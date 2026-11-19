@@ -97,6 +97,7 @@ def frame(kind, titles, src):
 
 
 NAMES = {"00-mega": "Mega (all three)", "01-sales-tracker": "Sales tracker", "02-copies-chart": "Copies chart", "03-revenue-chart": "Revenue chart"}
+PREVIEWS = {"00-mega": "mega", "01-sales-tracker": "sales-tracker", "02-copies-chart": "copies-chart", "03-revenue-chart": "revenue-chart"}
 
 
 def copy_page(stamp):
@@ -111,7 +112,9 @@ def copy_page(stamp):
                 f'<div class="f"><div class="fh"><b>{name.upper()} field</b><span>{len(text):,} characters</span>'
                 f'<button type="button" data-for="{fid}">Copy</button></div>'
                 f'<textarea id="{fid}" readonly spellcheck="false">{html.escape(text)}</textarea></div>')
-        blocks.append(f'<section><h2>{NAMES[folder]}</h2>{"".join(fields)}</section>')
+        view = f"../preview/{PREVIEWS[folder]}.html"
+        blocks.append(f'<section><div class="sh"><h2>{NAMES[folder]}</h2><span class="v">View: <a href="{view}" target="_blank">Dark</a>'
+                      f' \u00b7 <a href="{view}?theme=light" target="_blank">Light</a></span></div>{"".join(fields)}</section>')
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GTA 6 embed fields</title>
@@ -119,7 +122,10 @@ def copy_page(stamp):
 body{{margin:0;padding:24px 16px;background:#f2f2f2;color:#181818;font:15px/21px Roboto,Arial,sans-serif}}
 main{{max-width:900px;margin:0 auto}} h1{{font:600 22px/28px Poppins,Arial,sans-serif;margin:0 0 4px}}
 p{{margin:0 0 16px;color:#555}} section{{background:#fff;border-radius:4px;padding:16px;margin:0 0 16px}}
-h2{{font:600 17px/22px Poppins,Arial,sans-serif;text-transform:uppercase;margin:0 0 12px;color:#555}}
+h2{{font:600 17px/22px Poppins,Arial,sans-serif;text-transform:uppercase;margin:0;color:#555}}
+.sh{{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;margin:0 0 12px}} .v{{font-size:13px;color:#6b6b6b}}
+a{{color:#c81e25;font-weight:500}} a:hover{{color:#181818}} a:focus-visible{{outline:2px solid #c81e25;outline-offset:2px}}
+.links{{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 16px;font-size:15px}}
 .f{{margin:0 0 12px}} .fh{{display:flex;align-items:center;gap:12px;margin:0 0 4px}} .fh span{{color:#6b6b6b;font-size:13px;flex:1}}
 button{{font:600 11px/13px Poppins,Arial,sans-serif;text-transform:uppercase;padding:8px 14px;border:0;border-radius:2px;background:#de272e;color:#fff;cursor:pointer}}
 button.done{{background:#0b5c2b}} button:focus-visible{{outline:2px solid #c81e25;outline-offset:2px}}
@@ -127,6 +133,8 @@ textarea{{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospa
 </style></head><body><main>
 <h1>GTA 6 embed fields</h1>
 <p>Build {stamp}. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
+<p class="links"><a href="../preview/index.html" target="_blank">All previews</a><a href="../preview/separate-embeds.html" target="_blank">Three separate embeds on one page</a><a href="../preview/mega.html?gta6debug=1" target="_blank">Mega with build stamp</a></p>
+<p>Previews use the data bundled at build time, so they work offline; on the live site the widgets load the latest data.</p>
 {"".join(blocks)}
 </main>
 <script>
