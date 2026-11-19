@@ -162,7 +162,7 @@
         "name": "publisher and studio reports"
       },
       {
-        "name": "Cowen via MarketWatch"
+        "name": "industry estimates"
       }
     ],
     "launch": {
@@ -238,7 +238,7 @@
     },
     "all": {
       "meta": "Lifetime revenue · games’ sales, films’ worldwide box office",
-      "note": "GTA 5 is a 2018 analyst estimate ($6B at 90M copies), so its current total is higher. Spider-Man: Brand New Day is still in release. Free-to-play games excluded. Not inflation-adjusted.",
+      "note": "* Estimate, not a publisher figure: GTA 5 is worldwide revenue since launch (as of May 2025); Minecraft is game sales only; Red Dead Redemption 2 is estimated from unit sales. Spider-Man: Brand New Day is still in release. Free-to-play games excluded. Not inflation-adjusted.",
       "items": [
         {
           "title": "GTA 6",
@@ -249,9 +249,25 @@
         {
           "title": "GTA 5",
           "year": 2013,
-          "sub": "Game · Analyst est.",
-          "amt": 6000000000,
-          "plus": true
+          "sub": "Game · Lifetime",
+          "amt": 9500000000,
+          "plus": true,
+          "est": true
+        },
+        {
+          "title": "Minecraft",
+          "year": 2011,
+          "sub": "Game · Lifetime sales",
+          "amt": 4200000000,
+          "est": true
+        },
+        {
+          "title": "Red Dead Redemption 2",
+          "year": 2018,
+          "sub": "Game · Lifetime",
+          "amt": 3300000000,
+          "plus": true,
+          "est": true
         },
         {
           "title": "Avengers: Endgame",

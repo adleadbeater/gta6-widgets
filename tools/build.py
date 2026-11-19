@@ -68,6 +68,51 @@ def frame(kind, titles, src):
     return f'<div class="mw-gta6" data-widget="{kind}" data-src="{src}">{inner}</div>'
 
 
+NAMES = {"00-mega": "Mega (all three)", "01-sales-tracker": "Sales tracker", "02-copies-chart": "Copies chart", "03-revenue-chart": "Revenue chart"}
+
+
+def copy_page(stamp):
+    """widgets/index.html: every CMS field with a Copy button, for pasting into Emaki."""
+    blocks = []
+    for folder in WIDGETS:
+        fields = []
+        for name in ("html", "css", "js"):
+            text = read("widgets", folder, f"{name}.html")
+            fid = f"{folder}-{name}"
+            fields.append(
+                f'<div class="f"><div class="fh"><b>{name.upper()} field</b><span>{len(text):,} characters</span>'
+                f'<button type="button" data-for="{fid}">Copy</button></div>'
+                f'<textarea id="{fid}" readonly spellcheck="false">{html.escape(text)}</textarea></div>')
+        blocks.append(f'<section><h2>{NAMES[folder]}</h2>{"".join(fields)}</section>')
+    return f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA 6 embed fields</title>
+<style>
+body{{margin:0;padding:24px 16px;background:#f2f2f2;color:#181818;font:15px/21px Roboto,Arial,sans-serif}}
+main{{max-width:900px;margin:0 auto}} h1{{font:600 22px/28px Poppins,Arial,sans-serif;margin:0 0 4px}}
+p{{margin:0 0 16px;color:#555}} section{{background:#fff;border-radius:4px;padding:16px;margin:0 0 16px}}
+h2{{font:600 17px/22px Poppins,Arial,sans-serif;text-transform:uppercase;margin:0 0 12px;color:#555}}
+.f{{margin:0 0 12px}} .fh{{display:flex;align-items:center;gap:12px;margin:0 0 4px}} .fh span{{color:#6b6b6b;font-size:13px;flex:1}}
+button{{font:600 11px/13px Poppins,Arial,sans-serif;text-transform:uppercase;padding:8px 14px;border:0;border-radius:2px;background:#de272e;color:#fff;cursor:pointer}}
+button.done{{background:#0b5c2b}} button:focus-visible{{outline:2px solid #c81e25;outline-offset:2px}}
+textarea{{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospace,Menlo,monospace;border:1px solid #e4e4e4;border-radius:2px;padding:6px;resize:vertical}}
+</style></head><body><main>
+<h1>GTA 6 embed fields</h1>
+<p>Build {stamp}. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
+{"".join(blocks)}
+</main>
+<script>
+document.addEventListener('click', function (ev) {{
+  var b = ev.target.closest('button[data-for]'); if (!b) return;
+  var t = document.getElementById(b.getAttribute('data-for'));
+  function done() {{ b.textContent = 'Copied'; b.className = 'done'; setTimeout(function () {{ b.textContent = 'Copy'; b.className = ''; }}, 2000); }}
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t.value).then(done, function () {{ t.select(); document.execCommand('copy'); done(); }});
+  else {{ t.select(); document.execCommand('copy'); done(); }}
+}});
+</script></body></html>
+"""
+
+
 def main():
     css, js = read("src", "mw-gta6.css"), read("src", "mw-gta6.js")
     emaki_check(js)
@@ -82,6 +127,8 @@ def main():
         out.append(write(css_field, "widgets", folder, "css.html"))
         out.append(write(js_field, "widgets", folder, "js.html"))
         out.append(write(frame(kind, titles, DATA_SRC) + "\n", "widgets", folder, "html.html"))
+
+    out.append(write(copy_page(stamp), "widgets", "index.html"))
 
     links = json.loads(read("data", "links.json"))
     if not links.get("items"):

@@ -110,7 +110,9 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Don't mention GTA 6's state in a Launch view's `note`: the widget adds that sentence
 - `film: true` = grey bar; `plus: true` = value shown with "+"
 - Check weekly: Spider-Man: Brand New Day (still in release), Minecraft and GTA 5 lifetime units
-- GTA 5 lifetime revenue is a 2018 analyst estimate ($6B); replace when a current figure is available
+- `est: true` = an outside estimate, not a publisher figure: the value gets an asterisk and the view's `note` must explain it
+  - Revenue all-time: GTA 5 ($9.5B+, as of May 2025), Minecraft ($4.2B, game sales), Red Dead Redemption 2 ($3.3B+, from unit sales)
+  - Replace with publisher figures if any are ever disclosed
 
 ## 8. Official figures and related links
 

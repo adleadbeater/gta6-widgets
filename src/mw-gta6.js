@@ -565,10 +565,12 @@
       var rank = isPin ? (view.pinRank || String(myIdx + 1)) : String(i + 1);
       var sub = x.year + DOT + x.sub;
       var subShort = String(x.year) + (x.sub === 'Lifetime' ? '' : DOT + String(x.sub).replace(/^(Film|Game) \u00b7 /, ''));
-      var val = fmt(x);
+      // est: an outside estimate, not a publisher figure; asterisked on screen, spelled out for screen readers
+      var val = fmt(x) + (x.est ? '*' : '');
+      var spoken = fmt(x) + (x.est ? ', estimate' : '');
       if (isPin) out += '<li class="mw-gta6__gap" aria-hidden="true">\u00b7\u00b7\u00b7</li>';
       out += '<li class="mw-gta6__row' + (x.me ? ' mw-gta6__row--me' : '') + '" aria-label="' +
-        esc(rank + '. ' + x.title + ' (' + x.year + '), ' + x.sub + ': ' + val) + '">' +
+        esc(rank + '. ' + x.title + ' (' + x.year + '), ' + x.sub + ': ' + spoken) + '">' +
         '<span class="mw-gta6__rank" aria-hidden="true">' + esc(rank) + '</span>' +
         '<span class="mw-gta6__lab" aria-hidden="true"><span class="mw-gta6__title" title="' + esc(x.title) + '">' + esc(x.title) + '</span>' +
         '<span class="mw-gta6__sub">' + esc(sub) + '</span><span class="mw-gta6__subs">' + esc(subShort) + '</span></span>' +
