@@ -1,4 +1,8 @@
 {
+  "gta6": {
+    "release": "2026-11-19",
+    "launchDays": 3
+  },
   "copies": {
     "title": "GTA 6 vs. best-selling games",
     "sources": [
@@ -15,8 +19,8 @@
       }
     ],
     "launch": {
-      "meta": "Copies sold at launch · GTA 6 is a live estimate",
-      "note": "Windows differ: first 24 hours for GTA 5, Diablo III and Nightreign; US and UK only for Modern Warfare 3 and Black Ops; first 3 days for the rest. GTA 6 is Sensor Tower’s digital estimate to date.",
+      "meta": "Copies sold at launch",
+      "note": "Windows differ: first 24 hours for GTA 5, Diablo III and Nightreign; US and UK only for Modern Warfare 3 and Black Ops; first 3 days for the rest.",
       "items": [
         {
           "title": "GTA 6",
@@ -175,7 +179,7 @@
     ],
     "launch": {
       "meta": "Revenue at launch · games’ first days, films’ global opening weekend",
-      "note": "Games are publisher-reported sell-through over the first 3 days, except GTA 6 (live estimate). Zootopia 2 is a 5-day Thanksgiving opening. Not inflation-adjusted.",
+      "note": "Games are publisher-reported sell-through over the first 3 days. Zootopia 2 is a 5-day Thanksgiving opening. Not inflation-adjusted.",
       "items": [
         {
           "title": "GTA 6",

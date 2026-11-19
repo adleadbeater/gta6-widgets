@@ -47,6 +47,27 @@
 .mw-gta6[hidden] { display: none !important; }
 .mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
 
+/* space held while data loads, so the article doesn't jump when the widget appears;
+   if the script never marks it ready, it gives the space back after 12s */
+.mw-gta6:not([data-state="ready"])::before {
+  content: "";
+  display: block;
+  height: 925px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+  animation: mwgta6-giveup 0s linear 12s forwards;
+}
+.mw-gta6[data-widget="copies"]:not([data-state="ready"])::before,
+.mw-gta6[data-widget="revenue"]:not([data-state="ready"])::before { height: 695px; }
+.mw-gta6[data-widget="mega"]:not([data-state="ready"])::before { height: 2363px; }
+@container mwgta6 (max-width: 600px) {
+  .mw-gta6[data-widget="tracker"]:not([data-state="ready"])::before { height: 1110px; }
+  .mw-gta6[data-widget="copies"]:not([data-state="ready"])::before { height: 851px; }
+  .mw-gta6[data-widget="revenue"]:not([data-state="ready"])::before { height: 900px; }
+  .mw-gta6[data-widget="mega"]:not([data-state="ready"])::before { height: 2900px; }
+}
+@keyframes mwgta6-giveup { to { height: 0; } }
+
 /* panel */
 .mw-gta6__panel {
   background: var(--mw-panel);
@@ -185,7 +206,15 @@
   font-weight: 500;
 }
 .mw-gta6__table th:first-child,
-.mw-gta6__table td:first-child { text-align: left; white-space: nowrap; font-weight: 400; }
+.mw-gta6__table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--mw-panel);
+  text-align: left;
+  white-space: nowrap;
+  font-weight: 400;
+}
 .mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
 
 /* comparison charts */
@@ -293,8 +322,132 @@
   color: var(--mw-muted);
 }
 
+/* quiet buttons: pause, share */
+.mw-gta6__quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  margin: 0;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--mw-card);
+  color: var(--mw-ink);
+  font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6__quiet svg { width: 14px; height: 14px; flex: none; }
+.mw-gta6__liverow,
+.mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.mw-gta6__liverow { margin-top: -4px; }
+.mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+
+/* next-overtake line under the charts */
+.mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
+.mw-gta6__next[hidden] { display: none; }
+
+/* official vs. estimate */
+.mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6__vsitem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 12px 16px;
+  border-radius: 2px;
+  background: var(--mw-card);
+  font-size: 13px;
+  line-height: 18px;
+}
+.mw-gta6__vsnum {
+  font: 700 22px/1.2 Poppins, Arial, Helvetica, sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--mw-ink);
+}
+
+/* sales history chart */
+.mw-gta6__plotwrap { position: relative; padding-top: 30px; }
+.mw-gta6__plot { position: relative; height: 140px; border-bottom: 1px solid var(--mw-rule); }
+.mw-gta6__plot:focus-visible { outline: 2px solid var(--mw-red); outline-offset: 2px; }
+.mw-gta6__plot svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; overflow: visible; }
+.mw-gta6__area { fill: var(--mw-red); opacity: 0.18; }
+.mw-gta6__line {
+  fill: none;
+  stroke: var(--mw-red);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.mw-gta6__grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid var(--mw-rule);
+  font-size: 11px;
+  line-height: 13px;
+  color: var(--mw-muted);
+}
+.mw-gta6__grid span { position: absolute; left: 0; bottom: 2px; }
+.mw-gta6__mark { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--mw-muted); }
+.mw-gta6__mark span { position: absolute; top: 0; left: 4px; font-size: 11px; line-height: 13px; color: var(--mw-muted); white-space: nowrap; }
+.mw-gta6__mark--end span { left: auto; right: 4px; }
+.mw-gta6__cross { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--mw-ink); pointer-events: none; }
+.mw-gta6__dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--mw-red);
+  box-shadow: 0 0 0 2px var(--mw-panel);
+  pointer-events: none;
+}
+.mw-gta6__tip {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: var(--mw-card);
+  color: var(--mw-ink);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.mw-gta6__tip--start { transform: none; }
+.mw-gta6__tip--end { transform: translateX(-100%); }
+.mw-gta6__cross[hidden],
+.mw-gta6__dot[hidden],
+.mw-gta6__tip[hidden] { display: none; }
+.mw-gta6__xaxis { display: flex; justify-content: space-between; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+
+/* related links */
+.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
+.mw-gta6__more a {
+  display: block;
+  padding: 10px 0;
+  color: var(--mw-ink);
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.mw-gta6__more a:hover { text-decoration: underline; }
+
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
+  .mw-gta6__table { min-width: 0; }
+  .mw-gta6__table th,
+  .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
+  .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
   .mw-gta6__panel { padding: 16px 12px 12px; }
   .mw-gta6__h { font-size: 17px; line-height: 20px; }
   .mw-gta6__label,
