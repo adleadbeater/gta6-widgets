@@ -5,7 +5,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 ## 1. Contents
 
 - `widgets/` — CMS-ready embeds, three fields each (`html.html`, `css.html`, `js.html`)
-  - `00-mega/` — all three widgets in one embed
+  - `00-mega/` — all three in one box: each part on its own shaded panel, one Copy link and More link at the bottom
   - `01-sales-tracker/` — live sales tracker
   - `02-copies-chart/` — GTA 6 vs. best-selling games (copies), Launch / All time
   - `03-revenue-chart/` — GTA 6 vs. biggest entertainment releases (revenue), Launch / All time
@@ -42,7 +42,8 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA 6 "Latest reading"
   - Result: a stalled feed never leaves an inflated number on screen
 - Official figure: shown beside the estimate in an "Official vs. estimate" block; it never replaces the estimate (section 8)
-- "Show sales by day": full-width button above the readings table; opens a table of copies and revenue added each day (up to 14 days, newest first)
+- "Show sales by day": full-width outline button above the readings table; opens Day · Copies · Revenue · Change (up to 14 days, newest first)
+  - Copies and revenue added that day; Change = that day's copies against the day before (green ▲, red ▼, = for no change)
   - Only days with a one-day step in the history (daily from Nov 9; earlier history is in two-day steps)
   - Follows the platform buttons; the release day carries a Launch tag
 - Comparison charts: top 10, sorted on render; GTA 6 pinned below with its rank if it falls outside
@@ -52,7 +53,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
     - No pace estimate when data is stale or the target is more than 14 days away
 - Launch view: GTA 6 shows "Pre-orders + sales to date" until the history reaches the end of its first 3 days
   - Then it switches to a fixed "First 3 days" figure, comparable with the other first-3-day entries (section 7)
-- "Copy link" button on every panel: copies a link straight to that panel (no share sheet)
+- "Copy link" button on every widget (once in the mega, linking to its top): copies a link straight to it (no share sheet)
   - Links end `#gta6-sales-tracker`, `#gta6-copies-chart` or `#gta6-revenue-chart` (`-2` etc. for repeats, in page order)
   - Opening a shared link scrolls to that panel once it has loaded
 - "More on GTA 6" link at the bottom of the tracker (or the mega's last panel): the `title` text from `data/links.json`, linking to the first item's URL, in a new tab

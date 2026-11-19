@@ -15,11 +15,11 @@ button.done{background:#0b5c2b} button:focus-visible{outline:2px solid #c81e25;o
 textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospace,Menlo,monospace;border:1px solid #e4e4e4;border-radius:2px;padding:6px;resize:vertical}
 </style></head><body><main>
 <h1>GTA 6 embed fields</h1>
-<p>Build 1.3.0+20261119.949e6e6. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
+<p>Build 1.3.0+20261119.fd6f7df. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
 <p class="links"><a href="../preview/index.html" target="_blank">All previews</a><a href="../preview/separate-embeds.html" target="_blank">Three separate embeds on one page</a><a href="../preview/mega.html?gta6debug=1" target="_blank">Mega with build stamp</a></p>
 <p>Previews use the data bundled at build time, so they work offline; on the live site the widgets load the latest data.</p>
 <section><div class="sh"><h2>Mega (all three)</h2><span class="v">View: <a href="../preview/mega.html" target="_blank">Dark</a> · <a href="../preview/mega.html?theme=light" target="_blank">Light</a></span></div><div class="f"><div class="fh"><b>HTML field</b><span>671 characters</span><button type="button" data-for="00-mega-html">Copy</button></div><textarea id="00-mega-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;mega&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 Sales Tracker&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--tracker&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. best-selling games&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--copies&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. biggest entertainment releases&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--revenue&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="00-mega-css">Copy</button></div><textarea id="00-mega-css" readonly spellcheck="false">&lt;style&gt;
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>16,867 characters</span><button type="button" data-for="00-mega-css">Copy</button></div><textarea id="00-mega-css" readonly spellcheck="false">&lt;style&gt;
 .mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
@@ -37,6 +37,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #ff5a5f;
   --mw-hi-muted: #b0b0b0;
   --mw-up: #4ade80;
+  --mw-down: #ffa3a3;
+  --mw-sub: #242424;
+  --mw-sub-card: #333333;
+  --mw-sub-muted: #b0b0b0;
+  --mw-sub-rule: #333333;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -60,6 +65,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-hi-ink: #b81a21;
     --mw-hi-muted: #555555;
     --mw-up: #0b5c2b;
+    --mw-down: #8f1218;
+    --mw-sub: #f3f3f3;
+    --mw-sub-card: #e4e4e4;
+    --mw-sub-muted: #5f5f5f;
+    --mw-sub-rule: #dadada;
   }
 }
 .mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
@@ -76,6 +86,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #b81a21;
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
+  --mw-down: #8f1218;
+  --mw-sub: #f3f3f3;
+  --mw-sub-card: #e4e4e4;
+  --mw-sub-muted: #5f5f5f;
+  --mw-sub-rule: #dadada;
 }
 .mw-gta6.mw-gta6[hidden],
 .mw-gta6.mw-gta6 [hidden] { display: none !important; }
@@ -117,6 +132,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+/* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -129,6 +147,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 12px;
 }
 .mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel {
+  --mw-panel: var(--mw-sub);
+  --mw-card: var(--mw-sub-card);
+  --mw-muted: var(--mw-sub-muted);
+  --mw-rule: var(--mw-sub-rule);
+  border-radius: 3px;
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel + .mw-gta6__panel { margin-top: 0; }
 .mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
@@ -186,7 +220,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 .mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
-.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
+
 
 /* stat cards */
 .mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -208,6 +242,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
 .mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__down { color: var(--mw-down); }
 
 /* platform split */
 .mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -401,6 +436,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   cursor: pointer;
 }
 .mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide { width: 100%; min-height: 40px; justify-content: center; box-shadow: inset 0 0 0 1px var(--mw-button); color: var(--mw-ink); font-size: 12px; line-height: 14px; }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide[aria-expanded=&quot;true&quot;] { box-shadow: inset 0 0 0 1px var(--mw-rule); color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__liverow,
 .mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
@@ -480,9 +517,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 905px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="00-mega-js">Copy</button></div><textarea id="00-mega-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>37,650 characters</span><button type="button" data-for="00-mega-js">Copy</button></div><textarea id="00-mega-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -499,10 +538,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var DOT = &#x27; \u00b7 &#x27;;
   var DASH = &#x27;\u2014&#x27;;
   var UP = &#x27;\u25b2&#x27;;
+  var DOWN = &#x27;\u25bc&#x27;;
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.fd6f7df&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -752,7 +792,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   /* ---------- shared panel parts ---------- */
 
-  function shareHTML() {
+  function shareHTML(st) {
+    if (!st.showShare) return &#x27;&#x27;;
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
       &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
@@ -783,7 +824,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function share(st) {
     var cat = CATS[st.kind];
-    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.el.id;
+    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.shareTo;
     var status = st.el.querySelector(&#x27;.mw-gta6__status&#x27;);
     function say(msg) {
       if (!status) return;
@@ -814,29 +855,38 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var key = st.platform;
     function pick(p, f) { return key === &#x27;all&#x27; ? p.ps5[f] + p.xbox[f] : p[key][f]; }
     var rows = [];
-    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX; i--) {
+    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX + 1; i--) {
       var a = m.series[i - 1];
       var b = m.series[i];
       if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
       rows.push({ d: b.d, u: pick(b, &#x27;units&#x27;) - pick(a, &#x27;units&#x27;), r: pick(b, &#x27;revenue&#x27;) - pick(a, &#x27;revenue&#x27;) });
     }
     if (!rows.length) return &#x27;&#x27;;
+    rows.forEach(function (r, j) { r.c = rows[j + 1] ? r.u - rows[j + 1].u : null; });
+    rows = rows.slice(0, BYDAY_MAX);
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
-      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__quiet--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) + &#x27;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Sales by day&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;caption class=&quot;mw-gta6__sr&quot;&gt;Sales by day&#x27; + (pname ? &#x27;, &#x27; + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
     rows.forEach(function (r) {
       h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27; + esc(fmtDate(r.d)) + (r.d === m.release ? &#x27; &lt;span class=&quot;mw-gta6__tag&quot;&gt;Launch&lt;/span&gt;&#x27; : &#x27;&#x27;) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; +
-        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + movement(r.c) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders; change is against the day before. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
+  }
+
+  // Movement glyphs: up green, down red, same as &quot;=&quot;, each with screen-reader text
+  function movement(v) {
+    if (v === null) return DASH;
+    if (v &gt; 0) return &#x27;&lt;span class=&quot;mw-gta6__up&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + UP + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;up &lt;/span&gt;&#x27; + esc(mUnits(v));
+    if (v &lt; 0) return &#x27;&lt;span class=&quot;mw-gta6__down&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + DOWN + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;down &lt;/span&gt;&#x27; + esc(mUnits(-v));
+    return &#x27;&lt;span class=&quot;mw-gta6__muted&quot; aria-hidden=&quot;true&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;no change&lt;/span&gt;&#x27;;
   }
 
   function trackerHTML(st) {
@@ -937,7 +987,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       ? &#x27;Showing the latest reading; next update delayed. &#x27;
       : &#x27;Live figure projected from the latest reading. &#x27;) +
       &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -1082,7 +1132,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
     if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -1255,7 +1305,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: &#x27;all&#x27;, mode: &#x27;launch&#x27;, last: &#x27;&#x27;, lastNext: &#x27;&#x27;, visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1,
+          showShare: i === kinds.length - 1, shareTo: ids[0]
         });
       });
       apply(inst, res);
@@ -1329,7 +1380,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><div class="sh"><h2>Sales tracker</h2><span class="v">View: <a href="../preview/sales-tracker.html" target="_blank">Dark</a> · <a href="../preview/sales-tracker.html?theme=light" target="_blank">Light</a></span></div><div class="f"><div class="fh"><b>HTML field</b><span>289 characters</span><button type="button" data-for="01-sales-tracker-html">Copy</button></div><textarea id="01-sales-tracker-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;tracker&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 Sales Tracker&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--tracker&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="01-sales-tracker-css">Copy</button></div><textarea id="01-sales-tracker-css" readonly spellcheck="false">&lt;style&gt;
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>16,867 characters</span><button type="button" data-for="01-sales-tracker-css">Copy</button></div><textarea id="01-sales-tracker-css" readonly spellcheck="false">&lt;style&gt;
 .mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
@@ -1347,6 +1398,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #ff5a5f;
   --mw-hi-muted: #b0b0b0;
   --mw-up: #4ade80;
+  --mw-down: #ffa3a3;
+  --mw-sub: #242424;
+  --mw-sub-card: #333333;
+  --mw-sub-muted: #b0b0b0;
+  --mw-sub-rule: #333333;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -1370,6 +1426,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-hi-ink: #b81a21;
     --mw-hi-muted: #555555;
     --mw-up: #0b5c2b;
+    --mw-down: #8f1218;
+    --mw-sub: #f3f3f3;
+    --mw-sub-card: #e4e4e4;
+    --mw-sub-muted: #5f5f5f;
+    --mw-sub-rule: #dadada;
   }
 }
 .mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
@@ -1386,6 +1447,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #b81a21;
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
+  --mw-down: #8f1218;
+  --mw-sub: #f3f3f3;
+  --mw-sub-card: #e4e4e4;
+  --mw-sub-muted: #5f5f5f;
+  --mw-sub-rule: #dadada;
 }
 .mw-gta6.mw-gta6[hidden],
 .mw-gta6.mw-gta6 [hidden] { display: none !important; }
@@ -1427,6 +1493,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+/* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -1439,6 +1508,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 12px;
 }
 .mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel {
+  --mw-panel: var(--mw-sub);
+  --mw-card: var(--mw-sub-card);
+  --mw-muted: var(--mw-sub-muted);
+  --mw-rule: var(--mw-sub-rule);
+  border-radius: 3px;
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel + .mw-gta6__panel { margin-top: 0; }
 .mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
@@ -1496,7 +1581,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 .mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
-.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
+
 
 /* stat cards */
 .mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -1518,6 +1603,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
 .mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__down { color: var(--mw-down); }
 
 /* platform split */
 .mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -1711,6 +1797,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   cursor: pointer;
 }
 .mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide { width: 100%; min-height: 40px; justify-content: center; box-shadow: inset 0 0 0 1px var(--mw-button); color: var(--mw-ink); font-size: 12px; line-height: 14px; }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide[aria-expanded=&quot;true&quot;] { box-shadow: inset 0 0 0 1px var(--mw-rule); color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__liverow,
 .mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
@@ -1790,9 +1878,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 905px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="01-sales-tracker-js">Copy</button></div><textarea id="01-sales-tracker-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>37,650 characters</span><button type="button" data-for="01-sales-tracker-js">Copy</button></div><textarea id="01-sales-tracker-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -1809,10 +1899,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var DOT = &#x27; \u00b7 &#x27;;
   var DASH = &#x27;\u2014&#x27;;
   var UP = &#x27;\u25b2&#x27;;
+  var DOWN = &#x27;\u25bc&#x27;;
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.fd6f7df&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -2062,7 +2153,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   /* ---------- shared panel parts ---------- */
 
-  function shareHTML() {
+  function shareHTML(st) {
+    if (!st.showShare) return &#x27;&#x27;;
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
       &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
@@ -2093,7 +2185,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function share(st) {
     var cat = CATS[st.kind];
-    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.el.id;
+    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.shareTo;
     var status = st.el.querySelector(&#x27;.mw-gta6__status&#x27;);
     function say(msg) {
       if (!status) return;
@@ -2124,29 +2216,38 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var key = st.platform;
     function pick(p, f) { return key === &#x27;all&#x27; ? p.ps5[f] + p.xbox[f] : p[key][f]; }
     var rows = [];
-    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX; i--) {
+    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX + 1; i--) {
       var a = m.series[i - 1];
       var b = m.series[i];
       if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
       rows.push({ d: b.d, u: pick(b, &#x27;units&#x27;) - pick(a, &#x27;units&#x27;), r: pick(b, &#x27;revenue&#x27;) - pick(a, &#x27;revenue&#x27;) });
     }
     if (!rows.length) return &#x27;&#x27;;
+    rows.forEach(function (r, j) { r.c = rows[j + 1] ? r.u - rows[j + 1].u : null; });
+    rows = rows.slice(0, BYDAY_MAX);
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
-      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__quiet--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) + &#x27;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Sales by day&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;caption class=&quot;mw-gta6__sr&quot;&gt;Sales by day&#x27; + (pname ? &#x27;, &#x27; + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
     rows.forEach(function (r) {
       h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27; + esc(fmtDate(r.d)) + (r.d === m.release ? &#x27; &lt;span class=&quot;mw-gta6__tag&quot;&gt;Launch&lt;/span&gt;&#x27; : &#x27;&#x27;) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; +
-        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + movement(r.c) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders; change is against the day before. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
+  }
+
+  // Movement glyphs: up green, down red, same as &quot;=&quot;, each with screen-reader text
+  function movement(v) {
+    if (v === null) return DASH;
+    if (v &gt; 0) return &#x27;&lt;span class=&quot;mw-gta6__up&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + UP + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;up &lt;/span&gt;&#x27; + esc(mUnits(v));
+    if (v &lt; 0) return &#x27;&lt;span class=&quot;mw-gta6__down&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + DOWN + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;down &lt;/span&gt;&#x27; + esc(mUnits(-v));
+    return &#x27;&lt;span class=&quot;mw-gta6__muted&quot; aria-hidden=&quot;true&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;no change&lt;/span&gt;&#x27;;
   }
 
   function trackerHTML(st) {
@@ -2247,7 +2348,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       ? &#x27;Showing the latest reading; next update delayed. &#x27;
       : &#x27;Live figure projected from the latest reading. &#x27;) +
       &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -2392,7 +2493,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
     if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -2565,7 +2666,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: &#x27;all&#x27;, mode: &#x27;launch&#x27;, last: &#x27;&#x27;, lastNext: &#x27;&#x27;, visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1,
+          showShare: i === kinds.length - 1, shareTo: ids[0]
         });
       });
       apply(inst, res);
@@ -2639,7 +2741,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><div class="sh"><h2>Copies chart</h2><span class="v">View: <a href="../preview/copies-chart.html" target="_blank">Dark</a> · <a href="../preview/copies-chart.html?theme=light" target="_blank">Light</a></span></div><div class="f"><div class="fh"><b>HTML field</b><span>296 characters</span><button type="button" data-for="02-copies-chart-html">Copy</button></div><textarea id="02-copies-chart-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;copies&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. best-selling games&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--copies&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="02-copies-chart-css">Copy</button></div><textarea id="02-copies-chart-css" readonly spellcheck="false">&lt;style&gt;
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>16,867 characters</span><button type="button" data-for="02-copies-chart-css">Copy</button></div><textarea id="02-copies-chart-css" readonly spellcheck="false">&lt;style&gt;
 .mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
@@ -2657,6 +2759,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #ff5a5f;
   --mw-hi-muted: #b0b0b0;
   --mw-up: #4ade80;
+  --mw-down: #ffa3a3;
+  --mw-sub: #242424;
+  --mw-sub-card: #333333;
+  --mw-sub-muted: #b0b0b0;
+  --mw-sub-rule: #333333;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -2680,6 +2787,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-hi-ink: #b81a21;
     --mw-hi-muted: #555555;
     --mw-up: #0b5c2b;
+    --mw-down: #8f1218;
+    --mw-sub: #f3f3f3;
+    --mw-sub-card: #e4e4e4;
+    --mw-sub-muted: #5f5f5f;
+    --mw-sub-rule: #dadada;
   }
 }
 .mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
@@ -2696,6 +2808,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #b81a21;
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
+  --mw-down: #8f1218;
+  --mw-sub: #f3f3f3;
+  --mw-sub-card: #e4e4e4;
+  --mw-sub-muted: #5f5f5f;
+  --mw-sub-rule: #dadada;
 }
 .mw-gta6.mw-gta6[hidden],
 .mw-gta6.mw-gta6 [hidden] { display: none !important; }
@@ -2737,6 +2854,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+/* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -2749,6 +2869,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 12px;
 }
 .mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel {
+  --mw-panel: var(--mw-sub);
+  --mw-card: var(--mw-sub-card);
+  --mw-muted: var(--mw-sub-muted);
+  --mw-rule: var(--mw-sub-rule);
+  border-radius: 3px;
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel + .mw-gta6__panel { margin-top: 0; }
 .mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
@@ -2806,7 +2942,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 .mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
-.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
+
 
 /* stat cards */
 .mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -2828,6 +2964,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
 .mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__down { color: var(--mw-down); }
 
 /* platform split */
 .mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -3021,6 +3158,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   cursor: pointer;
 }
 .mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide { width: 100%; min-height: 40px; justify-content: center; box-shadow: inset 0 0 0 1px var(--mw-button); color: var(--mw-ink); font-size: 12px; line-height: 14px; }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide[aria-expanded=&quot;true&quot;] { box-shadow: inset 0 0 0 1px var(--mw-rule); color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__liverow,
 .mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
@@ -3100,9 +3239,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 905px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="02-copies-chart-js">Copy</button></div><textarea id="02-copies-chart-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>37,650 characters</span><button type="button" data-for="02-copies-chart-js">Copy</button></div><textarea id="02-copies-chart-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -3119,10 +3260,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var DOT = &#x27; \u00b7 &#x27;;
   var DASH = &#x27;\u2014&#x27;;
   var UP = &#x27;\u25b2&#x27;;
+  var DOWN = &#x27;\u25bc&#x27;;
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.fd6f7df&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -3372,7 +3514,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   /* ---------- shared panel parts ---------- */
 
-  function shareHTML() {
+  function shareHTML(st) {
+    if (!st.showShare) return &#x27;&#x27;;
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
       &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
@@ -3403,7 +3546,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function share(st) {
     var cat = CATS[st.kind];
-    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.el.id;
+    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.shareTo;
     var status = st.el.querySelector(&#x27;.mw-gta6__status&#x27;);
     function say(msg) {
       if (!status) return;
@@ -3434,29 +3577,38 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var key = st.platform;
     function pick(p, f) { return key === &#x27;all&#x27; ? p.ps5[f] + p.xbox[f] : p[key][f]; }
     var rows = [];
-    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX; i--) {
+    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX + 1; i--) {
       var a = m.series[i - 1];
       var b = m.series[i];
       if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
       rows.push({ d: b.d, u: pick(b, &#x27;units&#x27;) - pick(a, &#x27;units&#x27;), r: pick(b, &#x27;revenue&#x27;) - pick(a, &#x27;revenue&#x27;) });
     }
     if (!rows.length) return &#x27;&#x27;;
+    rows.forEach(function (r, j) { r.c = rows[j + 1] ? r.u - rows[j + 1].u : null; });
+    rows = rows.slice(0, BYDAY_MAX);
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
-      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__quiet--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) + &#x27;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Sales by day&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;caption class=&quot;mw-gta6__sr&quot;&gt;Sales by day&#x27; + (pname ? &#x27;, &#x27; + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
     rows.forEach(function (r) {
       h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27; + esc(fmtDate(r.d)) + (r.d === m.release ? &#x27; &lt;span class=&quot;mw-gta6__tag&quot;&gt;Launch&lt;/span&gt;&#x27; : &#x27;&#x27;) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; +
-        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + movement(r.c) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders; change is against the day before. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
+  }
+
+  // Movement glyphs: up green, down red, same as &quot;=&quot;, each with screen-reader text
+  function movement(v) {
+    if (v === null) return DASH;
+    if (v &gt; 0) return &#x27;&lt;span class=&quot;mw-gta6__up&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + UP + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;up &lt;/span&gt;&#x27; + esc(mUnits(v));
+    if (v &lt; 0) return &#x27;&lt;span class=&quot;mw-gta6__down&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + DOWN + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;down &lt;/span&gt;&#x27; + esc(mUnits(-v));
+    return &#x27;&lt;span class=&quot;mw-gta6__muted&quot; aria-hidden=&quot;true&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;no change&lt;/span&gt;&#x27;;
   }
 
   function trackerHTML(st) {
@@ -3557,7 +3709,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       ? &#x27;Showing the latest reading; next update delayed. &#x27;
       : &#x27;Live figure projected from the latest reading. &#x27;) +
       &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -3702,7 +3854,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
     if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -3875,7 +4027,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: &#x27;all&#x27;, mode: &#x27;launch&#x27;, last: &#x27;&#x27;, lastNext: &#x27;&#x27;, visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1,
+          showShare: i === kinds.length - 1, shareTo: ids[0]
         });
       });
       apply(inst, res);
@@ -3949,7 +4102,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><div class="sh"><h2>Revenue chart</h2><span class="v">View: <a href="../preview/revenue-chart.html" target="_blank">Dark</a> · <a href="../preview/revenue-chart.html?theme=light" target="_blank">Light</a></span></div><div class="f"><div class="fh"><b>HTML field</b><span>310 characters</span><button type="button" data-for="03-revenue-chart-html">Copy</button></div><textarea id="03-revenue-chart-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;revenue&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. biggest entertainment releases&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--revenue&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="03-revenue-chart-css">Copy</button></div><textarea id="03-revenue-chart-css" readonly spellcheck="false">&lt;style&gt;
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>16,867 characters</span><button type="button" data-for="03-revenue-chart-css">Copy</button></div><textarea id="03-revenue-chart-css" readonly spellcheck="false">&lt;style&gt;
 .mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
@@ -3967,6 +4120,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #ff5a5f;
   --mw-hi-muted: #b0b0b0;
   --mw-up: #4ade80;
+  --mw-down: #ffa3a3;
+  --mw-sub: #242424;
+  --mw-sub-card: #333333;
+  --mw-sub-muted: #b0b0b0;
+  --mw-sub-rule: #333333;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -3990,6 +4148,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-hi-ink: #b81a21;
     --mw-hi-muted: #555555;
     --mw-up: #0b5c2b;
+    --mw-down: #8f1218;
+    --mw-sub: #f3f3f3;
+    --mw-sub-card: #e4e4e4;
+    --mw-sub-muted: #5f5f5f;
+    --mw-sub-rule: #dadada;
   }
 }
 .mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
@@ -4006,6 +4169,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-ink: #b81a21;
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
+  --mw-down: #8f1218;
+  --mw-sub: #f3f3f3;
+  --mw-sub-card: #e4e4e4;
+  --mw-sub-muted: #5f5f5f;
+  --mw-sub-rule: #dadada;
 }
 .mw-gta6.mw-gta6[hidden],
 .mw-gta6.mw-gta6 [hidden] { display: none !important; }
@@ -4047,6 +4215,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+/* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -4059,6 +4230,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 12px;
 }
 .mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel {
+  --mw-panel: var(--mw-sub);
+  --mw-card: var(--mw-sub-card);
+  --mw-muted: var(--mw-sub-muted);
+  --mw-rule: var(--mw-sub-rule);
+  border-radius: 3px;
+}
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] &gt; .mw-gta6__panel + .mw-gta6__panel { margin-top: 0; }
 .mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
@@ -4116,7 +4303,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 .mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
-.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
+
 
 /* stat cards */
 .mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -4138,6 +4325,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 .mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
 .mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__down { color: var(--mw-down); }
 
 /* platform split */
 .mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -4331,6 +4519,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   cursor: pointer;
 }
 .mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide { width: 100%; min-height: 40px; justify-content: center; box-shadow: inset 0 0 0 1px var(--mw-button); color: var(--mw-ink); font-size: 12px; line-height: 14px; }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide[aria-expanded=&quot;true&quot;] { box-shadow: inset 0 0 0 1px var(--mw-rule); color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__liverow,
 .mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
@@ -4410,9 +4600,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--copies { height: 905px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="03-revenue-chart-js">Copy</button></div><textarea id="03-revenue-chart-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>37,650 characters</span><button type="button" data-for="03-revenue-chart-js">Copy</button></div><textarea id="03-revenue-chart-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -4429,10 +4621,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var DOT = &#x27; \u00b7 &#x27;;
   var DASH = &#x27;\u2014&#x27;;
   var UP = &#x27;\u25b2&#x27;;
+  var DOWN = &#x27;\u25bc&#x27;;
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.fd6f7df&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -4682,7 +4875,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   /* ---------- shared panel parts ---------- */
 
-  function shareHTML() {
+  function shareHTML(st) {
+    if (!st.showShare) return &#x27;&#x27;;
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
       &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
@@ -4713,7 +4907,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function share(st) {
     var cat = CATS[st.kind];
-    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.el.id;
+    var url = location.href.split(&#x27;#&#x27;)[0] + &#x27;#&#x27; + st.shareTo;
     var status = st.el.querySelector(&#x27;.mw-gta6__status&#x27;);
     function say(msg) {
       if (!status) return;
@@ -4744,29 +4938,38 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var key = st.platform;
     function pick(p, f) { return key === &#x27;all&#x27; ? p.ps5[f] + p.xbox[f] : p[key][f]; }
     var rows = [];
-    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX; i--) {
+    for (var i = m.series.length - 1; i &gt; 0 &amp;&amp; rows.length &lt; BYDAY_MAX + 1; i--) {
       var a = m.series[i - 1];
       var b = m.series[i];
       if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
       rows.push({ d: b.d, u: pick(b, &#x27;units&#x27;) - pick(a, &#x27;units&#x27;), r: pick(b, &#x27;revenue&#x27;) - pick(a, &#x27;revenue&#x27;) });
     }
     if (!rows.length) return &#x27;&#x27;;
+    rows.forEach(function (r, j) { r.c = rows[j + 1] ? r.u - rows[j + 1].u : null; });
+    rows = rows.slice(0, BYDAY_MAX);
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
-      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__quiet--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+      &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) + &#x27;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Sales by day&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;caption class=&quot;mw-gta6__sr&quot;&gt;Sales by day&#x27; + (pname ? &#x27;, &#x27; + esc(pname) : &#x27;&#x27;) +
-      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+      &#x27;&lt;/caption&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Day&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Copies&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Revenue&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Change&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
     rows.forEach(function (r) {
       h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27; + esc(fmtDate(r.d)) + (r.d === m.release ? &#x27; &lt;span class=&quot;mw-gta6__tag&quot;&gt;Launch&lt;/span&gt;&#x27; : &#x27;&#x27;) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; +
-        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+        esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + movement(r.c) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders; change is against the day before. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
+  }
+
+  // Movement glyphs: up green, down red, same as &quot;=&quot;, each with screen-reader text
+  function movement(v) {
+    if (v === null) return DASH;
+    if (v &gt; 0) return &#x27;&lt;span class=&quot;mw-gta6__up&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + UP + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;up &lt;/span&gt;&#x27; + esc(mUnits(v));
+    if (v &lt; 0) return &#x27;&lt;span class=&quot;mw-gta6__down&quot; aria-hidden=&quot;true&quot;&gt;&#x27; + DOWN + &#x27;&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;down &lt;/span&gt;&#x27; + esc(mUnits(-v));
+    return &#x27;&lt;span class=&quot;mw-gta6__muted&quot; aria-hidden=&quot;true&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mw-gta6__sr&quot;&gt;no change&lt;/span&gt;&#x27;;
   }
 
   function trackerHTML(st) {
@@ -4867,7 +5070,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       ? &#x27;Showing the latest reading; next update delayed. &#x27;
       : &#x27;Live figure projected from the latest reading. &#x27;) +
       &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -5012,7 +5215,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
     if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -5185,7 +5388,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: &#x27;all&#x27;, mode: &#x27;launch&#x27;, last: &#x27;&#x27;, lastNext: &#x27;&#x27;, visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf(&#x27;tracker&#x27;) &gt;= 0 &amp;&amp; i === kinds.length - 1,
+          showShare: i === kinds.length - 1, shareTo: ids[0]
         });
       });
       apply(inst, res);

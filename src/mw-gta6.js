@@ -14,6 +14,7 @@
   var DOT = ' \u00b7 ';
   var DASH = '\u2014';
   var UP = '\u25b2';
+  var DOWN = '\u25bc';
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var CATS = { tracker: 'GTA 6 Sales Tracker Vignette', copies: 'GTA 6 Copies Chart Vignette', revenue: 'GTA 6 Revenue Chart Vignette' };
   var MAX_EVENTS = 50;
@@ -267,7 +268,8 @@
 
   /* ---------- shared panel parts ---------- */
 
-  function shareHTML() {
+  function shareHTML(st) {
+    if (!st.showShare) return '';
     return '<div class="mw-gta6__foot"><span class="mw-gta6__status" role="status" aria-live="polite"></span>' +
       '<button type="button" class="mw-gta6__quiet" data-action="share">Copy link</button></div>';
   }
@@ -298,7 +300,7 @@
 
   function share(st) {
     var cat = CATS[st.kind];
-    var url = location.href.split('#')[0] + '#' + st.el.id;
+    var url = location.href.split('#')[0] + '#' + st.shareTo;
     var status = st.el.querySelector('.mw-gta6__status');
     function say(msg) {
       if (!status) return;
@@ -329,29 +331,38 @@
     var key = st.platform;
     function pick(p, f) { return key === 'all' ? p.ps5[f] + p.xbox[f] : p[key][f]; }
     var rows = [];
-    for (var i = m.series.length - 1; i > 0 && rows.length < BYDAY_MAX; i--) {
+    for (var i = m.series.length - 1; i > 0 && rows.length < BYDAY_MAX + 1; i--) {
       var a = m.series[i - 1];
       var b = m.series[i];
       if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
       rows.push({ d: b.d, u: pick(b, 'units') - pick(a, 'units'), r: pick(b, 'revenue') - pick(a, 'revenue') });
     }
     if (!rows.length) return '';
+    rows.forEach(function (r, j) { r.c = rows[j + 1] ? r.u - rows[j + 1].u : null; });
+    rows = rows.slice(0, BYDAY_MAX);
     var id = st.el.id + '-byday';
     var pname = key === 'all' ? '' : (key === 'ps5' ? 'PS5' : 'Xbox Series X|S');
     var h = '<div class="mw-gta6__block mw-gta6__byday">';
-    h += '<div><button type="button" class="mw-gta6__btn mw-gta6__btn--wide" data-action="byday" aria-expanded="' + (st.byDay ? 'true' : 'false') +
-      '" aria-controls="' + id + '">' + (st.byDay ? 'Hide' : 'Show') + ' sales by day' + (pname ? DOT + esc(pname) : '') +
-      '<span class="mw-gta6__chev" aria-hidden="true"></span></button></div>';
+    h += '<div><button type="button" class="mw-gta6__quiet mw-gta6__quiet--wide" data-action="byday" aria-expanded="' + (st.byDay ? 'true' : 'false') +
+      '" aria-controls="' + id + '">' + (st.byDay ? 'Hide' : 'Show') + ' sales by day' + (pname ? DOT + esc(pname) : '') + '</button></div>';
     h += '<div class="mw-gta6__block" id="' + id + '"' + (st.byDay ? '' : ' hidden') + '>';
     h += '<div class="mw-gta6__scroll" tabindex="0" role="region" aria-label="Sales by day"><table class="mw-gta6__table"><caption class="mw-gta6__sr">Sales by day' + (pname ? ', ' + esc(pname) : '') +
-      '</caption><thead><tr><th scope="col">Day</th><th scope="col">Copies</th><th scope="col">Revenue</th></tr></thead><tbody>';
+      '</caption><thead><tr><th scope="col">Day</th><th scope="col">Copies</th><th scope="col">Revenue</th><th scope="col">Change</th></tr></thead><tbody>';
     rows.forEach(function (r) {
       h += '<tr><td>' + esc(fmtDate(r.d)) + (r.d === m.release ? ' <span class="mw-gta6__tag">Launch</span>' : '') + '</td><td>' +
-        esc(mUnits(r.u)) + '</td><td>' + esc(usd(r.r)) + '</td></tr>';
+        esc(mUnits(r.u)) + '</td><td>' + esc(usd(r.r)) + '</td><td class="mw-gta6__chgcell">' + movement(r.c) + '</td></tr>';
     });
     h += '</tbody></table></div>';
-    h += '<p class="mw-gta6__caption">Includes pre-orders. Runs about two days behind the latest reading.</p>';
+    h += '<p class="mw-gta6__caption">Copies and revenue added each day, including pre-orders; change is against the day before. Runs about two days behind the latest reading.</p>';
     return h + '</div></div>';
+  }
+
+  // Movement glyphs: up green, down red, same as "=", each with screen-reader text
+  function movement(v) {
+    if (v === null) return DASH;
+    if (v > 0) return '<span class="mw-gta6__up" aria-hidden="true">' + UP + '</span><span class="mw-gta6__sr">up </span>' + esc(mUnits(v));
+    if (v < 0) return '<span class="mw-gta6__down" aria-hidden="true">' + DOWN + '</span><span class="mw-gta6__sr">down </span>' + esc(mUnits(-v));
+    return '<span class="mw-gta6__muted" aria-hidden="true">=</span><span class="mw-gta6__sr">no change</span>';
   }
 
   function trackerHTML(st) {
@@ -452,7 +463,7 @@
       ? 'Showing the latest reading; next update delayed. '
       : 'Live figure projected from the latest reading. ') +
       'Estimates; excludes physical copies.</p>';
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -597,7 +608,7 @@
     h += '<ol class="mw-gta6__bars">' + rows.html + '</ol>';
     h += '<p class="mw-gta6__next" data-live="next"' + (rows.next ? '' : ' hidden') + '>' + rows.next + '</p>';
     if (view.note) h += '<p class="mw-gta6__caption">' + esc(view.note) + '</p>';
-    h += shareHTML();
+    h += shareHTML(st);
     h += linksHTML(st);
     return h;
   }
@@ -770,7 +781,8 @@
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: 'all', mode: 'launch', last: '', lastNext: '', visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf('tracker') >= 0 && i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf('tracker') >= 0 && i === kinds.length - 1,
+          showShare: i === kinds.length - 1, shareTo: ids[0]
         });
       });
       apply(inst, res);

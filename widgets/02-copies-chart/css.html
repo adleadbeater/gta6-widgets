@@ -16,6 +16,11 @@
   --mw-hi-ink: #ff5a5f;
   --mw-hi-muted: #b0b0b0;
   --mw-up: #4ade80;
+  --mw-down: #ffa3a3;
+  --mw-sub: #242424;
+  --mw-sub-card: #333333;
+  --mw-sub-muted: #b0b0b0;
+  --mw-sub-rule: #333333;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -39,6 +44,11 @@
     --mw-hi-ink: #b81a21;
     --mw-hi-muted: #555555;
     --mw-up: #0b5c2b;
+    --mw-down: #8f1218;
+    --mw-sub: #f3f3f3;
+    --mw-sub-card: #e4e4e4;
+    --mw-sub-muted: #5f5f5f;
+    --mw-sub-rule: #dadada;
   }
 }
 .mw-gta6.mw-gta6[data-theme="light"] {
@@ -55,6 +65,11 @@
   --mw-hi-ink: #b81a21;
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
+  --mw-down: #8f1218;
+  --mw-sub: #f3f3f3;
+  --mw-sub-card: #e4e4e4;
+  --mw-sub-muted: #5f5f5f;
+  --mw-sub-rule: #dadada;
 }
 .mw-gta6.mw-gta6[hidden],
 .mw-gta6.mw-gta6 [hidden] { display: none !important; }
@@ -96,6 +111,9 @@
 .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 704px; }
+/* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
+.mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -108,6 +126,22 @@
   gap: 12px;
 }
 .mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6[data-widget="mega"] {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--mw-panel);
+}
+.mw-gta6.mw-gta6[data-widget="mega"] > .mw-gta6__panel {
+  --mw-panel: var(--mw-sub);
+  --mw-card: var(--mw-sub-card);
+  --mw-muted: var(--mw-sub-muted);
+  --mw-rule: var(--mw-sub-rule);
+  border-radius: 3px;
+}
+.mw-gta6.mw-gta6[data-widget="mega"] > .mw-gta6__panel + .mw-gta6__panel { margin-top: 0; }
 .mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
@@ -165,7 +199,7 @@
 }
 .mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed="true"] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
-.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
+
 
 /* stat cards */
 .mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -187,6 +221,7 @@
 .mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
 .mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__down { color: var(--mw-down); }
 
 /* platform split */
 .mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -380,6 +415,8 @@
   cursor: pointer;
 }
 .mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide { width: 100%; min-height: 40px; justify-content: center; box-shadow: inset 0 0 0 1px var(--mw-button); color: var(--mw-ink); font-size: 12px; line-height: 14px; }
+.mw-gta6.mw-gta6 .mw-gta6__quiet--wide[aria-expanded="true"] { box-shadow: inset 0 0 0 1px var(--mw-rule); color: var(--mw-muted); }
 .mw-gta6.mw-gta6 .mw-gta6__liverow,
 .mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
@@ -459,5 +496,7 @@
   .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 1012px; }
+  .mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6.mw-gta6[data-widget="mega"] .mw-gta6__skel--copies { height: 905px; }
 }
 </style>
