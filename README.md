@@ -1,4 +1,4 @@
-# GTA 6 widgets for MovieWeb
+# GTA VI widgets for MovieWeb
 
 Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are listed in section 9.
 
@@ -7,8 +7,8 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 - `widgets/` — CMS-ready embeds, three fields each (`html.html`, `css.html`, `js.html`)
   - `00-mega/` — all three in one box: each part on its own shaded panel, one Copy link and More link at the bottom
   - `01-sales-tracker/` — live sales tracker
-  - `02-copies-chart/` — GTA 6 vs. best-selling games (copies), Launch / All time
-  - `03-revenue-chart/` — GTA 6 vs. biggest entertainment releases (revenue), Launch / All time
+  - `02-copies-chart/` — GTA VI vs. best-selling games (copies), Launch / All time
+  - `03-revenue-chart/` — GTA VI vs. biggest entertainment releases (revenue), Launch / All time
 - `preview/` — open `preview/index.html` in a browser; runs offline on bundled seed data; `?theme=light` for light mode
   - `preview/showcase.html` — one self-contained file to click through all four (theme and phone-width switches); live data online, snapshot offline
 - `data/` — `tracker.json` (Sensor Tower readings + daily history), `comparisons.json` (chart data, hand-edited), `links.json` (related articles, hand-edited)
@@ -40,7 +40,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Ticks only while the widget is on screen and the tab is visible
   - "Pause live count" button stops it; readers with reduced motion switched on get one update a minute
 - Stale data: 36 hours after the latest reading the widget stops projecting
-  - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA 6 "Latest reading"
+  - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA VI "Latest reading"
   - Result: a stalled feed never leaves an inflated number on screen
 - Official figure: shown beside the estimate in an "Official vs. estimate" block; it never replaces the estimate (section 8)
 - Tracker order: platform buttons, revenue/copies, platform split, then "Show sales by day"
@@ -48,17 +48,17 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Copies and revenue added that day; Change = that day's copies against the day before (green ▲, red ▼, = for no change)
   - Only days with a one-day step in the history (daily from Nov 9; earlier history is in two-day steps)
   - Follows the platform buttons; the release day carries a Launch tag
-- Comparison charts: top 10, sorted on render; GTA 6 pinned below with its rank if it falls outside
+- Comparison charts: top 10, sorted on render; GTA VI pinned below with its rank if it falls outside
   - Copies all-time uses a fixed `pinRank` of "50+"
-  - Line under each chart: what GTA 6 last passed and what's next, with the gap and an estimate at the current pace
-    - Hidden in the next-target part when GTA 6 sits behind a fixed `pinRank` (the entries in between aren't listed)
+  - Line under each chart: what GTA VI last passed and what's next, with the gap and an estimate at the current pace
+    - Hidden in the next-target part when GTA VI sits behind a fixed `pinRank` (the entries in between aren't listed)
     - No pace estimate when data is stale or the target is more than 14 days away
-- Launch view: GTA 6 shows "Pre-orders + sales to date" until the history reaches the end of its first 3 days
+- Launch view: GTA VI shows "Pre-orders + sales to date" until the history reaches the end of its first 3 days
   - Then it switches to a fixed "First 3 days" figure, comparable with the other first-3-day entries (section 7)
 - "Copy link" button on every widget (once in the mega, linking to its top): copies a link straight to it (no share sheet)
   - Links end `#gta6-sales-tracker`, `#gta6-copies-chart` or `#gta6-revenue-chart` (`-2` etc. for repeats, in page order)
   - Opening a shared link scrolls to that panel once it has loaded
-- "More on GTA 6" link at the bottom of the tracker (or the mega's last panel): the `title` text from `data/links.json`, linking to the first item's URL, in a new tab
+- "More on GTA VI" link at the bottom of the tracker (or the mega's last panel): the `title` text from `data/links.json`, linking to the first item's URL, in a new tab
 - No source credit lines are shown; the `sources` lists in `comparisons.json` are kept for the record only
 - Site styles can't reach inside: the CSS resets article styles, and `tools/build.py` doubles the root class on every rule
   (`.mw-gta6.mw-gta6 …`) so it outranks rules such as `.article-body table th` without `!important`
@@ -69,7 +69,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 ## 4. Tracking
 
 - `window.websiteSentinel.sendEvent(category, action, label)`, retried 20 × 250ms, then dropped; at most 50 events per page
-- Categories: `GTA 6 Sales Tracker Vignette`, `GTA 6 Copies Chart Vignette`, `GTA 6 Revenue Chart Vignette` (mega sends each panel under its own)
+- Categories: `GTA VI Sales Tracker Vignette`, `GTA VI Copies Chart Vignette`, `GTA VI Revenue Chart Vignette` (mega sends each panel under its own)
 - Actions (snake_case) and labels (slugs, never reader data or URLs):
   - `load`, `view` (once, 50% visible): label = panel (`tracker`, `copies`, `revenue`)
   - `tab_switch`: `all`, `ps5`, `xbox` · `period_switch`: `launch`, `all-time`
@@ -108,11 +108,11 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 ## 7. Updating comparison data
 
 - Edit `data/comparisons.json` directly; no rebuild needed
-- `"gta6": {"release": "YYYY-MM-DD", "launchDays": 3}` — GTA 6's release date and launch window
+- `"gta6": {"release": "YYYY-MM-DD", "launchDays": 3}` — GTA VI's release date and launch window
   - Drives the Launch view's like-for-like figure, the history chart's Launch marker and the scraper's launch jump limit
   - Set to 2026-11-19; correct it here if the date changes
-- GTA 6 rows use `"live": true` instead of `amt`; their `sub` label is set by the widget (pre-orders, first 3 days, est. to date, latest reading)
-  - Don't mention GTA 6's state in a Launch view's `note`: the widget adds that sentence
+- GTA VI rows use `"live": true` instead of `amt`; their `sub` label is set by the widget (pre-orders, first 3 days, est. to date, latest reading)
+  - Don't mention GTA VI's state in a Launch view's `note`: the widget adds that sentence
 - `film: true` = grey bar; `plus: true` = value shown with "+"
 - Check weekly: Spider-Man: Brand New Day (still in release), Minecraft and GTA 5 lifetime units
 - `est: true` = an outside estimate, not a publisher figure: the value gets an asterisk and the view's `note` must explain it
@@ -128,7 +128,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Shown beside the estimate reading on or before that date; the live estimate keeps running
   - Edit right after a scraper commit, or pull first: the bot commits to the same file
 - Related links: `data/links.json`
-  - `{"title": "More on GTA 6", "items": [{"title": "...", "url": "https://movieweb.com/..."}]}`
+  - `{"title": "More on GTA VI", "items": [{"title": "...", "url": "https://movieweb.com/..."}]}`
   - Only `https://movieweb.com/` URLs count, never a link to the page the widget is on; the first valid one is used
   - Empty `items` = no links block
 

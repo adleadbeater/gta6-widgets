@@ -1,4 +1,4 @@
-name: Update GTA 6 data
+name: Update GTA VI data
 
 on:
   schedule:
@@ -34,5 +34,5 @@ jobs:
           git config user.name "gta6-data-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data/
-          git commit -m "Update GTA 6 sales data"
+          git commit -m "Update GTA VI sales data"
           git push

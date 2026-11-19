@@ -4,7 +4,7 @@
     "launchDays": 3
   },
   "copies": {
-    "title": "GTA 6 vs. best-selling games",
+    "title": "GTA VI vs. best-selling games",
     "sources": [
       {
         "name": "publisher reports"
@@ -19,7 +19,7 @@
       "note": "Launch windows differ by game.",
       "items": [
         {
-          "title": "GTA 6",
+          "title": "GTA VI",
           "year": 2026,
           "sub": "Est. to date",
           "live": true
@@ -81,12 +81,12 @@
       ]
     },
     "all": {
-      "meta": "Lifetime copies sold · GTA 6 is a live estimate",
+      "meta": "Lifetime copies sold · GTA VI is a live estimate",
       "note": "Excludes Tetris, whose 520M combines every version.",
       "pinRank": "50+",
       "items": [
         {
-          "title": "GTA 6",
+          "title": "GTA VI",
           "year": 2026,
           "sub": "Est. to date",
           "live": true
@@ -155,7 +155,7 @@
     }
   },
   "revenue": {
-    "title": "GTA 6 vs. biggest entertainment releases",
+    "title": "GTA VI vs. biggest entertainment releases",
     "legend": true,
     "sources": [
       {
@@ -170,7 +170,7 @@
       "note": "Not inflation-adjusted.",
       "items": [
         {
-          "title": "GTA 6",
+          "title": "GTA VI",
           "year": 2026,
           "sub": "Game · Est. to date",
           "live": true
@@ -241,7 +241,7 @@
       "note": "* Estimate, not a publisher figure. Not inflation-adjusted.",
       "items": [
         {
-          "title": "GTA 6",
+          "title": "GTA VI",
           "year": 2026,
           "sub": "Game · Est. to date",
           "live": true

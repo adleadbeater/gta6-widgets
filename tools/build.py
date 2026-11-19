@@ -24,7 +24,7 @@ from datetime import datetime, timezone
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_SRC = "https://adleadbeater.github.io/gta6-widgets/data/"
 WIDGETS = {"00-mega": "mega", "01-sales-tracker": "tracker", "02-copies-chart": "copies", "03-revenue-chart": "revenue"}
-# Previews only: example related links so the "More on GTA 6" block can be seen offline
+# Previews only: example related links so the "More on GTA VI" block can be seen offline
 PREVIEW_LINKS = [
     {"title": "Example related article (edit data/links.json)", "url": "https://movieweb.com/"},
     {"title": "Another example article", "url": "https://movieweb.com/"},
@@ -141,7 +141,7 @@ def copy_page(stamp):
                       f' \u00b7 <a href="{view}?theme=light" target="_blank">Light</a></span></div>{"".join(fields)}</section>')
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA 6 embed fields</title>
+<title>GTA VI embed fields</title>
 <style>
 body{{margin:0;padding:24px 16px;background:#f2f2f2;color:#181818;font:15px/21px Roboto,Arial,sans-serif}}
 main{{max-width:900px;margin:0 auto}} h1{{font:600 22px/28px Poppins,Arial,sans-serif;margin:0 0 4px}}
@@ -155,7 +155,7 @@ button{{font:600 11px/13px Poppins,Arial,sans-serif;text-transform:uppercase;pad
 button.done{{background:#0b5c2b}} button:focus-visible{{outline:2px solid #c81e25;outline-offset:2px}}
 textarea{{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospace,Menlo,monospace;border:1px solid #e4e4e4;border-radius:2px;padding:6px;resize:vertical}}
 </style></head><body><main>
-<h1>GTA 6 embed fields</h1>
+<h1>GTA VI embed fields</h1>
 <p>Build {stamp}. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
 <p class="links"><a href="../preview/index.html" target="_blank">All previews</a><a href="../preview/separate-embeds.html" target="_blank">Three separate embeds on one page</a><a href="../preview/mega.html?gta6debug=1" target="_blank">Mega with build stamp</a></p>
 <p>Previews use the data bundled at build time, so they work offline; on the live site the widgets load the latest data.</p>
@@ -181,7 +181,7 @@ def showcase_page(css_field, js_field, seed_js, titles, stamp):
     panes = "".join(f'<div class="sc-pane" data-pane="{k}"{"" if i == 0 else " hidden"}>{frame(k, titles, DATA_SRC)}</div>' for i, (k, _) in enumerate(views))
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA 6 Vignettes Showcase</title>
+<title>GTA VI Vignettes Showcase</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{{--page:#0a0a0a;--bar:#181818;--ink:#ffffff;--muted:#b0b0b0;--btn:#737373;--red:#de272e;--ring:#ff5a5f}}
@@ -203,8 +203,8 @@ body.phone .sc-stage{{max-width:358px}}
 {seed_js}
 </head><body>
 <div class="sc-bar">
-  <h1>GTA 6 vignettes</h1>
-  <p>Click through the four MovieWeb GTA 6 vignettes. Live data when online; build {stamp}.</p>
+  <h1>GTA VI vignettes</h1>
+  <p>Click through the four MovieWeb GTA VI vignettes. Live data when online; build {stamp}.</p>
   <div class="sc-row">
     <div class="sc-group" role="group" aria-label="Vignette">{tabs}</div>
   </div>
@@ -247,7 +247,7 @@ def main():
     stamp = f"{version}+{datetime.now(timezone.utc):%Y%m%d}.{hashlib.sha256((js + css).encode()).hexdigest()[:7]}"
     js = js.replace("var BUILD = 'dev';", f"var BUILD = '{stamp}';", 1)
     cmp = json.loads(read("data", "comparisons.json"))
-    titles = {"tracker": "GTA 6 Sales Tracker", "copies": cmp["copies"]["title"], "revenue": cmp["revenue"]["title"]}
+    titles = {"tracker": "GTA VI Sales Tracker", "copies": cmp["copies"]["title"], "revenue": cmp["revenue"]["title"]}
     css_field, js_field = "<style>\n" + css + "</style>\n", "<script>\n" + js + "</script>\n"
     out = []
     for folder, kind in WIDGETS.items():

@@ -16,7 +16,7 @@
   var UP = '\u25b2';
   var DOWN = '\u25bc';
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var CATS = { tracker: 'GTA 6 Sales Tracker Vignette', copies: 'GTA 6 Copies Chart Vignette', revenue: 'GTA 6 Revenue Chart Vignette' };
+  var CATS = { tracker: 'GTA VI Sales Tracker Vignette', copies: 'GTA VI Copies Chart Vignette', revenue: 'GTA VI Revenue Chart Vignette' };
   var MAX_EVENTS = 50;
   var BUILD = 'dev';
   var DEBUG = /[?&]gta6debug=1(&|$)/.test(location.search);
@@ -183,7 +183,7 @@
         /^https:\/\/(www\.)?movieweb\.com\//i.test(x.url) && pathOf(x.url) !== here;
     }).slice(0, 3);
     if (!items.length) return null;
-    return { title: typeof d.title === 'string' && d.title.trim() ? d.title : 'More on GTA 6', items: items };
+    return { title: typeof d.title === 'string' && d.title.trim() ? d.title : 'More on GTA VI', items: items };
   }
 
   // Daily cumulative history; optional, so a bad series is dropped, never fatal
@@ -387,7 +387,7 @@
     var meta = 'Worldwide digital sales on PS5 and Xbox Series X|S' + DOT + 'Latest reading ' + esc(fmtDate(m.r0.date));
 
     var h = '';
-    h += '<div class="mw-gta6__head"><h2 class="mw-gta6__h">GTA 6 Sales Tracker</h2>' +
+    h += '<div class="mw-gta6__head"><h2 class="mw-gta6__h">GTA VI Sales Tracker</h2>' +
       '<span class="mw-gta6__badge">' + (L.stale ? 'Latest reading' : 'Live estimate') + '</span></div>';
     h += '<p class="mw-gta6__meta">' + meta + '<span data-live="status">' + (L.stale ? DOT + 'Awaiting next update' : '') + '</span></p>';
     h += '<p class="mw-gta6__sr">As of the ' + esc(fmtDate(m.r0.date)) + ' reading: ' + esc(whole(m.r0.units)) +
@@ -469,7 +469,7 @@
 
   /* ---------- charts ---------- */
 
-  // GTA 6's like-for-like launch figure: the estimated cumulative total at the end of
+  // GTA VI's like-for-like launch figure: the estimated cumulative total at the end of
   // its first N days (pre-orders included, as for the other games). Null without a
   // release date; { pending } until the series reaches that day.
   function gtaLaunch(st) {
@@ -548,7 +548,7 @@
         '" style="--w:' + (x.amt / max).toFixed(4) + '"></span><span class="mw-gta6__val">' + esc(val) + '</span></span></li>';
     });
 
-    // Next-overtake line: only while GTA 6's figure is live, and only against an entry that
+    // Next-overtake line: only while GTA VI's figure is live, and only against an entry that
     // is really next (not across the unlisted gap behind a fixed pinRank such as "50+")
     var next = '';
     if (myIdx >= 0 && !fixed) {
@@ -568,7 +568,7 @@
         if (rate > 0 && gap / rate <= ETA_MAX_SEC) s += DOT + esc(fmtDur(gap / rate)) + ' at the current pace';
         parts.push(s);
       } else if (myIdx === 0) {
-        parts.push('<strong>GTA 6</strong> tops this chart');
+        parts.push('<strong>GTA VI</strong> tops this chart');
       }
       next = parts.join(DOT);
     }
@@ -633,7 +633,7 @@
     } else {
       st.el.innerHTML = chartHTML(st);
     }
-    st.el.setAttribute('aria-label', st.kind === 'tracker' ? 'GTA 6 sales tracker' : st.cmp[st.kind].title);
+    st.el.setAttribute('aria-label', st.kind === 'tracker' ? 'GTA VI sales tracker' : st.cmp[st.kind].title);
     if (refocus) {
       var target = st.el.querySelector(refocus);
       if (target) target.focus();
@@ -790,7 +790,7 @@
       root.setAttribute('data-state', 'failed');
       warn('widget hidden: ' + (e && e.message), e);
       if (DEBUG) {
-        root.innerHTML = '<p class="mw-gta6__note">GTA 6 vignette not shown: ' + esc(e && e.message) + DOT + 'build ' + esc(BUILD) + '</p>';
+        root.innerHTML = '<p class="mw-gta6__note">GTA VI vignette not shown: ' + esc(e && e.message) + DOT + 'build ' + esc(BUILD) + '</p>';
       } else {
         root.innerHTML = '';
         root.hidden = true;

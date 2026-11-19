@@ -123,7 +123,7 @@ def _num(s):
 
 
 def release_date():
-    """GTA 6 release date from data/comparisons.json ("gta6": {"release": "YYYY-MM-DD"}), or None."""
+    """GTA VI release date from data/comparisons.json ("gta6": {"release": "YYYY-MM-DD"}), or None."""
     try:
         with open(COMPARISONS, encoding="utf-8") as f:
             return Date.fromisoformat(json.load(f)["gta6"]["release"])
