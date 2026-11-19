@@ -1,0 +1,59 @@
+{
+  "source": {
+    "name": "Sensor Tower",
+    "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"
+  },
+  "readings": [
+    {
+      "date": "2026-11-19",
+      "at": "2026-11-19T00:00:00Z",
+      "units": 19050000,
+      "revenue": 1841060000,
+      "platforms": {
+        "ps5": {
+          "units": 14230000,
+          "revenue": 1377170000
+        },
+        "xbox": {
+          "units": 4820000,
+          "revenue": 463890000
+        }
+      }
+    },
+    {
+      "date": "2026-11-18",
+      "at": "2026-11-18T00:00:00Z",
+      "units": 17070000,
+      "revenue": 1650000000
+    },
+    {
+      "date": "2026-11-16",
+      "at": "2026-11-16T00:00:00Z",
+      "units": 14940000,
+      "revenue": 1450000000,
+      "platforms": {
+        "ps5": {
+          "units": 11130000,
+          "revenue": 1080000000
+        },
+        "xbox": {
+          "units": 3810000,
+          "revenue": 368000000
+        }
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "at": "2026-11-13T00:00:00Z",
+      "units": 10310000,
+      "revenue": 1000000000
+    },
+    {
+      "date": "2026-11-03",
+      "at": "2026-11-03T00:00:00Z",
+      "units": 7710000,
+      "revenue": 750000000
+    }
+  ],
+  "official": null
+}

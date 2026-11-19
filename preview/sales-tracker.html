@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sales tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;padding:8px 16px;background:#0a0a0a;font-family:Roboto,Arial,sans-serif}
+body.light{background:#f2f2f2}
+.preview-bar{max-width:760px;margin:16px auto 0;font-size:13px;color:#b0b0b0}
+body.light .preview-bar{color:#555}
+.preview-bar a{color:inherit}
+</style>
+<script>window.MWGTA6_SEED = {"tracker": {"source": {"name": "Sensor Tower", "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"}, "readings": [{"date": "2026-11-19", "at": "2026-11-19T00:00:00Z", "units": 19050000, "revenue": 1844000000, "platforms": {"ps5": {"units": 14230000, "revenue": 1380000000}, "xbox": {"units": 4820000, "revenue": 464000000}}}, {"date": "2026-11-18", "at": "2026-11-18T00:00:00Z", "units": 17070000, "revenue": 1650000000}, {"date": "2026-11-16", "at": "2026-11-16T00:00:00Z", "units": 14940000, "revenue": 1450000000, "platforms": {"ps5": {"units": 11130000, "revenue": 1080000000}, "xbox": {"units": 3810000, "revenue": 368000000}}}, {"date": "2026-11-13", "at": "2026-11-13T00:00:00Z", "units": 10310000, "revenue": 1000000000}, {"date": "2026-11-03", "at": "2026-11-03T00:00:00Z", "units": 7710000, "revenue": 750000000}], "official": null}, "comparisons": {"copies": {"title": "GTA 6 vs. best-selling games", "sources": [{"name": "Sensor Tower", "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"}, {"name": "publisher reports"}, {"name": "Guinness World Records", "url": "https://www.guinnessworldrecords.com/"}], "launch": {"meta": "Copies sold at launch \u00b7 GTA 6 is a live estimate", "note": "Windows differ: first 24 hours for GTA 5, Diablo III and Nightreign; US and UK only for Modern Warfare 3 and Black Ops; first 3 days for the rest. GTA 6 is Sensor Tower\u2019s digital estimate to date.", "items": [{"title": "GTA 6", "year": 2026, "sub": "Est. to date", "live": true}, {"title": "GTA 5", "year": 2013, "sub": "First 24 hours", "amt": 11210000}, {"title": "Zelda: Tears of the Kingdom", "year": 2023, "sub": "First 3 days", "amt": 10000000}, {"title": "Pok\u00e9mon Scarlet / Violet", "year": 2022, "sub": "First 3 days", "amt": 10000000}, {"title": "Black Myth: Wukong", "year": 2024, "sub": "First 3 days", "amt": 10000000}, {"title": "Monster Hunter Wilds", "year": 2025, "sub": "First 3 days", "amt": 8000000}, {"title": "Call of Duty: Modern Warfare 3", "year": 2011, "sub": "24 hrs, US & UK", "amt": 6500000}, {"title": "Call of Duty: Black Ops", "year": 2010, "sub": "24 hrs, US & UK", "amt": 5600000}, {"title": "Diablo III", "year": 2012, "sub": "First 24 hours", "amt": 3500000}, {"title": "Elden Ring Nightreign", "year": 2025, "sub": "First 24 hours", "amt": 2000000}]}, "all": {"meta": "Lifetime copies sold \u00b7 GTA 6 is a live estimate", "note": "Publisher-reported units sold. Excludes Tetris, whose 520M combines every version. GTA 6 ranks outside the top 50.", "pinRank": "50+", "items": [{"title": "GTA 6", "year": 2026, "sub": "Est. to date", "live": true}, {"title": "Minecraft", "year": 2011, "sub": "Lifetime", "amt": 425000000}, {"title": "GTA 5", "year": 2013, "sub": "Lifetime", "amt": 235000000}, {"title": "Red Dead Redemption 2", "year": 2018, "sub": "Lifetime", "amt": 89000000}, {"title": "Wii Sports", "year": 2006, "sub": "Lifetime", "amt": 82900000}, {"title": "Mario Kart 8 / Deluxe", "year": 2014, "sub": "Lifetime", "amt": 80460000}, {"title": "PUBG: Battlegrounds", "year": 2017, "sub": "Lifetime", "amt": 75000000}, {"title": "Terraria", "year": 2011, "sub": "Lifetime", "amt": 70000000}, {"title": "The Elder Scrolls V: Skyrim", "year": 2011, "sub": "Lifetime", "amt": 65000000}, {"title": "The Witcher 3: Wild Hunt", "year": 2015, "sub": "Lifetime", "amt": 65000000}, {"title": "Super Mario Bros.", "year": 1985, "sub": "Lifetime", "amt": 58000000}]}}, "revenue": {"title": "GTA 6 vs. biggest entertainment releases", "legend": true, "sources": [{"name": "Sensor Tower", "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"}, {"name": "Box Office Mojo", "url": "https://www.boxofficemojo.com/"}, {"name": "publisher and studio reports"}, {"name": "Cowen via MarketWatch"}], "launch": {"meta": "Revenue at launch \u00b7 games\u2019 first days, films\u2019 global opening weekend", "note": "Games are publisher-reported sell-through over the first 3 days, except GTA 6 (live estimate). Zootopia 2 is a 5-day Thanksgiving opening. Not inflation-adjusted.", "items": [{"title": "GTA 6", "year": 2026, "sub": "Game \u00b7 Est. to date", "live": true}, {"title": "Avengers: Endgame", "year": 2019, "sub": "Film \u00b7 Opening weekend", "amt": 1223000000, "film": true}, {"title": "GTA 5", "year": 2013, "sub": "Game \u00b7 First 3 days", "amt": 1000000000}, {"title": "Spider-Man: Brand New Day", "year": 2026, "sub": "Film \u00b7 Opening weekend", "amt": 932000000, "film": true}, {"title": "Red Dead Redemption 2", "year": 2018, "sub": "Game \u00b7 First 3 days", "amt": 725000000}, {"title": "Avengers: Infinity War", "year": 2018, "sub": "Film \u00b7 Opening weekend", "amt": 640000000, "film": true}, {"title": "Spider-Man: No Way Home", "year": 2021, "sub": "Film \u00b7 Opening weekend", "amt": 601000000, "film": true}, {"title": "Call of Duty: Modern Warfare", "year": 2019, "sub": "Game \u00b7 First 3 days", "amt": 600000000}, {"title": "Zootopia 2", "year": 2025, "sub": "Film \u00b7 5-day opening", "amt": 556000000, "film": true}, {"title": "Call of Duty: Black Ops III", "year": 2015, "sub": "Game \u00b7 First 3 days", "amt": 550000000}]}, "all": {"meta": "Lifetime revenue \u00b7 games\u2019 sales, films\u2019 worldwide box office", "note": "GTA 5 is a 2018 analyst estimate ($6B at 90M copies), so its current total is higher. Spider-Man: Brand New Day is still in release. Free-to-play games excluded. Not inflation-adjusted.", "items": [{"title": "GTA 6", "year": 2026, "sub": "Game \u00b7 Est. to date", "live": true}, {"title": "GTA 5", "year": 2013, "sub": "Game \u00b7 Analyst est.", "amt": 6000000000, "plus": true}, {"title": "Avengers: Endgame", "year": 2019, "sub": "Film \u00b7 Worldwide", "amt": 2925500000, "film": true}, {"title": "Avatar", "year": 2009, "sub": "Film \u00b7 Worldwide", "amt": 2923700000, "film": true}, {"title": "Spider-Man: Brand New Day", "year": 2026, "sub": "Film \u00b7 In release", "amt": 2523000000, "film": true}, {"title": "Avatar: The Way of Water", "year": 2022, "sub": "Film \u00b7 Worldwide", "amt": 2334000000, "film": true}, {"title": "Titanic", "year": 1997, "sub": "Film \u00b7 Worldwide", "amt": 2258000000, "film": true}, {"title": "Ne Zha 2", "year": 2025, "sub": "Film \u00b7 Worldwide", "amt": 2216000000, "film": true}, {"title": "Star Wars: The Force Awakens", "year": 2015, "sub": "Film \u00b7 Worldwide", "amt": 2068000000, "film": true}, {"title": "Avengers: Infinity War", "year": 2018, "sub": "Film \u00b7 Worldwide", "amt": 2048000000, "film": true}, {"title": "Spider-Man: No Way Home", "year": 2021, "sub": "Film \u00b7 Worldwide", "amt": 1923000000, "film": true}, {"title": "Zootopia 2", "year": 2025, "sub": "Film \u00b7 Worldwide", "amt": 1867000000, "film": true}, {"title": "The Odyssey", "year": 2026, "sub": "Film \u00b7 Worldwide", "amt": 1816000000, "film": true}, {"title": "Inside Out 2", "year": 2024, "sub": "Film \u00b7 Worldwide", "amt": 1699000000, "film": true}]}}}};</script>
+<style>
+.mw-gta6 {
+  --mw-panel: #181818;
+  --mw-card: #333333;
+  --mw-rule: #2c2c2c;
+  --mw-ink: #ffffff;
+  --mw-heading: #b0b0b0;
+  --mw-muted: #b0b0b0;
+  --mw-button: #737373;
+  --mw-on-button: #ffffff;
+  --mw-red: #de272e;
+  --mw-alt: #b0b0b0;
+  --mw-hi: #381a1c;
+  --mw-track: #333333;
+  container: mwgta6 / inline-size;
+  display: block;
+  max-width: 760px;
+  margin: 24px auto;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  color: var(--mw-ink);
+  text-align: left;
+}
+@media (prefers-color-scheme: light) {
+  .mw-gta6:not([data-theme="dark"]) {
+    --mw-panel: #ffffff;
+    --mw-card: #f0f0f0;
+    --mw-rule: #e4e4e4;
+    --mw-ink: #181818;
+    --mw-heading: #555555;
+    --mw-muted: #6b6b6b;
+    --mw-alt: #181818;
+    --mw-hi: #fadcde;
+    --mw-track: #e4e4e4;
+  }
+}
+.mw-gta6[data-theme="light"] {
+  --mw-panel: #ffffff;
+  --mw-card: #f0f0f0;
+  --mw-rule: #e4e4e4;
+  --mw-ink: #181818;
+  --mw-heading: #555555;
+  --mw-muted: #6b6b6b;
+  --mw-alt: #181818;
+  --mw-hi: #fadcde;
+  --mw-track: #e4e4e4;
+}
+.mw-gta6[hidden] { display: none !important; }
+.mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+
+/* panel */
+.mw-gta6__panel {
+  background: var(--mw-panel);
+  border-radius: 4px;
+  padding: 16px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mw-gta6__h {
+  margin: 0;
+  font: 600 20px/24px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: var(--mw-heading);
+}
+.mw-gta6__badge {
+  flex: none;
+  background: var(--mw-red);
+  color: #ffffff;
+  font: 600 10px/12px Poppins, Arial, Helvetica, sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 4px 6px;
+  border-radius: 2px;
+}
+.mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6__label {
+  font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: var(--mw-muted);
+}
+.mw-gta6__muted { color: var(--mw-muted); }
+.mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+.mw-gta6__caption a { color: var(--mw-muted); text-decoration: underline; }
+.mw-gta6__caption a:hover { color: var(--mw-ink); }
+.mw-gta6__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.mw-gta6 button:focus-visible,
+.mw-gta6 a:focus-visible { outline: 2px solid var(--mw-red); outline-offset: 2px; }
+
+/* platform buttons */
+.mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.mw-gta6__btn {
+  min-height: 36px;
+  margin: 0;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--mw-button);
+  color: var(--mw-on-button);
+  font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.mw-gta6__btn[aria-pressed="true"] { background: var(--mw-red); }
+.mw-gta6__btn:hover { filter: brightness(1.12); }
+
+/* stat cards */
+.mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6__stat {
+  background: var(--mw-card);
+  border-radius: 2px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.mw-gta6__num {
+  font: 700 32px/1.2 Poppins, Arial, Helvetica, sans-serif;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--mw-ink);
+}
+.mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6__chg strong { color: var(--mw-ink); }
+.mw-gta6__up { color: var(--mw-red); }
+
+/* platform split */
+.mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
+.mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
+.mw-gta6__split span:first-child { background: var(--mw-red); }
+.mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
+.mw-gta6__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  font-size: 13px;
+  line-height: 18px;
+}
+.mw-gta6__sw {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  background: var(--mw-red);
+}
+.mw-gta6__sw--alt { background: var(--mw-alt); }
+
+/* readings table */
+.mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6__table {
+  width: 100%;
+  min-width: 340px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 21px;
+  font-variant-numeric: tabular-nums;
+}
+.mw-gta6__table th {
+  padding: 0 8px 6px;
+  border-bottom: 1px solid var(--mw-rule);
+  font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--mw-muted);
+}
+.mw-gta6__table td {
+  height: 42px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mw-rule);
+  text-align: right;
+  font-weight: 500;
+}
+.mw-gta6__table th:first-child,
+.mw-gta6__table td:first-child { text-align: left; white-space: nowrap; font-weight: 400; }
+.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+
+/* comparison charts */
+.mw-gta6__chart-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.mw-gta6__switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 3px;
+  background: var(--mw-card);
+}
+.mw-gta6__switch button {
+  min-height: 32px;
+  margin: 0;
+  padding: 6px 16px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--mw-ink);
+  font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.mw-gta6__switch button[aria-pressed="true"] { background: var(--mw-red); color: #ffffff; }
+.mw-gta6__switch button:hover { filter: brightness(1.12); }
+.mw-gta6__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--mw-muted);
+}
+.mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mw-gta6__row {
+  display: grid;
+  grid-template-columns: 1.6rem 13rem minmax(0, 1fr);
+  grid-template-areas: "rank lab bar";
+  gap: 8px;
+  align-items: center;
+  min-height: 40px;
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+.mw-gta6__row--me { background: var(--mw-hi); }
+.mw-gta6__rank {
+  grid-area: rank;
+  font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
+  color: var(--mw-muted);
+}
+.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-ink); }
+.mw-gta6__lab { grid-area: lab; min-width: 0; }
+.mw-gta6__title {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+}
+.mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
+.mw-gta6__sub,
+.mw-gta6__subs {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  line-height: 14px;
+  color: var(--mw-muted);
+}
+.mw-gta6__subs { display: none; }
+.mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mw-gta6__bar {
+  flex: none;
+  width: calc(var(--w, 0) * 80%);
+  min-width: 2px;
+  height: 22px;
+  border-radius: 2px;
+  background: var(--mw-red);
+}
+.mw-gta6__bar--film { background: var(--mw-alt); }
+.mw-gta6__val {
+  flex: none;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.mw-gta6__gap {
+  margin: 0;
+  padding: 0 8px;
+  font-size: 13px;
+  line-height: 14px;
+  letter-spacing: 0.2em;
+  color: var(--mw-muted);
+}
+
+/* narrow layout: container width 600px and below */
+@container mwgta6 (max-width: 600px) {
+  .mw-gta6__panel { padding: 16px 12px 12px; }
+  .mw-gta6__h { font-size: 17px; line-height: 20px; }
+  .mw-gta6__label,
+  .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6__num { font-size: 30px; }
+  .mw-gta6__table { font-size: 14px; }
+  .mw-gta6__row {
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    grid-template-areas: "rank lab" "rank bar";
+    gap: 4px 8px;
+    padding: 6px 8px;
+  }
+  .mw-gta6__lab { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .mw-gta6__title { min-width: 0; }
+  .mw-gta6__sub { display: none; }
+  .mw-gta6__subs { display: block; flex: none; overflow: visible; }
+  .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
+  .mw-gta6__val { font-size: 13px; line-height: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="preview-bar">Preview: Sales tracker &middot; <a href="?theme=dark">Dark</a> &middot; <a href="?theme=light">Light</a> &middot; <a href="index.html">All previews</a></div>
+<div class="mw-gta6" data-widget="tracker" data-src="" hidden></div>
+<script>(function(){var t=new URLSearchParams(location.search).get("theme");if(t==="light"||t==="dark"){if(t==="light")document.body.className="light";var r=document.querySelectorAll(".mw-gta6");for(var i=0;i<r.length;i++)r[i].setAttribute("data-theme",t);}})();</script>
+<script>
+(function () {
+  'use strict';
+
+  var NS = 'MWGTA6';
+  if (window[NS]) { window[NS].mountAll(); return; }
+
+  var REFRESH_MS = 300000;
+  var TICK_MS = 250;
+  var CAP_SEC = 36 * 3600;
+  var DOT = ' \u00b7 ';
+  var DASH = '\u2014';
+  var UP = '\u25b2';
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  var CATS = { tracker: 'GTA 6 Sales Tracker', copies: 'GTA 6 Copies Chart', revenue: 'GTA 6 Revenue Chart' };
+  var PLATFORMS = [
+    { id: 'all', label: 'All platforms' },
+    { id: 'ps5', label: 'PS5' },
+    { id: 'xbox', label: 'Xbox Series X|S' }
+  ];
+  var MODES = [
+    { id: 'launch', label: 'Launch' },
+    { id: 'all', label: 'All time' }
+  ];
+  var ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+
+  var instances = [];
+  var requests = {};
+
+  /* ---------- helpers ---------- */
+
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function (ch) { return ESC[ch]; });
+  }
+
+  function warn(msg, err) {
+    if (window.console && console.warn) console.warn('[mw-gta6] ' + msg, err || '');
+  }
+
+  function track(cat, action, label) {
+    var tries = 0;
+    label = String(label || '').slice(0, 200);
+    (function attempt() {
+      var s = window.websiteSentinel;
+      if (s && typeof s.sendEvent === 'function') {
+        try { s.sendEvent(cat, action, label); } catch (e) { /* tracking must never break the widget */ }
+        return;
+      }
+      tries += 1;
+      if (tries < 20) setTimeout(attempt, 250);
+    })();
+  }
+
+  function dateParts(iso) {
+    var p = String(iso || '').slice(0, 10).split('-');
+    var m = parseInt(p[1], 10) - 1;
+    var d = parseInt(p[2], 10);
+    if (!(m >= 0 && m < 12) || !d) return null;
+    return { y: p[0], m: MONTHS[m], d: d };
+  }
+  function fmtDate(iso) { var p = dateParts(iso); return p ? p.m + ' ' + p.d + ', ' + p.y : DASH; }
+  function fmtShort(iso) { var p = dateParts(iso); return p ? p.m + ' ' + p.d : DASH; }
+  function whole(n) { return Math.floor(n).toLocaleString('en-US'); }
+  function trim2(n) { return String(parseFloat(n.toFixed(2))); }
+  function mUnits(n) { return trim2(n / 1e6) + 'M'; }
+  function usd(n, plus) {
+    var s = n >= 1e9 ? '$' + trim2(n / 1e9) + 'B' : '$' + Math.round(n / 1e6) + 'M';
+    return plus ? s + '+' : s;
+  }
+  function time(r) { return Date.parse(r.at || r.date); }
+  function isNum(v) { return typeof v === 'number' && isFinite(v) && v >= 0; }
+
+  /* ---------- data ---------- */
+
+  function fetchJSON(url) {
+    var bucket = Math.floor(Date.now() / REFRESH_MS);
+    var key = url + '|' + bucket;
+    if (requests[key]) return requests[key];
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 10000) : null;
+    var href = url + (url.indexOf('?') < 0 ? '?' : '&') + 'v=' + bucket;
+    requests[key] = fetch(href, { credentials: 'omit', signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) {
+        if (timer) clearTimeout(timer);
+        if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + url);
+        return r.json();
+      })
+      .catch(function (e) {
+        if (timer) clearTimeout(timer);
+        delete requests[key];
+        throw e;
+      });
+    return requests[key];
+  }
+
+  function loadData(root, names) {
+    var base = String(root.getAttribute('data-src') || '').trim();
+    var seed = window.MWGTA6_SEED || null;
+    if (base && !/^https:\/\//i.test(base)) return Promise.reject(new Error('data-src must be an https URL'));
+    if (base && base.charAt(base.length - 1) !== '/') base += '/';
+    return Promise.all(names.map(function (name) {
+      if (!base) {
+        return seed && seed[name] ? Promise.resolve(seed[name]) : Promise.reject(new Error('no data-src and no seed for ' + name));
+      }
+      return fetchJSON(base + name + '.json').catch(function (e) {
+        if (seed && seed[name]) return seed[name];
+        throw e;
+      });
+    }));
+  }
+
+  function validTracker(d) {
+    if (!d || !Array.isArray(d.readings) || !d.readings.length) return false;
+    for (var i = 0; i < d.readings.length; i++) {
+      var r = d.readings[i];
+      if (!r || !isNum(r.units) || !isNum(r.revenue) || !dateParts(r.date) || isNaN(time(r))) return false;
+      if (r.platforms) {
+        var p = r.platforms;
+        if (!p.ps5 || !p.xbox || !isNum(p.ps5.units) || !isNum(p.xbox.units) || !isNum(p.ps5.revenue) || !isNum(p.xbox.revenue)) return false;
+      }
+    }
+    return true;
+  }
+
+  function validComparisons(d) {
+    if (!d) return false;
+    return ['copies', 'revenue'].every(function (k) {
+      var s = d[k];
+      return s && s.title && ['launch', 'all'].every(function (m) {
+        return s[m] && Array.isArray(s[m].items) && s[m].items.length && s[m].items.every(function (x) {
+          return x && x.title && (x.live === true || isNum(x.amt));
+        });
+      });
+    });
+  }
+
+  function model(t) {
+    var rs = t.readings.slice().sort(function (a, b) { return time(b) - time(a); });
+    var r0 = rs[0];
+    var r1 = rs[1] || null;
+    var uRate = 0;
+    var rRate = 0;
+    if (r1) {
+      var dt = (time(r0) - time(r1)) / 1000;
+      if (dt > 0) {
+        uRate = Math.max(0, (r0.units - r1.units) / dt);
+        rRate = Math.max(0, (r0.revenue - r1.revenue) / dt);
+      }
+    }
+    var withP = rs.filter(function (r) { return !!r.platforms; });
+    var off = t.official;
+    var official = off && isNum(off.units) && isNum(off.revenue) && dateParts(off.date) && Date.parse(off.date) >= time(r0) ? off : null;
+    return {
+      rs: rs, r0: r0, r1: r1, t0: time(r0), uRate: uRate, rRate: rRate,
+      p0: withP[0] || null, p1: withP[1] || null, official: official,
+      sourceUrl: (t.source && /^https:\/\//.test(t.source.url)) ? t.source.url : 'https://sensortower.com/grand-theft-auto-VI/sales-tracker'
+    };
+  }
+
+  function live(m, now) {
+    if (m.official) return { units: m.official.units, revenue: m.official.revenue, stale: false, official: true };
+    var dt = Math.max(0, (now - m.t0) / 1000);
+    var stale = dt > CAP_SEC;
+    if (stale) dt = CAP_SEC;
+    return { units: m.r0.units + m.uRate * dt, revenue: m.r0.revenue + m.rRate * dt, stale: stale, official: false };
+  }
+
+  function forPlatform(m, L, key) {
+    if (key === 'all' || !m.p0) return L;
+    var p = m.p0.platforms[key];
+    return { units: L.units * p.units / m.p0.units, revenue: L.revenue * p.revenue / m.p0.revenue };
+  }
+
+  /* ---------- tracker ---------- */
+
+  function trackerHTML(st) {
+    var m = st.m;
+    var L = live(m, Date.now());
+    var V = forPlatform(m, L, st.platform);
+    var dU = null;
+    var dR = null;
+    var since = '';
+    if (st.platform === 'all') {
+      if (m.r1) { dU = m.r0.units - m.r1.units; dR = m.r0.revenue - m.r1.revenue; since = fmtShort(m.r1.date); }
+    } else if (m.p0 && m.p1) {
+      var a = m.p0.platforms[st.platform];
+      var b = m.p1.platforms[st.platform];
+      dU = a.units - b.units; dR = a.revenue - b.revenue; since = fmtShort(m.p1.date);
+    }
+    function change(v, f) {
+      if (v === null) return '<div class="mw-gta6__chg">' + DASH + '</div>';
+      return '<div class="mw-gta6__chg"><span class="mw-gta6__up" aria-hidden="true">' + UP + ' </span><strong>+' +
+        esc(f(v)) + '</strong> since ' + esc(since) + '</div>';
+    }
+    var meta = L.official
+      ? 'Official figure from Take-Two' + DOT + esc(fmtDate(m.official.date))
+      : 'Worldwide digital sales on PS5 and Xbox Series X|S' + DOT + 'Latest Sensor Tower reading ' + esc(fmtDate(m.r0.date));
+
+    var h = '';
+    h += '<div class="mw-gta6__head"><h2 class="mw-gta6__h">GTA 6 Sales Tracker</h2>' +
+      '<span class="mw-gta6__badge">' + (L.official ? 'Official' : 'Live estimate') + '</span></div>';
+    h += '<p class="mw-gta6__meta">' + meta + '<span data-live="status">' + (L.stale ? DOT + 'Awaiting next update' : '') + '</span></p>';
+    h += '<p class="mw-gta6__sr">As of the ' + esc(fmtDate(m.r0.date)) + ' reading: ' + esc(mUnits(m.r0.units)) +
+      ' copies and ' + esc(usd(m.r0.revenue)) + ' in revenue.</p>';
+
+    if (m.p0) {
+      h += '<div class="mw-gta6__btns" role="group" aria-label="Platform">';
+      PLATFORMS.forEach(function (p) {
+        h += '<button type="button" class="mw-gta6__btn" data-platform="' + p.id + '" aria-pressed="' +
+          (p.id === st.platform ? 'true' : 'false') + '">' + esc(p.label) + '</button>';
+      });
+      h += '</div>';
+    }
+
+    h += '<div class="mw-gta6__stats">';
+    h += '<div class="mw-gta6__stat"><div class="mw-gta6__label">Revenue</div>' +
+      '<div class="mw-gta6__num" data-live="rev" aria-live="off">$' + whole(V.revenue) + '</div>' + change(dR, usd) + '</div>';
+    h += '<div class="mw-gta6__stat"><div class="mw-gta6__label">Copies sold</div>' +
+      '<div class="mw-gta6__num" data-live="units" aria-live="off">' + whole(V.units) + '</div>' + change(dU, mUnits) + '</div>';
+    h += '</div>';
+
+    if (m.p0) {
+      var ps = m.p0.platforms.ps5;
+      var xb = m.p0.platforms.xbox;
+      var share = ps.units / m.p0.units;
+      var psPct = Math.round(share * 100);
+      h += '<div class="mw-gta6__block"><div class="mw-gta6__label">Platform split</div>';
+      h += '<div class="mw-gta6__split" role="img" aria-label="PS5 ' + psPct + ' percent, Xbox Series X|S ' + (100 - psPct) + ' percent">' +
+        '<span style="width:' + (share * 100).toFixed(1) + '%"></span><span></span></div>';
+      h += '<div class="mw-gta6__legend">' +
+        '<div><span class="mw-gta6__sw" aria-hidden="true"></span><strong>PS5 ' + psPct + '%</strong> <span class="mw-gta6__muted">' +
+        esc(mUnits(ps.units)) + ' copies' + DOT + esc(usd(ps.revenue)) + '</span></div>' +
+        '<div><span class="mw-gta6__sw mw-gta6__sw--alt" aria-hidden="true"></span><strong>Xbox Series X|S ' + (100 - psPct) +
+        '%</strong> <span class="mw-gta6__muted">' + esc(mUnits(xb.units)) + ' copies' + DOT + esc(usd(xb.revenue)) + '</span></div>' +
+        '</div></div>';
+    }
+
+    var rows = m.rs.slice(0, 5);
+    h += '<div class="mw-gta6__scroll"><table class="mw-gta6__table"><thead><tr>' +
+      '<th scope="col">Reading</th><th scope="col">Copies</th><th scope="col">Revenue</th><th scope="col">Change</th></tr></thead><tbody>';
+    rows.forEach(function (r, i) {
+      var prev = m.rs[i + 1];
+      var chg = prev ? '<span class="mw-gta6__up" aria-hidden="true">' + UP + ' </span>' + esc(mUnits(r.units - prev.units)) : DASH;
+      h += '<tr><td>' + esc(fmtDate(r.date)) + '</td><td>' + esc(mUnits(r.units)) + '</td><td>' + esc(usd(r.revenue)) +
+        '</td><td class="mw-gta6__chgcell">' + chg + '</td></tr>';
+    });
+    h += '</tbody></table></div>';
+
+    h += '<p class="mw-gta6__caption">Live figure is projected from the latest reading and resets when Sensor Tower updates. ' +
+      'Estimates only; excludes physical copies. Source: <a href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">Sensor Tower</a></p>';
+    return h;
+  }
+
+  function tickTracker(st) {
+    var L = live(st.m, Date.now());
+    if (L.stale !== st.stale) { st.stale = L.stale; render(st); return; }
+    var V = forPlatform(st.m, L, st.platform);
+    var r = st.el.querySelector('[data-live="rev"]');
+    var u = st.el.querySelector('[data-live="units"]');
+    if (r) r.textContent = '$' + whole(V.revenue);
+    if (u) u.textContent = whole(V.units);
+  }
+
+  /* ---------- charts ---------- */
+
+  function chartRows(st) {
+    var set = st.cmp[st.kind];
+    var view = set[st.mode];
+    var L = live(st.m, Date.now());
+    var liveAmt = st.kind === 'copies' ? L.units : L.revenue;
+    var items = view.items.map(function (x) {
+      var o = {};
+      for (var k in x) { if (Object.prototype.hasOwnProperty.call(x, k)) o[k] = x[k]; }
+      if (x.live) { o.amt = liveAmt; o.me = true; }
+      return o;
+    });
+    items.sort(function (a, b) { return b.amt - a.amt; });
+    var myIdx = -1;
+    for (var i = 0; i < items.length; i++) { if (items[i].me) { myIdx = i; break; } }
+    var list = items.slice(0, 10);
+    var pinned = myIdx >= 10 ? items[myIdx] : null;
+    if (pinned) list.push(pinned);
+    var max = Math.max.apply(null, list.map(function (x) { return x.amt; }));
+    var fmt = st.kind === 'copies' ? function (x) { return mUnits(x.amt); } : function (x) { return usd(x.amt, x.plus); };
+
+    var out = '';
+    list.forEach(function (x, i) {
+      var isPin = pinned && x === pinned;
+      var rank = isPin ? (view.pinRank || String(myIdx + 1)) : String(i + 1);
+      var sub = x.year + DOT + x.sub;
+      var subShort = String(x.year) + (x.sub === 'Lifetime' ? '' : DOT + String(x.sub).replace(/^(Film|Game) \u00b7 /, ''));
+      var val = fmt(x);
+      if (isPin) out += '<li class="mw-gta6__gap" aria-hidden="true">\u00b7\u00b7\u00b7</li>';
+      out += '<li class="mw-gta6__row' + (x.me ? ' mw-gta6__row--me' : '') + '" aria-label="' +
+        esc(rank + '. ' + x.title + ' (' + x.year + '), ' + x.sub + ': ' + val) + '">' +
+        '<span class="mw-gta6__rank" aria-hidden="true">' + esc(rank) + '</span>' +
+        '<span class="mw-gta6__lab" aria-hidden="true"><span class="mw-gta6__title" title="' + esc(x.title) + '">' + esc(x.title) + '</span>' +
+        '<span class="mw-gta6__sub">' + esc(sub) + '</span><span class="mw-gta6__subs">' + esc(subShort) + '</span></span>' +
+        '<span class="mw-gta6__barwrap" aria-hidden="true"><span class="mw-gta6__bar' + (x.film ? ' mw-gta6__bar--film' : '') +
+        '" style="--w:' + (x.amt / max).toFixed(4) + '"></span><span class="mw-gta6__val">' + esc(val) + '</span></span></li>';
+    });
+    return { html: out, key: mUnits(liveAmt) + usd(liveAmt) };
+  }
+
+  function sourcesHTML(list) {
+    if (!Array.isArray(list)) return '';
+    return 'Source: ' + list.map(function (s) {
+      if (s && s.url && /^https:\/\//.test(s.url)) {
+        return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a>';
+      }
+      return esc(s && s.name);
+    }).join(DOT);
+  }
+
+  function chartHTML(st) {
+    var set = st.cmp[st.kind];
+    var view = set[st.mode];
+    var rows = chartRows(st);
+    st.last = rows.key;
+    var h = '';
+    h += '<div class="mw-gta6__head"><h2 class="mw-gta6__h">' + esc(set.title) + '</h2></div>';
+    h += '<p class="mw-gta6__meta">' + esc(view.meta) + '</p>';
+    h += '<div class="mw-gta6__chart-head"><div class="mw-gta6__switch" role="group" aria-label="Time period">';
+    MODES.forEach(function (md) {
+      h += '<button type="button" data-mode="' + md.id + '" aria-pressed="' + (md.id === st.mode ? 'true' : 'false') + '">' + esc(md.label) + '</button>';
+    });
+    h += '</div>';
+    if (set.legend) {
+      h += '<div class="mw-gta6__keys"><div><span class="mw-gta6__sw" aria-hidden="true"></span>Games</div>' +
+        '<div><span class="mw-gta6__sw mw-gta6__sw--alt" aria-hidden="true"></span>Films</div></div>';
+    }
+    h += '</div>';
+    h += '<ol class="mw-gta6__bars">' + rows.html + '</ol>';
+    if (view.note) h += '<p class="mw-gta6__caption">' + esc(view.note) + '</p>';
+    h += '<p class="mw-gta6__caption">' + sourcesHTML(set.sources) + '</p>';
+    return h;
+  }
+
+  function tickChart(st) {
+    var rows = chartRows(st);
+    if (rows.key === st.last) return;
+    st.last = rows.key;
+    var ol = st.el.querySelector('.mw-gta6__bars');
+    if (ol) ol.innerHTML = rows.html;
+  }
+
+  /* ---------- lifecycle ---------- */
+
+  function render(st) {
+    var active = document.activeElement;
+    var refocus = null;
+    if (active && st.el.contains(active)) {
+      if (active.getAttribute('data-platform')) refocus = '[data-platform="' + active.getAttribute('data-platform') + '"]';
+      else if (active.getAttribute('data-mode')) refocus = '[data-mode="' + active.getAttribute('data-mode') + '"]';
+    }
+    if (st.kind === 'tracker') {
+      st.stale = live(st.m, Date.now()).stale;
+      st.el.innerHTML = trackerHTML(st);
+    } else {
+      st.el.innerHTML = chartHTML(st);
+    }
+    st.el.setAttribute('aria-label', st.kind === 'tracker' ? 'GTA 6 sales tracker' : st.cmp[st.kind].title);
+    if (refocus) {
+      var target = st.el.querySelector(refocus);
+      if (target) target.focus();
+    }
+  }
+
+  function bind(st) {
+    st.el.addEventListener('click', function (ev) {
+      var t = ev.target;
+      while (t && t !== st.el && !(t.tagName === 'BUTTON' || t.tagName === 'A')) t = t.parentNode;
+      if (!t || t === st.el) return;
+      var cat = CATS[st.kind];
+      if (t.tagName === 'A') { track(cat, 'Link Click', t.textContent); return; }
+      var p = t.getAttribute('data-platform');
+      var md = t.getAttribute('data-mode');
+      if (p && p !== st.platform) {
+        st.platform = p;
+        render(st);
+        track(cat, 'Platform Switch', p);
+      } else if (md && md !== st.mode) {
+        st.mode = md;
+        render(st);
+        track(cat, 'Toggle', st.kind + DOT + md);
+      }
+    });
+  }
+
+  function observe(st) {
+    if (!('IntersectionObserver' in window)) {
+      st.visible = true;
+      track(CATS[st.kind], 'Impression', st.kind);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        st.visible = e.isIntersecting;
+        if (!st.impressed && e.intersectionRatio >= 0.5) {
+          st.impressed = true;
+          track(CATS[st.kind], 'Impression', st.kind);
+        }
+      });
+    }, { threshold: [0, 0.5] });
+    io.observe(st.el);
+  }
+
+  function needsFor(kinds) {
+    var names = ['tracker'];
+    if (kinds.indexOf('copies') >= 0 || kinds.indexOf('revenue') >= 0) names.push('comparisons');
+    return names;
+  }
+
+  function apply(inst, res) {
+    var t = res[0];
+    var cmp = res[1] || null;
+    if (!validTracker(t)) throw new Error('tracker.json failed validation');
+    if (inst.names.length > 1 && !validComparisons(cmp)) throw new Error('comparisons.json failed validation');
+    var m = model(t);
+    inst.parts.forEach(function (st) { st.m = m; st.cmp = cmp; render(st); });
+  }
+
+  function mount(root) {
+    if (root.getAttribute('data-mounted') === '1') return;
+    root.setAttribute('data-mounted', '1');
+    var kind = root.getAttribute('data-widget');
+    var kinds = kind === 'mega' ? ['tracker', 'copies', 'revenue'] : [kind];
+    if (!CATS[kinds[0]]) { warn('unknown data-widget "' + kind + '"'); root.hidden = true; return; }
+    var names = needsFor(kinds);
+    loadData(root, names).then(function (res) {
+      root.innerHTML = kinds.map(function (k) { return '<section class="mw-gta6__panel" data-part="' + k + '"></section>'; }).join('');
+      var inst = { root: root, names: names, parts: [] };
+      kinds.forEach(function (k, i) {
+        inst.parts.push({ kind: k, el: root.children[i], platform: 'all', mode: 'launch', last: '', visible: false, impressed: false, stale: false });
+      });
+      apply(inst, res);
+      inst.parts.forEach(function (st) { bind(st); observe(st); });
+      root.hidden = false;
+      instances.push(inst);
+    }).catch(function (e) {
+      root.innerHTML = '';
+      root.hidden = true;
+      warn('widget hidden: ' + (e && e.message), e);
+    });
+  }
+
+  function mountAll() {
+    var roots = document.querySelectorAll('.mw-gta6[data-widget]');
+    for (var i = 0; i < roots.length; i++) mount(roots[i]);
+  }
+
+  setInterval(function () {
+    if (document.hidden) return;
+    instances.forEach(function (inst) {
+      inst.parts.forEach(function (st) {
+        if (!st.visible) return;
+        if (st.kind === 'tracker') tickTracker(st); else tickChart(st);
+      });
+    });
+  }, TICK_MS);
+
+  setInterval(function () {
+    instances.forEach(function (inst) {
+      loadData(inst.root, inst.names).then(function (res) { apply(inst, res); })
+        .catch(function (e) { warn('refresh failed, keeping last data', e); });
+    });
+  }, REFRESH_MS);
+
+  window[NS] = { mountAll: mountAll, version: '1.0.0' };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAll);
+  else mountAll();
+})();
+</script>
+</body>
+</html>

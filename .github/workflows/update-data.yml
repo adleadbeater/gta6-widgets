@@ -1,0 +1,45 @@
+name: Update GTA 6 data
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: |
+          pip install -r scraper/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Scrape and validate
+        run: python scraper/update.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data/; then echo "No change"; exit 0; fi
+          git config user.name "gta6-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "Update GTA 6 sales data"
+          git push
+      - name: Alert Slack on failure
+        if: failure() && env.SLACK_WEBHOOK_URL != ''
+        run: |
+          curl -sS -m 10 -X POST -H 'Content-type: application/json' \
+            --data "{\"text\":\"GTA 6 tracker data update failed: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID\"}" \
+            "$SLACK_WEBHOOK_URL"

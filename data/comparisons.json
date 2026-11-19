@@ -1,0 +1,351 @@
+{
+  "copies": {
+    "title": "GTA 6 vs. best-selling games",
+    "sources": [
+      {
+        "name": "Sensor Tower",
+        "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"
+      },
+      {
+        "name": "publisher reports"
+      },
+      {
+        "name": "Guinness World Records",
+        "url": "https://www.guinnessworldrecords.com/"
+      }
+    ],
+    "launch": {
+      "meta": "Copies sold at launch · GTA 6 is a live estimate",
+      "note": "Windows differ: first 24 hours for GTA 5, Diablo III and Nightreign; US and UK only for Modern Warfare 3 and Black Ops; first 3 days for the rest. GTA 6 is Sensor Tower’s digital estimate to date.",
+      "items": [
+        {
+          "title": "GTA 6",
+          "year": 2026,
+          "sub": "Est. to date",
+          "live": true
+        },
+        {
+          "title": "GTA 5",
+          "year": 2013,
+          "sub": "First 24 hours",
+          "amt": 11210000
+        },
+        {
+          "title": "Zelda: Tears of the Kingdom",
+          "year": 2023,
+          "sub": "First 3 days",
+          "amt": 10000000
+        },
+        {
+          "title": "Pokémon Scarlet / Violet",
+          "year": 2022,
+          "sub": "First 3 days",
+          "amt": 10000000
+        },
+        {
+          "title": "Black Myth: Wukong",
+          "year": 2024,
+          "sub": "First 3 days",
+          "amt": 10000000
+        },
+        {
+          "title": "Monster Hunter Wilds",
+          "year": 2025,
+          "sub": "First 3 days",
+          "amt": 8000000
+        },
+        {
+          "title": "Call of Duty: Modern Warfare 3",
+          "year": 2011,
+          "sub": "24 hrs, US & UK",
+          "amt": 6500000
+        },
+        {
+          "title": "Call of Duty: Black Ops",
+          "year": 2010,
+          "sub": "24 hrs, US & UK",
+          "amt": 5600000
+        },
+        {
+          "title": "Diablo III",
+          "year": 2012,
+          "sub": "First 24 hours",
+          "amt": 3500000
+        },
+        {
+          "title": "Elden Ring Nightreign",
+          "year": 2025,
+          "sub": "First 24 hours",
+          "amt": 2000000
+        }
+      ]
+    },
+    "all": {
+      "meta": "Lifetime copies sold · GTA 6 is a live estimate",
+      "note": "Publisher-reported units sold. Excludes Tetris, whose 520M combines every version. GTA 6 ranks outside the top 50.",
+      "pinRank": "50+",
+      "items": [
+        {
+          "title": "GTA 6",
+          "year": 2026,
+          "sub": "Est. to date",
+          "live": true
+        },
+        {
+          "title": "Minecraft",
+          "year": 2011,
+          "sub": "Lifetime",
+          "amt": 425000000
+        },
+        {
+          "title": "GTA 5",
+          "year": 2013,
+          "sub": "Lifetime",
+          "amt": 235000000
+        },
+        {
+          "title": "Red Dead Redemption 2",
+          "year": 2018,
+          "sub": "Lifetime",
+          "amt": 89000000
+        },
+        {
+          "title": "Wii Sports",
+          "year": 2006,
+          "sub": "Lifetime",
+          "amt": 82900000
+        },
+        {
+          "title": "Mario Kart 8 / Deluxe",
+          "year": 2014,
+          "sub": "Lifetime",
+          "amt": 80460000
+        },
+        {
+          "title": "PUBG: Battlegrounds",
+          "year": 2017,
+          "sub": "Lifetime",
+          "amt": 75000000
+        },
+        {
+          "title": "Terraria",
+          "year": 2011,
+          "sub": "Lifetime",
+          "amt": 70000000
+        },
+        {
+          "title": "The Elder Scrolls V: Skyrim",
+          "year": 2011,
+          "sub": "Lifetime",
+          "amt": 65000000
+        },
+        {
+          "title": "The Witcher 3: Wild Hunt",
+          "year": 2015,
+          "sub": "Lifetime",
+          "amt": 65000000
+        },
+        {
+          "title": "Super Mario Bros.",
+          "year": 1985,
+          "sub": "Lifetime",
+          "amt": 58000000
+        }
+      ]
+    }
+  },
+  "revenue": {
+    "title": "GTA 6 vs. biggest entertainment releases",
+    "legend": true,
+    "sources": [
+      {
+        "name": "Sensor Tower",
+        "url": "https://sensortower.com/grand-theft-auto-VI/sales-tracker"
+      },
+      {
+        "name": "Box Office Mojo",
+        "url": "https://www.boxofficemojo.com/"
+      },
+      {
+        "name": "publisher and studio reports"
+      },
+      {
+        "name": "Cowen via MarketWatch"
+      }
+    ],
+    "launch": {
+      "meta": "Revenue at launch · games’ first days, films’ global opening weekend",
+      "note": "Games are publisher-reported sell-through over the first 3 days, except GTA 6 (live estimate). Zootopia 2 is a 5-day Thanksgiving opening. Not inflation-adjusted.",
+      "items": [
+        {
+          "title": "GTA 6",
+          "year": 2026,
+          "sub": "Game · Est. to date",
+          "live": true
+        },
+        {
+          "title": "Avengers: Endgame",
+          "year": 2019,
+          "sub": "Film · Opening weekend",
+          "amt": 1223000000,
+          "film": true
+        },
+        {
+          "title": "GTA 5",
+          "year": 2013,
+          "sub": "Game · First 3 days",
+          "amt": 1000000000
+        },
+        {
+          "title": "Spider-Man: Brand New Day",
+          "year": 2026,
+          "sub": "Film · Opening weekend",
+          "amt": 932000000,
+          "film": true
+        },
+        {
+          "title": "Red Dead Redemption 2",
+          "year": 2018,
+          "sub": "Game · First 3 days",
+          "amt": 725000000
+        },
+        {
+          "title": "Avengers: Infinity War",
+          "year": 2018,
+          "sub": "Film · Opening weekend",
+          "amt": 640000000,
+          "film": true
+        },
+        {
+          "title": "Spider-Man: No Way Home",
+          "year": 2021,
+          "sub": "Film · Opening weekend",
+          "amt": 601000000,
+          "film": true
+        },
+        {
+          "title": "Call of Duty: Modern Warfare",
+          "year": 2019,
+          "sub": "Game · First 3 days",
+          "amt": 600000000
+        },
+        {
+          "title": "Zootopia 2",
+          "year": 2025,
+          "sub": "Film · 5-day opening",
+          "amt": 556000000,
+          "film": true
+        },
+        {
+          "title": "Call of Duty: Black Ops III",
+          "year": 2015,
+          "sub": "Game · First 3 days",
+          "amt": 550000000
+        }
+      ]
+    },
+    "all": {
+      "meta": "Lifetime revenue · games’ sales, films’ worldwide box office",
+      "note": "GTA 5 is a 2018 analyst estimate ($6B at 90M copies), so its current total is higher. Spider-Man: Brand New Day is still in release. Free-to-play games excluded. Not inflation-adjusted.",
+      "items": [
+        {
+          "title": "GTA 6",
+          "year": 2026,
+          "sub": "Game · Est. to date",
+          "live": true
+        },
+        {
+          "title": "GTA 5",
+          "year": 2013,
+          "sub": "Game · Analyst est.",
+          "amt": 6000000000,
+          "plus": true
+        },
+        {
+          "title": "Avengers: Endgame",
+          "year": 2019,
+          "sub": "Film · Worldwide",
+          "amt": 2925500000,
+          "film": true
+        },
+        {
+          "title": "Avatar",
+          "year": 2009,
+          "sub": "Film · Worldwide",
+          "amt": 2923700000,
+          "film": true
+        },
+        {
+          "title": "Spider-Man: Brand New Day",
+          "year": 2026,
+          "sub": "Film · In release",
+          "amt": 2523000000,
+          "film": true
+        },
+        {
+          "title": "Avatar: The Way of Water",
+          "year": 2022,
+          "sub": "Film · Worldwide",
+          "amt": 2334000000,
+          "film": true
+        },
+        {
+          "title": "Titanic",
+          "year": 1997,
+          "sub": "Film · Worldwide",
+          "amt": 2258000000,
+          "film": true
+        },
+        {
+          "title": "Ne Zha 2",
+          "year": 2025,
+          "sub": "Film · Worldwide",
+          "amt": 2216000000,
+          "film": true
+        },
+        {
+          "title": "Star Wars: The Force Awakens",
+          "year": 2015,
+          "sub": "Film · Worldwide",
+          "amt": 2068000000,
+          "film": true
+        },
+        {
+          "title": "Avengers: Infinity War",
+          "year": 2018,
+          "sub": "Film · Worldwide",
+          "amt": 2048000000,
+          "film": true
+        },
+        {
+          "title": "Spider-Man: No Way Home",
+          "year": 2021,
+          "sub": "Film · Worldwide",
+          "amt": 1923000000,
+          "film": true
+        },
+        {
+          "title": "Zootopia 2",
+          "year": 2025,
+          "sub": "Film · Worldwide",
+          "amt": 1867000000,
+          "film": true
+        },
+        {
+          "title": "The Odyssey",
+          "year": 2026,
+          "sub": "Film · Worldwide",
+          "amt": 1816000000,
+          "film": true
+        },
+        {
+          "title": "Inside Out 2",
+          "year": 2024,
+          "sub": "Film · Worldwide",
+          "amt": 1699000000,
+          "film": true
+        }
+      ]
+    }
+  }
+}
