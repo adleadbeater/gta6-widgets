@@ -269,26 +269,14 @@
 
   function shareHTML() {
     return '<div class="mw-gta6__foot"><span class="mw-gta6__status" role="status" aria-live="polite"></span>' +
-      '<button type="button" class="mw-gta6__quiet" data-action="share">Share</button></div>';
+      '<button type="button" class="mw-gta6__quiet" data-action="share">Copy link</button></div>';
   }
 
   function linksHTML(st) {
     var L = st.links;
     if (!L) return '';
-    var h = '<nav class="mw-gta6__more" aria-label="' + esc(L.title) + '"><div class="mw-gta6__label">' + esc(L.title) + '</div><ul>';
-    L.items.forEach(function (x) {
-      h += '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener" data-track="related">' + esc(x.title) + '</a></li>';
-    });
-    return h + '</ul></nav>';
-  }
-
-  function shareText(st) {
-    if (st.kind === 'tracker') {
-      var r = st.m.r0;
-      return 'GTA 6 has sold an estimated ' + mUnits(r.units) + ' copies and ' + usd(r.revenue) +
-        ' in digital sales (as of ' + fmtDate(r.date) + ').';
-    }
-    return st.cmp[st.kind].title + ', updated live';
+    return '<nav class="mw-gta6__more" aria-label="' + esc(L.title) + '"><a class="mw-gta6__morelink" href="' + esc(L.items[0].url) +
+      '" target="_blank" rel="noopener" data-track="related">' + esc(L.title) + '</a></nav>';
   }
 
   function copyText(s) {
@@ -317,12 +305,6 @@
       status.textContent = msg;
       clearTimeout(st.sayTimer);
       st.sayTimer = setTimeout(function () { status.textContent = ''; }, 4000);
-    }
-    if (navigator.share) {
-      navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, 'share', 'native'); })
-        .catch(function () { /* cancelled */ });
-      return;
     }
     copyText(url).then(function () {
       say('Link copied');
@@ -357,7 +339,7 @@
     var id = st.el.id + '-byday';
     var pname = key === 'all' ? '' : (key === 'ps5' ? 'PS5' : 'Xbox Series X|S');
     var h = '<div class="mw-gta6__block mw-gta6__byday">';
-    h += '<div><button type="button" class="mw-gta6__quiet mw-gta6__disclose" data-action="byday" aria-expanded="' + (st.byDay ? 'true' : 'false') +
+    h += '<div><button type="button" class="mw-gta6__btn mw-gta6__btn--wide" data-action="byday" aria-expanded="' + (st.byDay ? 'true' : 'false') +
       '" aria-controls="' + id + '">' + (st.byDay ? 'Hide' : 'Show') + ' sales by day' + (pname ? DOT + esc(pname) : '') +
       '<span class="mw-gta6__chev" aria-hidden="true"></span></button></div>';
     h += '<div class="mw-gta6__block" id="' + id + '"' + (st.byDay ? '' : ' hidden') + '>';
@@ -368,7 +350,7 @@
         esc(mUnits(r.u)) + '</td><td>' + esc(usd(r.r)) + '</td></tr>';
     });
     h += '</tbody></table></div>';
-    h += '<p class="mw-gta6__caption">Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.</p>';
+    h += '<p class="mw-gta6__caption">Includes pre-orders. Runs about two days behind the latest reading.</p>';
     return h + '</div></div>';
   }
 
@@ -450,10 +432,10 @@
           '<div class="mw-gta6__muted">' + esc(fmtDate(e.date)) + ' reading</div></div>';
       }
       h += '</div><p class="mw-gta6__caption">' + (o.note ? esc(o.note) + ' ' : '') +
-        'Official totals can include physical copies and other platforms, so they differ from the digital estimate.' +
-        ' Source: ' + esc(o.source) + '</p></div>';
+        'Official totals can include physical copies and other platforms.</p></div>';
     }
 
+    h += byDayHTML(st);
 
     var rows = m.rs.slice(0, 5);
     h += '<div class="mw-gta6__scroll" tabindex="0" role="region" aria-label="Readings"><table class="mw-gta6__table"><thead><tr>' +
@@ -465,12 +447,11 @@
         '</td><td class="mw-gta6__chgcell">' + chg + '</td></tr>';
     });
     h += '</tbody></table></div>';
-    h += byDayHTML(st);
 
     h += '<p class="mw-gta6__caption">' + (L.stale
-      ? 'Showing the latest reading while the next update is delayed. '
-      : 'Live figure is projected from the latest reading and resets with each update. ') +
-      'Estimates only; excludes physical copies.</p>';
+      ? 'Showing the latest reading; next update delayed. '
+      : 'Live figure projected from the latest reading. ') +
+      'Estimates; excludes physical copies.</p>';
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -506,17 +487,6 @@
       units: row.ps5.units + row.xbox.units,
       revenue: row.ps5.revenue + row.xbox.revenue
     };
-  }
-
-  function gtaNote(st, gl) {
-    if (st.mode !== 'launch') return '';
-    if (!gl) return 'GTA 6 is a digital sales estimate to date.';
-    if (gl.pending) {
-      return 'Until the figure for its first ' + st.m.launchDays + ' days (to ' + fmtShort(gl.end) +
-        ') is in, GTA 6 shows estimated pre-orders and sales to date.';
-    }
-    return 'GTA 6 is a digital sales estimate for its first ' + gl.days + ' days (' + fmtShort(st.m.release) +
-      ' to ' + fmtShort(gl.end) + '), including pre-orders.';
   }
 
   function chartRows(st) {
@@ -602,13 +572,7 @@
       }
       next = parts.join(DOT);
     }
-    return { html: out, next: next, note: gtaNote(st, gl) };
-  }
-
-  function sourcesHTML(list) {
-    if (!Array.isArray(list)) return '';
-    var names = list.map(function (s) { return s && s.name ? esc(s.name) : ''; }).filter(Boolean);
-    return names.length ? 'Source: ' + names.join(DOT) : '';
+    return { html: out, next: next };
   }
 
   function chartHTML(st) {
@@ -632,10 +596,7 @@
     h += '</div>';
     h += '<ol class="mw-gta6__bars">' + rows.html + '</ol>';
     h += '<p class="mw-gta6__next" data-live="next"' + (rows.next ? '' : ' hidden') + '>' + rows.next + '</p>';
-    var note = [view.note, rows.note].filter(Boolean).join(' ');
-    if (note) h += '<p class="mw-gta6__caption">' + esc(note) + '</p>';
-    var src = sourcesHTML(set.sources);
-    if (src) h += '<p class="mw-gta6__caption">' + src + '</p>';
+    if (view.note) h += '<p class="mw-gta6__caption">' + esc(view.note) + '</p>';
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -865,7 +826,7 @@
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: '1.2.0', build: BUILD };
+  window[NS] = { mountAll: mountAll, version: '1.3.0', build: BUILD };
 
   function start() {
     mountAll();

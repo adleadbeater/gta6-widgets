@@ -16,7 +16,7 @@
     ],
     "launch": {
       "meta": "Copies sold at launch",
-      "note": "Windows differ: first 24 hours for GTA 5, Diablo III and Nightreign; US and UK only for Modern Warfare 3 and Black Ops; first 3 days for the rest.",
+      "note": "Launch windows differ by game.",
       "items": [
         {
           "title": "GTA 6",
@@ -82,7 +82,7 @@
     },
     "all": {
       "meta": "Lifetime copies sold · GTA 6 is a live estimate",
-      "note": "Publisher-reported units sold. Excludes Tetris, whose 520M combines every version. GTA 6 ranks outside the top 50.",
+      "note": "Excludes Tetris, whose 520M combines every version.",
       "pinRank": "50+",
       "items": [
         {
@@ -167,7 +167,7 @@
     ],
     "launch": {
       "meta": "Revenue at launch · games’ first days, films’ global opening weekend",
-      "note": "Games are publisher-reported sell-through over the first 3 days. Zootopia 2 is a 5-day Thanksgiving opening. Not inflation-adjusted.",
+      "note": "Not inflation-adjusted.",
       "items": [
         {
           "title": "GTA 6",
@@ -238,7 +238,7 @@
     },
     "all": {
       "meta": "Lifetime revenue · games’ sales, films’ worldwide box office",
-      "note": "* Estimate, not a publisher figure: GTA 5 is worldwide revenue since launch (as of May 2025); Minecraft is game sales only; Red Dead Redemption 2 is estimated from unit sales. Spider-Man: Brand New Day is still in release. Free-to-play games excluded. Not inflation-adjusted.",
+      "note": "* Estimate, not a publisher figure. Not inflation-adjusted.",
       "items": [
         {
           "title": "GTA 6",

@@ -2,7 +2,8 @@ name: Update GTA 6 data
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    # :17 and :47, off the busy top/half of the hour, when GitHub delays or drops scheduled runs
+    - cron: "17,47 * * * *"
   workflow_dispatch:
 
 permissions:

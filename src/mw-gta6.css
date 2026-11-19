@@ -58,17 +58,41 @@
 .mw-gta6[hidden],
 .mw-gta6 [hidden] { display: none !important; }
 .mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6 *::before,
+.mw-gta6 *::after { content: none; }
+/* article styles (h2, p, lists, tables, links) must not reach inside the widget */
+.mw-gta6 :is(h2, p, ul, ol, li, table, thead, tbody, tr, th, td, caption, a, button, nav, section, strong, span) {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
+.mw-gta6 :is(h2, p, ul, li, table, th, td, caption) { text-align: inherit; }
 
 /* static frame (in the HTML field): heading + skeleton at the finished height,
    so nothing on the page moves when the data arrives */
 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
-/* heights measured from the finished panels (tools/build.py header has the how-to);
+/* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega's last panel */
-.mw-gta6__skel--tracker { height: 641.4px; }
-.mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 714.4px; }
-.mw-gta6__skel--copies { height: 701px; }
-.mw-gta6__skel--revenue { height: 701px; }
-.mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 774px; }
+.mw-gta6__skel--tracker { height: 649.4px; }
+.mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6__skel--copies { height: 659px; }
+.mw-gta6__skel--revenue { height: 659px; }
+.mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 704px; }
 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
@@ -107,8 +131,6 @@
 .mw-gta6__muted { color: var(--mw-muted); }
 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
 .mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
-.mw-gta6 a::before,
-.mw-gta6 a::after { content: none; }
 .mw-gta6__sr {
   position: absolute;
   width: 1px;
@@ -140,6 +162,7 @@
 }
 .mw-gta6__btn[aria-pressed="true"] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
 
 /* stat cards */
 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -193,8 +216,9 @@
   width: 100%;
   min-width: 340px;
   border-collapse: collapse;
-  font-size: 15px;
-  line-height: 21px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
 .mw-gta6__table th {
@@ -223,7 +247,11 @@
   white-space: nowrap;
   font-weight: 400;
 }
-.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+/* article tables stripe and tint rows: keep ours flat */
+.mw-gta6__table tr,
+.mw-gta6__table td { background: transparent; }
+.mw-gta6__table td:first-child { background: var(--mw-panel); }
+.mw-gta6__table .mw-gta6__chgcell { font-size: 15px; font-weight: 700; }
 
 /* comparison charts */
 .mw-gta6__chart-head {
@@ -391,22 +419,15 @@
   vertical-align: 1px;
 }
 
-/* related links */
-.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
-.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
-.mw-gta6__more a {
-  display: block;
-  padding: 10px 8px;
+/* More on GTA 6: one link */
+.mw-gta6__more { padding-top: 12px; border-top: 1px solid var(--mw-rule); }
+.mw-gta6__morelink {
+  display: inline-block;
+  font: 600 17px/20px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
   color: var(--mw-ink);
-  font-size: 15px;
-  line-height: 21px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
+.mw-gta6__morelink:hover { color: var(--mw-ink-red); text-decoration: underline; }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
@@ -418,6 +439,7 @@
   .mw-gta6__h { font-size: 17px; line-height: 20px; }
   .mw-gta6__label,
   .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6__table { font-size: 15px; line-height: 22px; }
   .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
   .mw-gta6__num { font-size: 30px; }
   .mw-gta6__row {
@@ -429,9 +451,9 @@
   .mw-gta6__sub { display: none; }
   .mw-gta6__subs { display: block; }
   .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 809px; }
-  .mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 882px; }
-  .mw-gta6__skel--copies { height: 1021px; }
-  .mw-gta6__skel--revenue { height: 1039px; }
-  .mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 1112px; }
+  .mw-gta6__skel--tracker { height: 817px; }
+  .mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6__skel--copies { height: 949px; }
+  .mw-gta6__skel--revenue { height: 967px; }
+  .mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 1012px; }
 }

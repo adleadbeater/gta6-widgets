@@ -59,6 +59,34 @@ def emaki_check(js):
         raise SystemExit("src/mw-gta6.js breaks the Emaki JS rules:\n  " + "\n  ".join(problems))
 
 
+def harden(css):
+    """Prefix every rule with a doubled root class (.mw-gta6.mw-gta6 ...), so the widget's rules
+    outrank article styles such as `.article-body table th` without !important."""
+    def fix(sel):
+        sel = sel.strip()
+        if sel.startswith(".mw-gta6__"):
+            return ".mw-gta6.mw-gta6 " + sel
+        if sel.startswith(".mw-gta6"):
+            return ".mw-gta6.mw-gta6" + sel[len(".mw-gta6"):]
+        return sel
+
+    def prelude(m):
+        lead, sels = m.group(1), m.group(2)
+        if sels.lstrip().startswith(("@", "from", "to")) or sels.strip().endswith("%"):
+            return m.group(0)
+        parts, depth, cur = [], 0, ""
+        for ch in sels:  # split on top-level commas only, not those inside :is(...)
+            depth += (ch == "(") - (ch == ")")
+            if ch == "," and depth == 0:
+                parts.append(cur); cur = ""
+            else:
+                cur += ch
+        parts.append(cur)
+        return lead + ",\n".join(fix(x) for x in parts) + " {"
+
+    return re.sub(r"((?:^|[{}])\s*(?:/\*.*?\*/\s*)*)([^\s{}@/][^{}]*?)\s*\{", prelude, css, flags=re.S)
+
+
 def frame(kind, titles, src):
     """Static frame: one panel per part, heading + skeleton at the finished height."""
     parts = ["tracker", "copies", "revenue"] if kind == "mega" else [kind]
@@ -117,10 +145,11 @@ def main():
     css, js = read("src", "mw-gta6.css"), read("src", "mw-gta6.js")
     emaki_check(js)
     version = re.search(r"version: '([^']+)'", js).group(1)
-    stamp = f"{version}+{datetime.now(timezone.utc):%Y%m%d}.{hashlib.sha256(js.encode()).hexdigest()[:7]}"
+    stamp = f"{version}+{datetime.now(timezone.utc):%Y%m%d}.{hashlib.sha256((js + css).encode()).hexdigest()[:7]}"
     js = js.replace("var BUILD = 'dev';", f"var BUILD = '{stamp}';", 1)
     cmp = json.loads(read("data", "comparisons.json"))
     titles = {"tracker": "GTA 6 Sales Tracker", "copies": cmp["copies"]["title"], "revenue": cmp["revenue"]["title"]}
+    css = harden(css)
     css_field, js_field = "<style>\n" + css + "</style>\n", "<script>\n" + js + "</script>\n"
     out = []
     for folder, kind in WIDGETS.items():
@@ -146,7 +175,7 @@ def main():
         page = read("preview", name)
         n_seed = n_css = n_js = 0
         page, n_seed = re.subn(r"<script>window\.MWGTA6_SEED = .*?;</script>", lambda m: seed_js, page, flags=re.S)
-        page, n_css = re.subn(r"<style>\n\.mw-gta6 \{.*?</style>\n", lambda m: css_field, page, count=1, flags=re.S)
+        page, n_css = re.subn(r"<style>\n\.mw-gta6(?:\.mw-gta6)? \{.*?</style>\n", lambda m: css_field, page, count=1, flags=re.S)
         page, n_js = re.subn(r"<script>\n\(function \(\) \{\n  'use strict';.*?</script>\n", lambda m: js_field, page, count=1, flags=re.S)
         page = re.sub(r'<div class="mw-gta6" data-widget="([a-z]+)" data-src=""[^>]*>(?:</div>|.*?</section></div>)',
                       lambda m: frame(m.group(1), titles, ""), page, flags=re.S)

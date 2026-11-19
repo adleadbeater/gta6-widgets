@@ -12,10 +12,10 @@ button.done{background:#0b5c2b} button:focus-visible{outline:2px solid #c81e25;o
 textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospace,Menlo,monospace;border:1px solid #e4e4e4;border-radius:2px;padding:6px;resize:vertical}
 </style></head><body><main>
 <h1>GTA 6 embed fields</h1>
-<p>Build 1.2.0+20261119.fa822b1. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
+<p>Build 1.3.0+20261119.949e6e6. Paste each widget's HTML, CSS and JS into the matching Emaki field. CSS and JS are the same for all four widgets.</p>
 <section><h2>Mega (all three)</h2><div class="f"><div class="fh"><b>HTML field</b><span>671 characters</span><button type="button" data-for="00-mega-html">Copy</button></div><textarea id="00-mega-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;mega&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 Sales Tracker&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--tracker&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. best-selling games&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--copies&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. biggest entertainment releases&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--revenue&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>12,592 characters</span><button type="button" data-for="00-mega-css">Copy</button></div><textarea id="00-mega-css" readonly spellcheck="false">&lt;style&gt;
-.mw-gta6 {
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="00-mega-css">Copy</button></div><textarea id="00-mega-css" readonly spellcheck="false">&lt;style&gt;
+.mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
   --mw-rule: #2c2c2c;
@@ -41,7 +41,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: left;
 }
 @media (prefers-color-scheme: light) {
-  .mw-gta6:not([data-theme=&quot;dark&quot;]) {
+  .mw-gta6.mw-gta6:not([data-theme=&quot;dark&quot;]) {
     --mw-panel: #ffffff;
     --mw-card: #f0f0f0;
     --mw-rule: #e4e4e4;
@@ -57,7 +57,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-up: #0b5c2b;
   }
 }
-.mw-gta6[data-theme=&quot;light&quot;] {
+.mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
   --mw-panel: #ffffff;
   --mw-card: #f0f0f0;
   --mw-rule: #e4e4e4;
@@ -72,24 +72,50 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
 }
-.mw-gta6[hidden],
-.mw-gta6 [hidden] { display: none !important; }
-.mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6[hidden],
+.mw-gta6.mw-gta6 [hidden] { display: none !important; }
+.mw-gta6.mw-gta6 *,
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { content: none; }
+/* article styles (h2, p, lists, tables, links) must not reach inside the widget */
+.mw-gta6.mw-gta6 :is(h2, p, ul, ol, li, table, thead, tbody, tr, th, td, caption, a, button, nav, section, strong, span) {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
+.mw-gta6.mw-gta6 :is(h2, p, ul, li, table, th, td, caption) { text-align: inherit; }
 
 /* static frame (in the HTML field): heading + skeleton at the finished height,
    so nothing on the page moves when the data arrives */
-.mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
-/* heights measured from the finished panels (tools/build.py header has the how-to);
+.mw-gta6.mw-gta6 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
+/* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega&#x27;s last panel */
-.mw-gta6__skel--tracker { height: 641.4px; }
-.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 714.4px; }
-.mw-gta6__skel--copies { height: 701px; }
-.mw-gta6__skel--revenue { height: 701px; }
-.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 774px; }
-.mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 649.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+.mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
-.mw-gta6__panel {
+.mw-gta6.mw-gta6 .mw-gta6__panel {
   background: var(--mw-panel);
   border-radius: 4px;
   padding: 16px 16px 12px;
@@ -97,15 +123,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   flex-direction: column;
   gap: 12px;
 }
-.mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
-.mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.mw-gta6__h {
+.mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
   font: 600 20px/24px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-heading);
 }
-.mw-gta6__badge {
+.mw-gta6.mw-gta6 .mw-gta6__badge {
   flex: none;
   background: var(--mw-red);
   color: #ffffff;
@@ -115,18 +141,16 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 6px;
   border-radius: 2px;
 }
-.mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__label {
+.mw-gta6.mw-gta6 .mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__label {
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-muted);
 }
-.mw-gta6__muted { color: var(--mw-muted); }
-.mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
-.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
-.mw-gta6 a::before,
-.mw-gta6 a::after { content: none; }
-.mw-gta6__sr {
+.mw-gta6.mw-gta6 .mw-gta6__muted { color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
+.mw-gta6.mw-gta6 .mw-gta6__sr {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -137,13 +161,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   border: 0;
 }
-.mw-gta6 button:focus-visible,
-.mw-gta6 a:focus-visible,
-.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
+.mw-gta6.mw-gta6 button:focus-visible,
+.mw-gta6.mw-gta6 a:focus-visible,
+.mw-gta6.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
 
 /* platform buttons */
-.mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
-.mw-gta6__btn {
+.mw-gta6.mw-gta6 .mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.mw-gta6.mw-gta6 .mw-gta6__btn {
   min-height: 36px;
   margin: 0;
   padding: 6px 10px;
@@ -155,12 +179,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
-.mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
 
 /* stat cards */
-.mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__stat {
+.mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__stat {
   background: var(--mw-card);
   border-radius: 2px;
   padding: 14px 16px;
@@ -169,22 +194,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 4px;
   min-width: 0;
 }
-.mw-gta6__num {
+.mw-gta6.mw-gta6 .mw-gta6__num {
   font: 700 32px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--mw-ink);
 }
-.mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__chg strong { color: var(--mw-ink); }
-.mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
 
 /* platform split */
-.mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
-.mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
-.mw-gta6__split span:first-child { background: var(--mw-red); }
-.mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
-.mw-gta6__legend {
+.mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
+.mw-gta6.mw-gta6 .mw-gta6__split span:first-child { background: var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__legend {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -192,7 +217,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__sw {
+.mw-gta6.mw-gta6 .mw-gta6__sw {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -200,21 +225,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__sw--alt { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__sw--alt { background: var(--mw-alt); }
 
 /* readings table */
-.mw-gta6__scroll { overflow-x: auto; }
-.mw-gta6__scroll.is-scrolled th:first-child,
-.mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
-.mw-gta6__table {
+.mw-gta6.mw-gta6 .mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
+.mw-gta6.mw-gta6 .mw-gta6__table {
   width: 100%;
   min-width: 340px;
   border-collapse: collapse;
-  font-size: 15px;
-  line-height: 21px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
-.mw-gta6__table th {
+.mw-gta6.mw-gta6 .mw-gta6__table th {
   padding: 0 8px 6px;
   border-bottom: 1px solid var(--mw-rule);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
@@ -222,7 +248,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: right;
   color: var(--mw-muted);
 }
-.mw-gta6__table td {
+.mw-gta6.mw-gta6 .mw-gta6__table td {
   height: 42px;
   padding: 0 8px;
   border-bottom: 1px solid var(--mw-rule);
@@ -230,8 +256,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-weight: 500;
   white-space: nowrap;
 }
-.mw-gta6__table th:first-child,
-.mw-gta6__table td:first-child {
+.mw-gta6.mw-gta6 .mw-gta6__table th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
@@ -240,24 +266,28 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   font-weight: 400;
 }
-.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+/* article tables stripe and tint rows: keep ours flat */
+.mw-gta6.mw-gta6 .mw-gta6__table tr,
+.mw-gta6.mw-gta6 .mw-gta6__table td { background: transparent; }
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child { background: var(--mw-panel); }
+.mw-gta6.mw-gta6 .mw-gta6__table .mw-gta6__chgcell { font-size: 15px; font-weight: 700; }
 
 /* comparison charts */
-.mw-gta6__chart-head {
+.mw-gta6.mw-gta6 .mw-gta6__chart-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
 }
-.mw-gta6__switch {
+.mw-gta6.mw-gta6 .mw-gta6__switch {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
   border-radius: 3px;
   background: var(--mw-card);
 }
-.mw-gta6__switch button {
+.mw-gta6.mw-gta6 .mw-gta6__switch button {
   min-height: 32px;
   margin: 0;
   padding: 6px 10px;
@@ -269,9 +299,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
-.mw-gta6__switch button:hover { filter: brightness(1.12); }
-.mw-gta6__keys {
+.mw-gta6.mw-gta6 .mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
+.mw-gta6.mw-gta6 .mw-gta6__switch button:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__keys {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 16px;
@@ -279,8 +309,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-.mw-gta6__row {
+.mw-gta6.mw-gta6 .mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mw-gta6.mw-gta6 .mw-gta6__row {
   display: grid;
   grid-template-columns: 2rem 13rem minmax(0, 1fr);
   grid-template-areas: &quot;rank lab bar&quot;;
@@ -291,15 +321,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 8px;
   border-radius: 2px;
 }
-.mw-gta6__row--me { background: var(--mw-hi); }
-.mw-gta6__rank {
+.mw-gta6.mw-gta6 .mw-gta6__row--me { background: var(--mw-hi); }
+.mw-gta6.mw-gta6 .mw-gta6__rank {
   grid-area: rank;
   font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
-.mw-gta6__lab { grid-area: lab; min-width: 0; }
-.mw-gta6__title {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__lab { grid-area: lab; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -308,9 +338,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 21px;
   font-weight: 500;
 }
-.mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
-.mw-gta6__sub,
-.mw-gta6__subs {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__subs {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -319,11 +349,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__sub,
-.mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
-.mw-gta6__subs { display: none; }
-.mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mw-gta6__bar {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__subs { display: none; }
+.mw-gta6.mw-gta6 .mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__bar {
   flex: none;
   width: calc(var(--w, 0) * 80%);
   min-width: 2px;
@@ -331,8 +361,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__bar--film { background: var(--mw-alt); }
-.mw-gta6__val {
+.mw-gta6.mw-gta6 .mw-gta6__bar--film { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__val {
   flex: none;
   font-size: 15px;
   line-height: 21px;
@@ -340,7 +370,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.mw-gta6__gap {
+.mw-gta6.mw-gta6 .mw-gta6__gap {
   margin: 0;
   padding: 0 8px;
   font-size: 13px;
@@ -350,7 +380,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 
 /* quiet buttons: pause, share */
-.mw-gta6__quiet {
+.mw-gta6.mw-gta6 .mw-gta6__quiet {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -365,19 +395,19 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__quiet:hover { filter: brightness(1.12); }
-.mw-gta6__liverow,
-.mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
-.mw-gta6__liverow { margin-top: -4px; }
-.mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__liverow,
+.mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
+.mw-gta6.mw-gta6 .mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 
 /* next-overtake line under the charts */
-.mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
 
 /* official vs. estimate */
-.mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__vsitem {
+.mw-gta6.mw-gta6 .mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__vsitem {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -388,14 +418,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__vsnum {
+.mw-gta6.mw-gta6 .mw-gta6__vsnum {
   font: 700 22px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--mw-ink);
 }
 
 /* sales by day */
-.mw-gta6__tag {
+.mw-gta6.mw-gta6 .mw-gta6__tag {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 4px;
@@ -408,52 +438,46 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   vertical-align: 1px;
 }
 
-/* related links */
-.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
-.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
-.mw-gta6__more a {
-  display: block;
-  padding: 10px 8px;
+/* More on GTA 6: one link */
+.mw-gta6.mw-gta6 .mw-gta6__more { padding-top: 12px; border-top: 1px solid var(--mw-rule); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink {
+  display: inline-block;
+  font: 600 17px/20px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
   color: var(--mw-ink);
-  font-size: 15px;
-  line-height: 21px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink:hover { color: var(--mw-ink-red); text-decoration: underline; }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
-  .mw-gta6__table { min-width: 0; }
-  .mw-gta6__table th,
-  .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
-  .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__panel { padding: 16px 12px 12px; }
-  .mw-gta6__h { font-size: 17px; line-height: 20px; }
-  .mw-gta6__label,
-  .mw-gta6__table th { font-size: 10px; }
-  .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__num { font-size: 30px; }
-  .mw-gta6__row {
+  .mw-gta6.mw-gta6 .mw-gta6__table { min-width: 0; }
+  .mw-gta6.mw-gta6 .mw-gta6__table th,
+.mw-gta6.mw-gta6 .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
+  .mw-gta6.mw-gta6 .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__panel { padding: 16px 12px 12px; }
+  .mw-gta6.mw-gta6 .mw-gta6__h { font-size: 17px; line-height: 20px; }
+  .mw-gta6.mw-gta6 .mw-gta6__label,
+.mw-gta6.mw-gta6 .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6.mw-gta6 .mw-gta6__table { font-size: 15px; line-height: 22px; }
+  .mw-gta6.mw-gta6 .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__num { font-size: 30px; }
+  .mw-gta6.mw-gta6 .mw-gta6__row {
     grid-template-columns: 1.6rem minmax(0, 1fr);
     grid-template-areas: &quot;rank lab&quot; &quot;rank bar&quot;;
     gap: 4px 8px;
     padding: 6px 8px;
   }
-  .mw-gta6__sub { display: none; }
-  .mw-gta6__subs { display: block; }
-  .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 809px; }
-  .mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 882px; }
-  .mw-gta6__skel--copies { height: 1021px; }
-  .mw-gta6__skel--revenue { height: 1039px; }
-  .mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1112px; }
+  .mw-gta6.mw-gta6 .mw-gta6__sub { display: none; }
+  .mw-gta6.mw-gta6 .mw-gta6__subs { display: block; }
+  .mw-gta6.mw-gta6 .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 817px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>38,518 characters</span><button type="button" data-for="00-mega-js">Copy</button></div><textarea id="00-mega-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="00-mega-js">Copy</button></div><textarea id="00-mega-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -473,7 +497,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.2.0+20261119.fa822b1&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -725,26 +749,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function shareHTML() {
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
-      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Share&lt;/button&gt;&lt;/div&gt;&#x27;;
+      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
 
   function linksHTML(st) {
     var L = st.links;
     if (!L) return &#x27;&#x27;;
-    var h = &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;div class=&quot;mw-gta6__label&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/div&gt;&lt;ul&gt;&#x27;;
-    L.items.forEach(function (x) {
-      h += &#x27;&lt;li&gt;&lt;a href=&quot;&#x27; + esc(x.url) + &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(x.title) + &#x27;&lt;/a&gt;&lt;/li&gt;&#x27;;
-    });
-    return h + &#x27;&lt;/ul&gt;&lt;/nav&gt;&#x27;;
-  }
-
-  function shareText(st) {
-    if (st.kind === &#x27;tracker&#x27;) {
-      var r = st.m.r0;
-      return &#x27;GTA 6 has sold an estimated &#x27; + mUnits(r.units) + &#x27; copies and &#x27; + usd(r.revenue) +
-        &#x27; in digital sales (as of &#x27; + fmtDate(r.date) + &#x27;).&#x27;;
-    }
-    return st.cmp[st.kind].title + &#x27;, updated live&#x27;;
+    return &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;a class=&quot;mw-gta6__morelink&quot; href=&quot;&#x27; + esc(L.items[0].url) +
+      &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/a&gt;&lt;/nav&gt;&#x27;;
   }
 
   function copyText(s) {
@@ -773,12 +785,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       status.textContent = msg;
       clearTimeout(st.sayTimer);
       st.sayTimer = setTimeout(function () { status.textContent = &#x27;&#x27;; }, 4000);
-    }
-    if (navigator.share) {
-      navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, &#x27;share&#x27;, &#x27;native&#x27;); })
-        .catch(function () { /* cancelled */ });
-      return;
     }
     copyText(url).then(function () {
       say(&#x27;Link copied&#x27;);
@@ -813,7 +819,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__disclose&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
       &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
       &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
@@ -824,7 +830,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
   }
 
@@ -906,10 +912,10 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
           &#x27;&lt;div class=&quot;mw-gta6__muted&quot;&gt;&#x27; + esc(fmtDate(e.date)) + &#x27; reading&lt;/div&gt;&lt;/div&gt;&#x27;;
       }
       h += &#x27;&lt;/div&gt;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (o.note ? esc(o.note) + &#x27; &#x27; : &#x27;&#x27;) +
-        &#x27;Official totals can include physical copies and other platforms, so they differ from the digital estimate.&#x27; +
-        &#x27; Source: &#x27; + esc(o.source) + &#x27;&lt;/p&gt;&lt;/div&gt;&#x27;;
+        &#x27;Official totals can include physical copies and other platforms.&lt;/p&gt;&lt;/div&gt;&#x27;;
     }
 
+    h += byDayHTML(st);
 
     var rows = m.rs.slice(0, 5);
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Readings&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&#x27; +
@@ -921,12 +927,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + chg + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += byDayHTML(st);
 
     h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (L.stale
-      ? &#x27;Showing the latest reading while the next update is delayed. &#x27;
-      : &#x27;Live figure is projected from the latest reading and resets with each update. &#x27;) +
-      &#x27;Estimates only; excludes physical copies.&lt;/p&gt;&#x27;;
+      ? &#x27;Showing the latest reading; next update delayed. &#x27;
+      : &#x27;Live figure projected from the latest reading. &#x27;) +
+      &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -962,17 +967,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       units: row.ps5.units + row.xbox.units,
       revenue: row.ps5.revenue + row.xbox.revenue
     };
-  }
-
-  function gtaNote(st, gl) {
-    if (st.mode !== &#x27;launch&#x27;) return &#x27;&#x27;;
-    if (!gl) return &#x27;GTA 6 is a digital sales estimate to date.&#x27;;
-    if (gl.pending) {
-      return &#x27;Until the figure for its first &#x27; + st.m.launchDays + &#x27; days (to &#x27; + fmtShort(gl.end) +
-        &#x27;) is in, GTA 6 shows estimated pre-orders and sales to date.&#x27;;
-    }
-    return &#x27;GTA 6 is a digital sales estimate for its first &#x27; + gl.days + &#x27; days (&#x27; + fmtShort(st.m.release) +
-      &#x27; to &#x27; + fmtShort(gl.end) + &#x27;), including pre-orders.&#x27;;
   }
 
   function chartRows(st) {
@@ -1058,13 +1052,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       }
       next = parts.join(DOT);
     }
-    return { html: out, next: next, note: gtaNote(st, gl) };
-  }
-
-  function sourcesHTML(list) {
-    if (!Array.isArray(list)) return &#x27;&#x27;;
-    var names = list.map(function (s) { return s &amp;&amp; s.name ? esc(s.name) : &#x27;&#x27;; }).filter(Boolean);
-    return names.length ? &#x27;Source: &#x27; + names.join(DOT) : &#x27;&#x27;;
+    return { html: out, next: next };
   }
 
   function chartHTML(st) {
@@ -1088,10 +1076,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
-    var note = [view.note, rows.note].filter(Boolean).join(&#x27; &#x27;);
-    if (note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(note) + &#x27;&lt;/p&gt;&#x27;;
-    var src = sourcesHTML(set.sources);
-    if (src) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + src + &#x27;&lt;/p&gt;&#x27;;
+    if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -1321,7 +1306,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: &#x27;1.2.0&#x27;, build: BUILD };
+  window[NS] = { mountAll: mountAll, version: &#x27;1.3.0&#x27;, build: BUILD };
 
   function start() {
     mountAll();
@@ -1339,8 +1324,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><h2>Sales tracker</h2><div class="f"><div class="fh"><b>HTML field</b><span>289 characters</span><button type="button" data-for="01-sales-tracker-html">Copy</button></div><textarea id="01-sales-tracker-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;tracker&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 Sales Tracker&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--tracker&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>12,592 characters</span><button type="button" data-for="01-sales-tracker-css">Copy</button></div><textarea id="01-sales-tracker-css" readonly spellcheck="false">&lt;style&gt;
-.mw-gta6 {
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="01-sales-tracker-css">Copy</button></div><textarea id="01-sales-tracker-css" readonly spellcheck="false">&lt;style&gt;
+.mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
   --mw-rule: #2c2c2c;
@@ -1366,7 +1351,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: left;
 }
 @media (prefers-color-scheme: light) {
-  .mw-gta6:not([data-theme=&quot;dark&quot;]) {
+  .mw-gta6.mw-gta6:not([data-theme=&quot;dark&quot;]) {
     --mw-panel: #ffffff;
     --mw-card: #f0f0f0;
     --mw-rule: #e4e4e4;
@@ -1382,7 +1367,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-up: #0b5c2b;
   }
 }
-.mw-gta6[data-theme=&quot;light&quot;] {
+.mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
   --mw-panel: #ffffff;
   --mw-card: #f0f0f0;
   --mw-rule: #e4e4e4;
@@ -1397,24 +1382,50 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
 }
-.mw-gta6[hidden],
-.mw-gta6 [hidden] { display: none !important; }
-.mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6[hidden],
+.mw-gta6.mw-gta6 [hidden] { display: none !important; }
+.mw-gta6.mw-gta6 *,
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { content: none; }
+/* article styles (h2, p, lists, tables, links) must not reach inside the widget */
+.mw-gta6.mw-gta6 :is(h2, p, ul, ol, li, table, thead, tbody, tr, th, td, caption, a, button, nav, section, strong, span) {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
+.mw-gta6.mw-gta6 :is(h2, p, ul, li, table, th, td, caption) { text-align: inherit; }
 
 /* static frame (in the HTML field): heading + skeleton at the finished height,
    so nothing on the page moves when the data arrives */
-.mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
-/* heights measured from the finished panels (tools/build.py header has the how-to);
+.mw-gta6.mw-gta6 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
+/* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega&#x27;s last panel */
-.mw-gta6__skel--tracker { height: 641.4px; }
-.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 714.4px; }
-.mw-gta6__skel--copies { height: 701px; }
-.mw-gta6__skel--revenue { height: 701px; }
-.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 774px; }
-.mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 649.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+.mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
-.mw-gta6__panel {
+.mw-gta6.mw-gta6 .mw-gta6__panel {
   background: var(--mw-panel);
   border-radius: 4px;
   padding: 16px 16px 12px;
@@ -1422,15 +1433,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   flex-direction: column;
   gap: 12px;
 }
-.mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
-.mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.mw-gta6__h {
+.mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
   font: 600 20px/24px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-heading);
 }
-.mw-gta6__badge {
+.mw-gta6.mw-gta6 .mw-gta6__badge {
   flex: none;
   background: var(--mw-red);
   color: #ffffff;
@@ -1440,18 +1451,16 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 6px;
   border-radius: 2px;
 }
-.mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__label {
+.mw-gta6.mw-gta6 .mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__label {
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-muted);
 }
-.mw-gta6__muted { color: var(--mw-muted); }
-.mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
-.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
-.mw-gta6 a::before,
-.mw-gta6 a::after { content: none; }
-.mw-gta6__sr {
+.mw-gta6.mw-gta6 .mw-gta6__muted { color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
+.mw-gta6.mw-gta6 .mw-gta6__sr {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -1462,13 +1471,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   border: 0;
 }
-.mw-gta6 button:focus-visible,
-.mw-gta6 a:focus-visible,
-.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
+.mw-gta6.mw-gta6 button:focus-visible,
+.mw-gta6.mw-gta6 a:focus-visible,
+.mw-gta6.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
 
 /* platform buttons */
-.mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
-.mw-gta6__btn {
+.mw-gta6.mw-gta6 .mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.mw-gta6.mw-gta6 .mw-gta6__btn {
   min-height: 36px;
   margin: 0;
   padding: 6px 10px;
@@ -1480,12 +1489,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
-.mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
 
 /* stat cards */
-.mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__stat {
+.mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__stat {
   background: var(--mw-card);
   border-radius: 2px;
   padding: 14px 16px;
@@ -1494,22 +1504,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 4px;
   min-width: 0;
 }
-.mw-gta6__num {
+.mw-gta6.mw-gta6 .mw-gta6__num {
   font: 700 32px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--mw-ink);
 }
-.mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__chg strong { color: var(--mw-ink); }
-.mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
 
 /* platform split */
-.mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
-.mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
-.mw-gta6__split span:first-child { background: var(--mw-red); }
-.mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
-.mw-gta6__legend {
+.mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
+.mw-gta6.mw-gta6 .mw-gta6__split span:first-child { background: var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__legend {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1517,7 +1527,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__sw {
+.mw-gta6.mw-gta6 .mw-gta6__sw {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -1525,21 +1535,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__sw--alt { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__sw--alt { background: var(--mw-alt); }
 
 /* readings table */
-.mw-gta6__scroll { overflow-x: auto; }
-.mw-gta6__scroll.is-scrolled th:first-child,
-.mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
-.mw-gta6__table {
+.mw-gta6.mw-gta6 .mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
+.mw-gta6.mw-gta6 .mw-gta6__table {
   width: 100%;
   min-width: 340px;
   border-collapse: collapse;
-  font-size: 15px;
-  line-height: 21px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
-.mw-gta6__table th {
+.mw-gta6.mw-gta6 .mw-gta6__table th {
   padding: 0 8px 6px;
   border-bottom: 1px solid var(--mw-rule);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
@@ -1547,7 +1558,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: right;
   color: var(--mw-muted);
 }
-.mw-gta6__table td {
+.mw-gta6.mw-gta6 .mw-gta6__table td {
   height: 42px;
   padding: 0 8px;
   border-bottom: 1px solid var(--mw-rule);
@@ -1555,8 +1566,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-weight: 500;
   white-space: nowrap;
 }
-.mw-gta6__table th:first-child,
-.mw-gta6__table td:first-child {
+.mw-gta6.mw-gta6 .mw-gta6__table th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
@@ -1565,24 +1576,28 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   font-weight: 400;
 }
-.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+/* article tables stripe and tint rows: keep ours flat */
+.mw-gta6.mw-gta6 .mw-gta6__table tr,
+.mw-gta6.mw-gta6 .mw-gta6__table td { background: transparent; }
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child { background: var(--mw-panel); }
+.mw-gta6.mw-gta6 .mw-gta6__table .mw-gta6__chgcell { font-size: 15px; font-weight: 700; }
 
 /* comparison charts */
-.mw-gta6__chart-head {
+.mw-gta6.mw-gta6 .mw-gta6__chart-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
 }
-.mw-gta6__switch {
+.mw-gta6.mw-gta6 .mw-gta6__switch {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
   border-radius: 3px;
   background: var(--mw-card);
 }
-.mw-gta6__switch button {
+.mw-gta6.mw-gta6 .mw-gta6__switch button {
   min-height: 32px;
   margin: 0;
   padding: 6px 10px;
@@ -1594,9 +1609,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
-.mw-gta6__switch button:hover { filter: brightness(1.12); }
-.mw-gta6__keys {
+.mw-gta6.mw-gta6 .mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
+.mw-gta6.mw-gta6 .mw-gta6__switch button:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__keys {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 16px;
@@ -1604,8 +1619,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-.mw-gta6__row {
+.mw-gta6.mw-gta6 .mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mw-gta6.mw-gta6 .mw-gta6__row {
   display: grid;
   grid-template-columns: 2rem 13rem minmax(0, 1fr);
   grid-template-areas: &quot;rank lab bar&quot;;
@@ -1616,15 +1631,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 8px;
   border-radius: 2px;
 }
-.mw-gta6__row--me { background: var(--mw-hi); }
-.mw-gta6__rank {
+.mw-gta6.mw-gta6 .mw-gta6__row--me { background: var(--mw-hi); }
+.mw-gta6.mw-gta6 .mw-gta6__rank {
   grid-area: rank;
   font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
-.mw-gta6__lab { grid-area: lab; min-width: 0; }
-.mw-gta6__title {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__lab { grid-area: lab; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -1633,9 +1648,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 21px;
   font-weight: 500;
 }
-.mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
-.mw-gta6__sub,
-.mw-gta6__subs {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__subs {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -1644,11 +1659,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__sub,
-.mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
-.mw-gta6__subs { display: none; }
-.mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mw-gta6__bar {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__subs { display: none; }
+.mw-gta6.mw-gta6 .mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__bar {
   flex: none;
   width: calc(var(--w, 0) * 80%);
   min-width: 2px;
@@ -1656,8 +1671,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__bar--film { background: var(--mw-alt); }
-.mw-gta6__val {
+.mw-gta6.mw-gta6 .mw-gta6__bar--film { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__val {
   flex: none;
   font-size: 15px;
   line-height: 21px;
@@ -1665,7 +1680,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.mw-gta6__gap {
+.mw-gta6.mw-gta6 .mw-gta6__gap {
   margin: 0;
   padding: 0 8px;
   font-size: 13px;
@@ -1675,7 +1690,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 
 /* quiet buttons: pause, share */
-.mw-gta6__quiet {
+.mw-gta6.mw-gta6 .mw-gta6__quiet {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -1690,19 +1705,19 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__quiet:hover { filter: brightness(1.12); }
-.mw-gta6__liverow,
-.mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
-.mw-gta6__liverow { margin-top: -4px; }
-.mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__liverow,
+.mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
+.mw-gta6.mw-gta6 .mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 
 /* next-overtake line under the charts */
-.mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
 
 /* official vs. estimate */
-.mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__vsitem {
+.mw-gta6.mw-gta6 .mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__vsitem {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1713,14 +1728,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__vsnum {
+.mw-gta6.mw-gta6 .mw-gta6__vsnum {
   font: 700 22px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--mw-ink);
 }
 
 /* sales by day */
-.mw-gta6__tag {
+.mw-gta6.mw-gta6 .mw-gta6__tag {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 4px;
@@ -1733,52 +1748,46 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   vertical-align: 1px;
 }
 
-/* related links */
-.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
-.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
-.mw-gta6__more a {
-  display: block;
-  padding: 10px 8px;
+/* More on GTA 6: one link */
+.mw-gta6.mw-gta6 .mw-gta6__more { padding-top: 12px; border-top: 1px solid var(--mw-rule); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink {
+  display: inline-block;
+  font: 600 17px/20px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
   color: var(--mw-ink);
-  font-size: 15px;
-  line-height: 21px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink:hover { color: var(--mw-ink-red); text-decoration: underline; }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
-  .mw-gta6__table { min-width: 0; }
-  .mw-gta6__table th,
-  .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
-  .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__panel { padding: 16px 12px 12px; }
-  .mw-gta6__h { font-size: 17px; line-height: 20px; }
-  .mw-gta6__label,
-  .mw-gta6__table th { font-size: 10px; }
-  .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__num { font-size: 30px; }
-  .mw-gta6__row {
+  .mw-gta6.mw-gta6 .mw-gta6__table { min-width: 0; }
+  .mw-gta6.mw-gta6 .mw-gta6__table th,
+.mw-gta6.mw-gta6 .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
+  .mw-gta6.mw-gta6 .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__panel { padding: 16px 12px 12px; }
+  .mw-gta6.mw-gta6 .mw-gta6__h { font-size: 17px; line-height: 20px; }
+  .mw-gta6.mw-gta6 .mw-gta6__label,
+.mw-gta6.mw-gta6 .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6.mw-gta6 .mw-gta6__table { font-size: 15px; line-height: 22px; }
+  .mw-gta6.mw-gta6 .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__num { font-size: 30px; }
+  .mw-gta6.mw-gta6 .mw-gta6__row {
     grid-template-columns: 1.6rem minmax(0, 1fr);
     grid-template-areas: &quot;rank lab&quot; &quot;rank bar&quot;;
     gap: 4px 8px;
     padding: 6px 8px;
   }
-  .mw-gta6__sub { display: none; }
-  .mw-gta6__subs { display: block; }
-  .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 809px; }
-  .mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 882px; }
-  .mw-gta6__skel--copies { height: 1021px; }
-  .mw-gta6__skel--revenue { height: 1039px; }
-  .mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1112px; }
+  .mw-gta6.mw-gta6 .mw-gta6__sub { display: none; }
+  .mw-gta6.mw-gta6 .mw-gta6__subs { display: block; }
+  .mw-gta6.mw-gta6 .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 817px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>38,518 characters</span><button type="button" data-for="01-sales-tracker-js">Copy</button></div><textarea id="01-sales-tracker-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="01-sales-tracker-js">Copy</button></div><textarea id="01-sales-tracker-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -1798,7 +1807,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.2.0+20261119.fa822b1&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -2050,26 +2059,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function shareHTML() {
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
-      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Share&lt;/button&gt;&lt;/div&gt;&#x27;;
+      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
 
   function linksHTML(st) {
     var L = st.links;
     if (!L) return &#x27;&#x27;;
-    var h = &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;div class=&quot;mw-gta6__label&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/div&gt;&lt;ul&gt;&#x27;;
-    L.items.forEach(function (x) {
-      h += &#x27;&lt;li&gt;&lt;a href=&quot;&#x27; + esc(x.url) + &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(x.title) + &#x27;&lt;/a&gt;&lt;/li&gt;&#x27;;
-    });
-    return h + &#x27;&lt;/ul&gt;&lt;/nav&gt;&#x27;;
-  }
-
-  function shareText(st) {
-    if (st.kind === &#x27;tracker&#x27;) {
-      var r = st.m.r0;
-      return &#x27;GTA 6 has sold an estimated &#x27; + mUnits(r.units) + &#x27; copies and &#x27; + usd(r.revenue) +
-        &#x27; in digital sales (as of &#x27; + fmtDate(r.date) + &#x27;).&#x27;;
-    }
-    return st.cmp[st.kind].title + &#x27;, updated live&#x27;;
+    return &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;a class=&quot;mw-gta6__morelink&quot; href=&quot;&#x27; + esc(L.items[0].url) +
+      &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/a&gt;&lt;/nav&gt;&#x27;;
   }
 
   function copyText(s) {
@@ -2098,12 +2095,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       status.textContent = msg;
       clearTimeout(st.sayTimer);
       st.sayTimer = setTimeout(function () { status.textContent = &#x27;&#x27;; }, 4000);
-    }
-    if (navigator.share) {
-      navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, &#x27;share&#x27;, &#x27;native&#x27;); })
-        .catch(function () { /* cancelled */ });
-      return;
     }
     copyText(url).then(function () {
       say(&#x27;Link copied&#x27;);
@@ -2138,7 +2129,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__disclose&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
       &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
       &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
@@ -2149,7 +2140,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
   }
 
@@ -2231,10 +2222,10 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
           &#x27;&lt;div class=&quot;mw-gta6__muted&quot;&gt;&#x27; + esc(fmtDate(e.date)) + &#x27; reading&lt;/div&gt;&lt;/div&gt;&#x27;;
       }
       h += &#x27;&lt;/div&gt;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (o.note ? esc(o.note) + &#x27; &#x27; : &#x27;&#x27;) +
-        &#x27;Official totals can include physical copies and other platforms, so they differ from the digital estimate.&#x27; +
-        &#x27; Source: &#x27; + esc(o.source) + &#x27;&lt;/p&gt;&lt;/div&gt;&#x27;;
+        &#x27;Official totals can include physical copies and other platforms.&lt;/p&gt;&lt;/div&gt;&#x27;;
     }
 
+    h += byDayHTML(st);
 
     var rows = m.rs.slice(0, 5);
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Readings&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&#x27; +
@@ -2246,12 +2237,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + chg + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += byDayHTML(st);
 
     h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (L.stale
-      ? &#x27;Showing the latest reading while the next update is delayed. &#x27;
-      : &#x27;Live figure is projected from the latest reading and resets with each update. &#x27;) +
-      &#x27;Estimates only; excludes physical copies.&lt;/p&gt;&#x27;;
+      ? &#x27;Showing the latest reading; next update delayed. &#x27;
+      : &#x27;Live figure projected from the latest reading. &#x27;) +
+      &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -2287,17 +2277,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       units: row.ps5.units + row.xbox.units,
       revenue: row.ps5.revenue + row.xbox.revenue
     };
-  }
-
-  function gtaNote(st, gl) {
-    if (st.mode !== &#x27;launch&#x27;) return &#x27;&#x27;;
-    if (!gl) return &#x27;GTA 6 is a digital sales estimate to date.&#x27;;
-    if (gl.pending) {
-      return &#x27;Until the figure for its first &#x27; + st.m.launchDays + &#x27; days (to &#x27; + fmtShort(gl.end) +
-        &#x27;) is in, GTA 6 shows estimated pre-orders and sales to date.&#x27;;
-    }
-    return &#x27;GTA 6 is a digital sales estimate for its first &#x27; + gl.days + &#x27; days (&#x27; + fmtShort(st.m.release) +
-      &#x27; to &#x27; + fmtShort(gl.end) + &#x27;), including pre-orders.&#x27;;
   }
 
   function chartRows(st) {
@@ -2383,13 +2362,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       }
       next = parts.join(DOT);
     }
-    return { html: out, next: next, note: gtaNote(st, gl) };
-  }
-
-  function sourcesHTML(list) {
-    if (!Array.isArray(list)) return &#x27;&#x27;;
-    var names = list.map(function (s) { return s &amp;&amp; s.name ? esc(s.name) : &#x27;&#x27;; }).filter(Boolean);
-    return names.length ? &#x27;Source: &#x27; + names.join(DOT) : &#x27;&#x27;;
+    return { html: out, next: next };
   }
 
   function chartHTML(st) {
@@ -2413,10 +2386,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
-    var note = [view.note, rows.note].filter(Boolean).join(&#x27; &#x27;);
-    if (note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(note) + &#x27;&lt;/p&gt;&#x27;;
-    var src = sourcesHTML(set.sources);
-    if (src) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + src + &#x27;&lt;/p&gt;&#x27;;
+    if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -2646,7 +2616,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: &#x27;1.2.0&#x27;, build: BUILD };
+  window[NS] = { mountAll: mountAll, version: &#x27;1.3.0&#x27;, build: BUILD };
 
   function start() {
     mountAll();
@@ -2664,8 +2634,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><h2>Copies chart</h2><div class="f"><div class="fh"><b>HTML field</b><span>296 characters</span><button type="button" data-for="02-copies-chart-html">Copy</button></div><textarea id="02-copies-chart-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;copies&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. best-selling games&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--copies&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>12,592 characters</span><button type="button" data-for="02-copies-chart-css">Copy</button></div><textarea id="02-copies-chart-css" readonly spellcheck="false">&lt;style&gt;
-.mw-gta6 {
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="02-copies-chart-css">Copy</button></div><textarea id="02-copies-chart-css" readonly spellcheck="false">&lt;style&gt;
+.mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
   --mw-rule: #2c2c2c;
@@ -2691,7 +2661,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: left;
 }
 @media (prefers-color-scheme: light) {
-  .mw-gta6:not([data-theme=&quot;dark&quot;]) {
+  .mw-gta6.mw-gta6:not([data-theme=&quot;dark&quot;]) {
     --mw-panel: #ffffff;
     --mw-card: #f0f0f0;
     --mw-rule: #e4e4e4;
@@ -2707,7 +2677,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-up: #0b5c2b;
   }
 }
-.mw-gta6[data-theme=&quot;light&quot;] {
+.mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
   --mw-panel: #ffffff;
   --mw-card: #f0f0f0;
   --mw-rule: #e4e4e4;
@@ -2722,24 +2692,50 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
 }
-.mw-gta6[hidden],
-.mw-gta6 [hidden] { display: none !important; }
-.mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6[hidden],
+.mw-gta6.mw-gta6 [hidden] { display: none !important; }
+.mw-gta6.mw-gta6 *,
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { content: none; }
+/* article styles (h2, p, lists, tables, links) must not reach inside the widget */
+.mw-gta6.mw-gta6 :is(h2, p, ul, ol, li, table, thead, tbody, tr, th, td, caption, a, button, nav, section, strong, span) {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
+.mw-gta6.mw-gta6 :is(h2, p, ul, li, table, th, td, caption) { text-align: inherit; }
 
 /* static frame (in the HTML field): heading + skeleton at the finished height,
    so nothing on the page moves when the data arrives */
-.mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
-/* heights measured from the finished panels (tools/build.py header has the how-to);
+.mw-gta6.mw-gta6 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
+/* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega&#x27;s last panel */
-.mw-gta6__skel--tracker { height: 641.4px; }
-.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 714.4px; }
-.mw-gta6__skel--copies { height: 701px; }
-.mw-gta6__skel--revenue { height: 701px; }
-.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 774px; }
-.mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 649.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+.mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
-.mw-gta6__panel {
+.mw-gta6.mw-gta6 .mw-gta6__panel {
   background: var(--mw-panel);
   border-radius: 4px;
   padding: 16px 16px 12px;
@@ -2747,15 +2743,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   flex-direction: column;
   gap: 12px;
 }
-.mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
-.mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.mw-gta6__h {
+.mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
   font: 600 20px/24px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-heading);
 }
-.mw-gta6__badge {
+.mw-gta6.mw-gta6 .mw-gta6__badge {
   flex: none;
   background: var(--mw-red);
   color: #ffffff;
@@ -2765,18 +2761,16 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 6px;
   border-radius: 2px;
 }
-.mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__label {
+.mw-gta6.mw-gta6 .mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__label {
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-muted);
 }
-.mw-gta6__muted { color: var(--mw-muted); }
-.mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
-.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
-.mw-gta6 a::before,
-.mw-gta6 a::after { content: none; }
-.mw-gta6__sr {
+.mw-gta6.mw-gta6 .mw-gta6__muted { color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
+.mw-gta6.mw-gta6 .mw-gta6__sr {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -2787,13 +2781,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   border: 0;
 }
-.mw-gta6 button:focus-visible,
-.mw-gta6 a:focus-visible,
-.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
+.mw-gta6.mw-gta6 button:focus-visible,
+.mw-gta6.mw-gta6 a:focus-visible,
+.mw-gta6.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
 
 /* platform buttons */
-.mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
-.mw-gta6__btn {
+.mw-gta6.mw-gta6 .mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.mw-gta6.mw-gta6 .mw-gta6__btn {
   min-height: 36px;
   margin: 0;
   padding: 6px 10px;
@@ -2805,12 +2799,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
-.mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
 
 /* stat cards */
-.mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__stat {
+.mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__stat {
   background: var(--mw-card);
   border-radius: 2px;
   padding: 14px 16px;
@@ -2819,22 +2814,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 4px;
   min-width: 0;
 }
-.mw-gta6__num {
+.mw-gta6.mw-gta6 .mw-gta6__num {
   font: 700 32px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--mw-ink);
 }
-.mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__chg strong { color: var(--mw-ink); }
-.mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
 
 /* platform split */
-.mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
-.mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
-.mw-gta6__split span:first-child { background: var(--mw-red); }
-.mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
-.mw-gta6__legend {
+.mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
+.mw-gta6.mw-gta6 .mw-gta6__split span:first-child { background: var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__legend {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -2842,7 +2837,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__sw {
+.mw-gta6.mw-gta6 .mw-gta6__sw {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -2850,21 +2845,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__sw--alt { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__sw--alt { background: var(--mw-alt); }
 
 /* readings table */
-.mw-gta6__scroll { overflow-x: auto; }
-.mw-gta6__scroll.is-scrolled th:first-child,
-.mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
-.mw-gta6__table {
+.mw-gta6.mw-gta6 .mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
+.mw-gta6.mw-gta6 .mw-gta6__table {
   width: 100%;
   min-width: 340px;
   border-collapse: collapse;
-  font-size: 15px;
-  line-height: 21px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
-.mw-gta6__table th {
+.mw-gta6.mw-gta6 .mw-gta6__table th {
   padding: 0 8px 6px;
   border-bottom: 1px solid var(--mw-rule);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
@@ -2872,7 +2868,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: right;
   color: var(--mw-muted);
 }
-.mw-gta6__table td {
+.mw-gta6.mw-gta6 .mw-gta6__table td {
   height: 42px;
   padding: 0 8px;
   border-bottom: 1px solid var(--mw-rule);
@@ -2880,8 +2876,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-weight: 500;
   white-space: nowrap;
 }
-.mw-gta6__table th:first-child,
-.mw-gta6__table td:first-child {
+.mw-gta6.mw-gta6 .mw-gta6__table th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
@@ -2890,24 +2886,28 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   font-weight: 400;
 }
-.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+/* article tables stripe and tint rows: keep ours flat */
+.mw-gta6.mw-gta6 .mw-gta6__table tr,
+.mw-gta6.mw-gta6 .mw-gta6__table td { background: transparent; }
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child { background: var(--mw-panel); }
+.mw-gta6.mw-gta6 .mw-gta6__table .mw-gta6__chgcell { font-size: 15px; font-weight: 700; }
 
 /* comparison charts */
-.mw-gta6__chart-head {
+.mw-gta6.mw-gta6 .mw-gta6__chart-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
 }
-.mw-gta6__switch {
+.mw-gta6.mw-gta6 .mw-gta6__switch {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
   border-radius: 3px;
   background: var(--mw-card);
 }
-.mw-gta6__switch button {
+.mw-gta6.mw-gta6 .mw-gta6__switch button {
   min-height: 32px;
   margin: 0;
   padding: 6px 10px;
@@ -2919,9 +2919,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
-.mw-gta6__switch button:hover { filter: brightness(1.12); }
-.mw-gta6__keys {
+.mw-gta6.mw-gta6 .mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
+.mw-gta6.mw-gta6 .mw-gta6__switch button:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__keys {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 16px;
@@ -2929,8 +2929,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-.mw-gta6__row {
+.mw-gta6.mw-gta6 .mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mw-gta6.mw-gta6 .mw-gta6__row {
   display: grid;
   grid-template-columns: 2rem 13rem minmax(0, 1fr);
   grid-template-areas: &quot;rank lab bar&quot;;
@@ -2941,15 +2941,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 8px;
   border-radius: 2px;
 }
-.mw-gta6__row--me { background: var(--mw-hi); }
-.mw-gta6__rank {
+.mw-gta6.mw-gta6 .mw-gta6__row--me { background: var(--mw-hi); }
+.mw-gta6.mw-gta6 .mw-gta6__rank {
   grid-area: rank;
   font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
-.mw-gta6__lab { grid-area: lab; min-width: 0; }
-.mw-gta6__title {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__lab { grid-area: lab; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -2958,9 +2958,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 21px;
   font-weight: 500;
 }
-.mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
-.mw-gta6__sub,
-.mw-gta6__subs {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__subs {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -2969,11 +2969,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__sub,
-.mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
-.mw-gta6__subs { display: none; }
-.mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mw-gta6__bar {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__subs { display: none; }
+.mw-gta6.mw-gta6 .mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__bar {
   flex: none;
   width: calc(var(--w, 0) * 80%);
   min-width: 2px;
@@ -2981,8 +2981,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__bar--film { background: var(--mw-alt); }
-.mw-gta6__val {
+.mw-gta6.mw-gta6 .mw-gta6__bar--film { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__val {
   flex: none;
   font-size: 15px;
   line-height: 21px;
@@ -2990,7 +2990,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.mw-gta6__gap {
+.mw-gta6.mw-gta6 .mw-gta6__gap {
   margin: 0;
   padding: 0 8px;
   font-size: 13px;
@@ -3000,7 +3000,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 
 /* quiet buttons: pause, share */
-.mw-gta6__quiet {
+.mw-gta6.mw-gta6 .mw-gta6__quiet {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -3015,19 +3015,19 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__quiet:hover { filter: brightness(1.12); }
-.mw-gta6__liverow,
-.mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
-.mw-gta6__liverow { margin-top: -4px; }
-.mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__liverow,
+.mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
+.mw-gta6.mw-gta6 .mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 
 /* next-overtake line under the charts */
-.mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
 
 /* official vs. estimate */
-.mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__vsitem {
+.mw-gta6.mw-gta6 .mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__vsitem {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -3038,14 +3038,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__vsnum {
+.mw-gta6.mw-gta6 .mw-gta6__vsnum {
   font: 700 22px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--mw-ink);
 }
 
 /* sales by day */
-.mw-gta6__tag {
+.mw-gta6.mw-gta6 .mw-gta6__tag {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 4px;
@@ -3058,52 +3058,46 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   vertical-align: 1px;
 }
 
-/* related links */
-.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
-.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
-.mw-gta6__more a {
-  display: block;
-  padding: 10px 8px;
+/* More on GTA 6: one link */
+.mw-gta6.mw-gta6 .mw-gta6__more { padding-top: 12px; border-top: 1px solid var(--mw-rule); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink {
+  display: inline-block;
+  font: 600 17px/20px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
   color: var(--mw-ink);
-  font-size: 15px;
-  line-height: 21px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink:hover { color: var(--mw-ink-red); text-decoration: underline; }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
-  .mw-gta6__table { min-width: 0; }
-  .mw-gta6__table th,
-  .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
-  .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__panel { padding: 16px 12px 12px; }
-  .mw-gta6__h { font-size: 17px; line-height: 20px; }
-  .mw-gta6__label,
-  .mw-gta6__table th { font-size: 10px; }
-  .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__num { font-size: 30px; }
-  .mw-gta6__row {
+  .mw-gta6.mw-gta6 .mw-gta6__table { min-width: 0; }
+  .mw-gta6.mw-gta6 .mw-gta6__table th,
+.mw-gta6.mw-gta6 .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
+  .mw-gta6.mw-gta6 .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__panel { padding: 16px 12px 12px; }
+  .mw-gta6.mw-gta6 .mw-gta6__h { font-size: 17px; line-height: 20px; }
+  .mw-gta6.mw-gta6 .mw-gta6__label,
+.mw-gta6.mw-gta6 .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6.mw-gta6 .mw-gta6__table { font-size: 15px; line-height: 22px; }
+  .mw-gta6.mw-gta6 .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__num { font-size: 30px; }
+  .mw-gta6.mw-gta6 .mw-gta6__row {
     grid-template-columns: 1.6rem minmax(0, 1fr);
     grid-template-areas: &quot;rank lab&quot; &quot;rank bar&quot;;
     gap: 4px 8px;
     padding: 6px 8px;
   }
-  .mw-gta6__sub { display: none; }
-  .mw-gta6__subs { display: block; }
-  .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 809px; }
-  .mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 882px; }
-  .mw-gta6__skel--copies { height: 1021px; }
-  .mw-gta6__skel--revenue { height: 1039px; }
-  .mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1112px; }
+  .mw-gta6.mw-gta6 .mw-gta6__sub { display: none; }
+  .mw-gta6.mw-gta6 .mw-gta6__subs { display: block; }
+  .mw-gta6.mw-gta6 .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 817px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>38,518 characters</span><button type="button" data-for="02-copies-chart-js">Copy</button></div><textarea id="02-copies-chart-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="02-copies-chart-js">Copy</button></div><textarea id="02-copies-chart-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -3123,7 +3117,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.2.0+20261119.fa822b1&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -3375,26 +3369,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function shareHTML() {
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
-      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Share&lt;/button&gt;&lt;/div&gt;&#x27;;
+      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
 
   function linksHTML(st) {
     var L = st.links;
     if (!L) return &#x27;&#x27;;
-    var h = &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;div class=&quot;mw-gta6__label&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/div&gt;&lt;ul&gt;&#x27;;
-    L.items.forEach(function (x) {
-      h += &#x27;&lt;li&gt;&lt;a href=&quot;&#x27; + esc(x.url) + &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(x.title) + &#x27;&lt;/a&gt;&lt;/li&gt;&#x27;;
-    });
-    return h + &#x27;&lt;/ul&gt;&lt;/nav&gt;&#x27;;
-  }
-
-  function shareText(st) {
-    if (st.kind === &#x27;tracker&#x27;) {
-      var r = st.m.r0;
-      return &#x27;GTA 6 has sold an estimated &#x27; + mUnits(r.units) + &#x27; copies and &#x27; + usd(r.revenue) +
-        &#x27; in digital sales (as of &#x27; + fmtDate(r.date) + &#x27;).&#x27;;
-    }
-    return st.cmp[st.kind].title + &#x27;, updated live&#x27;;
+    return &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;a class=&quot;mw-gta6__morelink&quot; href=&quot;&#x27; + esc(L.items[0].url) +
+      &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/a&gt;&lt;/nav&gt;&#x27;;
   }
 
   function copyText(s) {
@@ -3423,12 +3405,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       status.textContent = msg;
       clearTimeout(st.sayTimer);
       st.sayTimer = setTimeout(function () { status.textContent = &#x27;&#x27;; }, 4000);
-    }
-    if (navigator.share) {
-      navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, &#x27;share&#x27;, &#x27;native&#x27;); })
-        .catch(function () { /* cancelled */ });
-      return;
     }
     copyText(url).then(function () {
       say(&#x27;Link copied&#x27;);
@@ -3463,7 +3439,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__disclose&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
       &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
       &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
@@ -3474,7 +3450,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
   }
 
@@ -3556,10 +3532,10 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
           &#x27;&lt;div class=&quot;mw-gta6__muted&quot;&gt;&#x27; + esc(fmtDate(e.date)) + &#x27; reading&lt;/div&gt;&lt;/div&gt;&#x27;;
       }
       h += &#x27;&lt;/div&gt;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (o.note ? esc(o.note) + &#x27; &#x27; : &#x27;&#x27;) +
-        &#x27;Official totals can include physical copies and other platforms, so they differ from the digital estimate.&#x27; +
-        &#x27; Source: &#x27; + esc(o.source) + &#x27;&lt;/p&gt;&lt;/div&gt;&#x27;;
+        &#x27;Official totals can include physical copies and other platforms.&lt;/p&gt;&lt;/div&gt;&#x27;;
     }
 
+    h += byDayHTML(st);
 
     var rows = m.rs.slice(0, 5);
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Readings&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&#x27; +
@@ -3571,12 +3547,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + chg + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += byDayHTML(st);
 
     h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (L.stale
-      ? &#x27;Showing the latest reading while the next update is delayed. &#x27;
-      : &#x27;Live figure is projected from the latest reading and resets with each update. &#x27;) +
-      &#x27;Estimates only; excludes physical copies.&lt;/p&gt;&#x27;;
+      ? &#x27;Showing the latest reading; next update delayed. &#x27;
+      : &#x27;Live figure projected from the latest reading. &#x27;) +
+      &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -3612,17 +3587,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       units: row.ps5.units + row.xbox.units,
       revenue: row.ps5.revenue + row.xbox.revenue
     };
-  }
-
-  function gtaNote(st, gl) {
-    if (st.mode !== &#x27;launch&#x27;) return &#x27;&#x27;;
-    if (!gl) return &#x27;GTA 6 is a digital sales estimate to date.&#x27;;
-    if (gl.pending) {
-      return &#x27;Until the figure for its first &#x27; + st.m.launchDays + &#x27; days (to &#x27; + fmtShort(gl.end) +
-        &#x27;) is in, GTA 6 shows estimated pre-orders and sales to date.&#x27;;
-    }
-    return &#x27;GTA 6 is a digital sales estimate for its first &#x27; + gl.days + &#x27; days (&#x27; + fmtShort(st.m.release) +
-      &#x27; to &#x27; + fmtShort(gl.end) + &#x27;), including pre-orders.&#x27;;
   }
 
   function chartRows(st) {
@@ -3708,13 +3672,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       }
       next = parts.join(DOT);
     }
-    return { html: out, next: next, note: gtaNote(st, gl) };
-  }
-
-  function sourcesHTML(list) {
-    if (!Array.isArray(list)) return &#x27;&#x27;;
-    var names = list.map(function (s) { return s &amp;&amp; s.name ? esc(s.name) : &#x27;&#x27;; }).filter(Boolean);
-    return names.length ? &#x27;Source: &#x27; + names.join(DOT) : &#x27;&#x27;;
+    return { html: out, next: next };
   }
 
   function chartHTML(st) {
@@ -3738,10 +3696,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
-    var note = [view.note, rows.note].filter(Boolean).join(&#x27; &#x27;);
-    if (note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(note) + &#x27;&lt;/p&gt;&#x27;;
-    var src = sourcesHTML(set.sources);
-    if (src) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + src + &#x27;&lt;/p&gt;&#x27;;
+    if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -3971,7 +3926,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: &#x27;1.2.0&#x27;, build: BUILD };
+  window[NS] = { mountAll: mountAll, version: &#x27;1.3.0&#x27;, build: BUILD };
 
   function start() {
     mountAll();
@@ -3989,8 +3944,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 })();
 &lt;/script&gt;
 </textarea></div></section><section><h2>Revenue chart</h2><div class="f"><div class="fh"><b>HTML field</b><span>310 characters</span><button type="button" data-for="03-revenue-chart-html">Copy</button></div><textarea id="03-revenue-chart-html" readonly spellcheck="false">&lt;div class=&quot;mw-gta6&quot; data-widget=&quot;revenue&quot; data-src=&quot;https://adleadbeater.github.io/gta6-widgets/data/&quot;&gt;&lt;section class=&quot;mw-gta6__panel&quot;&gt;&lt;div class=&quot;mw-gta6__head&quot;&gt;&lt;h2 class=&quot;mw-gta6__h&quot;&gt;GTA 6 vs. biggest entertainment releases&lt;/h2&gt;&lt;/div&gt;&lt;div class=&quot;mw-gta6__skel mw-gta6__skel--revenue&quot;&gt;&lt;/div&gt;&lt;/section&gt;&lt;/div&gt;
-</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>12,592 characters</span><button type="button" data-for="03-revenue-chart-css">Copy</button></div><textarea id="03-revenue-chart-css" readonly spellcheck="false">&lt;style&gt;
-.mw-gta6 {
+</textarea></div><div class="f"><div class="fh"><b>CSS field</b><span>15,320 characters</span><button type="button" data-for="03-revenue-chart-css">Copy</button></div><textarea id="03-revenue-chart-css" readonly spellcheck="false">&lt;style&gt;
+.mw-gta6.mw-gta6 {
   --mw-panel: #181818;
   --mw-card: #333333;
   --mw-rule: #2c2c2c;
@@ -4016,7 +3971,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: left;
 }
 @media (prefers-color-scheme: light) {
-  .mw-gta6:not([data-theme=&quot;dark&quot;]) {
+  .mw-gta6.mw-gta6:not([data-theme=&quot;dark&quot;]) {
     --mw-panel: #ffffff;
     --mw-card: #f0f0f0;
     --mw-rule: #e4e4e4;
@@ -4032,7 +3987,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     --mw-up: #0b5c2b;
   }
 }
-.mw-gta6[data-theme=&quot;light&quot;] {
+.mw-gta6.mw-gta6[data-theme=&quot;light&quot;] {
   --mw-panel: #ffffff;
   --mw-card: #f0f0f0;
   --mw-rule: #e4e4e4;
@@ -4047,24 +4002,50 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   --mw-hi-muted: #555555;
   --mw-up: #0b5c2b;
 }
-.mw-gta6[hidden],
-.mw-gta6 [hidden] { display: none !important; }
-.mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6[hidden],
+.mw-gta6.mw-gta6 [hidden] { display: none !important; }
+.mw-gta6.mw-gta6 *,
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { box-sizing: border-box; }
+.mw-gta6.mw-gta6 *::before,
+.mw-gta6.mw-gta6 *::after { content: none; }
+/* article styles (h2, p, lists, tables, links) must not reach inside the widget */
+.mw-gta6.mw-gta6 :is(h2, p, ul, ol, li, table, thead, tbody, tr, th, td, caption, a, button, nav, section, strong, span) {
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: normal;
+  line-height: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  color: inherit;
+  list-style: none;
+}
+.mw-gta6.mw-gta6 :is(h2, p, ul, li, table, th, td, caption) { text-align: inherit; }
 
 /* static frame (in the HTML field): heading + skeleton at the finished height,
    so nothing on the page moves when the data arrives */
-.mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
-/* heights measured from the finished panels (tools/build.py header has the how-to);
+.mw-gta6.mw-gta6 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
+/* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega&#x27;s last panel */
-.mw-gta6__skel--tracker { height: 641.4px; }
-.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 714.4px; }
-.mw-gta6__skel--copies { height: 701px; }
-.mw-gta6__skel--revenue { height: 701px; }
-.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 774px; }
-.mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 649.4px; }
+.mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 659px; }
+.mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 659px; }
+.mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 704px; }
+.mw-gta6.mw-gta6 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
-.mw-gta6__panel {
+.mw-gta6.mw-gta6 .mw-gta6__panel {
   background: var(--mw-panel);
   border-radius: 4px;
   padding: 16px 16px 12px;
@@ -4072,15 +4053,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   flex-direction: column;
   gap: 12px;
 }
-.mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
-.mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.mw-gta6__h {
+.mw-gta6.mw-gta6 .mw-gta6__panel + .mw-gta6__panel { margin-top: 24px; }
+.mw-gta6.mw-gta6 .mw-gta6__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__h {
   margin: 0;
   font: 600 20px/24px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-heading);
 }
-.mw-gta6__badge {
+.mw-gta6.mw-gta6 .mw-gta6__badge {
   flex: none;
   background: var(--mw-red);
   color: #ffffff;
@@ -4090,18 +4071,16 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 6px;
   border-radius: 2px;
 }
-.mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__label {
+.mw-gta6.mw-gta6 .mw-gta6__meta { margin: -8px 0 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__label {
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   color: var(--mw-muted);
 }
-.mw-gta6__muted { color: var(--mw-muted); }
-.mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
-.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
-.mw-gta6 a::before,
-.mw-gta6 a::after { content: none; }
-.mw-gta6__sr {
+.mw-gta6.mw-gta6 .mw-gta6__muted { color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
+.mw-gta6.mw-gta6 .mw-gta6__sr {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -4112,13 +4091,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   border: 0;
 }
-.mw-gta6 button:focus-visible,
-.mw-gta6 a:focus-visible,
-.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
+.mw-gta6.mw-gta6 button:focus-visible,
+.mw-gta6.mw-gta6 a:focus-visible,
+.mw-gta6.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
 
 /* platform buttons */
-.mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
-.mw-gta6__btn {
+.mw-gta6.mw-gta6 .mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.mw-gta6.mw-gta6 .mw-gta6__btn {
   min-height: 36px;
   margin: 0;
   padding: 6px 10px;
@@ -4130,12 +4109,13 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
-.mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn[aria-pressed=&quot;true&quot;] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__btn:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__btn--wide { width: 100%; min-height: 40px; font-size: 12px; line-height: 14px; }
 
 /* stat cards */
-.mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__stat {
+.mw-gta6.mw-gta6 .mw-gta6__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__stat {
   background: var(--mw-card);
   border-radius: 2px;
   padding: 14px 16px;
@@ -4144,22 +4124,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   gap: 4px;
   min-width: 0;
 }
-.mw-gta6__num {
+.mw-gta6.mw-gta6 .mw-gta6__num {
   font: 700 32px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   color: var(--mw-ink);
 }
-.mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__chg strong { color: var(--mw-ink); }
-.mw-gta6__up { color: var(--mw-up); }
+.mw-gta6.mw-gta6 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__chg strong { color: var(--mw-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__up { color: var(--mw-up); }
 
 /* platform split */
-.mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
-.mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
-.mw-gta6__split span:first-child { background: var(--mw-red); }
-.mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
-.mw-gta6__legend {
+.mw-gta6.mw-gta6 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__split { display: flex; gap: 2px; height: 10px; border-radius: 2px; overflow: hidden; }
+.mw-gta6.mw-gta6 .mw-gta6__split span:first-child { background: var(--mw-red); }
+.mw-gta6.mw-gta6 .mw-gta6__split span:last-child { flex: 1; background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__legend {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -4167,7 +4147,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__sw {
+.mw-gta6.mw-gta6 .mw-gta6__sw {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -4175,21 +4155,22 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__sw--alt { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__sw--alt { background: var(--mw-alt); }
 
 /* readings table */
-.mw-gta6__scroll { overflow-x: auto; }
-.mw-gta6__scroll.is-scrolled th:first-child,
-.mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
-.mw-gta6__table {
+.mw-gta6.mw-gta6 .mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
+.mw-gta6.mw-gta6 .mw-gta6__table {
   width: 100%;
   min-width: 340px;
   border-collapse: collapse;
-  font-size: 15px;
-  line-height: 21px;
+  background: transparent;
+  font-size: 17px;
+  line-height: 24px;
   font-variant-numeric: tabular-nums;
 }
-.mw-gta6__table th {
+.mw-gta6.mw-gta6 .mw-gta6__table th {
   padding: 0 8px 6px;
   border-bottom: 1px solid var(--mw-rule);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
@@ -4197,7 +4178,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-align: right;
   color: var(--mw-muted);
 }
-.mw-gta6__table td {
+.mw-gta6.mw-gta6 .mw-gta6__table td {
   height: 42px;
   padding: 0 8px;
   border-bottom: 1px solid var(--mw-rule);
@@ -4205,8 +4186,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-weight: 500;
   white-space: nowrap;
 }
-.mw-gta6__table th:first-child,
-.mw-gta6__table td:first-child {
+.mw-gta6.mw-gta6 .mw-gta6__table th:first-child,
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child {
   position: sticky;
   left: 0;
   z-index: 1;
@@ -4215,24 +4196,28 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   white-space: nowrap;
   font-weight: 400;
 }
-.mw-gta6__table .mw-gta6__chgcell { font-size: 13px; font-weight: 700; }
+/* article tables stripe and tint rows: keep ours flat */
+.mw-gta6.mw-gta6 .mw-gta6__table tr,
+.mw-gta6.mw-gta6 .mw-gta6__table td { background: transparent; }
+.mw-gta6.mw-gta6 .mw-gta6__table td:first-child { background: var(--mw-panel); }
+.mw-gta6.mw-gta6 .mw-gta6__table .mw-gta6__chgcell { font-size: 15px; font-weight: 700; }
 
 /* comparison charts */
-.mw-gta6__chart-head {
+.mw-gta6.mw-gta6 .mw-gta6__chart-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 16px;
 }
-.mw-gta6__switch {
+.mw-gta6.mw-gta6 .mw-gta6__switch {
   display: inline-flex;
   gap: 2px;
   padding: 2px;
   border-radius: 3px;
   background: var(--mw-card);
 }
-.mw-gta6__switch button {
+.mw-gta6.mw-gta6 .mw-gta6__switch button {
   min-height: 32px;
   margin: 0;
   padding: 6px 10px;
@@ -4244,9 +4229,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
-.mw-gta6__switch button:hover { filter: brightness(1.12); }
-.mw-gta6__keys {
+.mw-gta6.mw-gta6 .mw-gta6__switch button[aria-pressed=&quot;true&quot;] { background: var(--mw-red); color: #ffffff; }
+.mw-gta6.mw-gta6 .mw-gta6__switch button:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__keys {
   display: flex;
   flex-wrap: wrap;
   gap: 4px 16px;
@@ -4254,8 +4239,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
-.mw-gta6__row {
+.mw-gta6.mw-gta6 .mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.mw-gta6.mw-gta6 .mw-gta6__row {
   display: grid;
   grid-template-columns: 2rem 13rem minmax(0, 1fr);
   grid-template-areas: &quot;rank lab bar&quot;;
@@ -4266,15 +4251,15 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   padding: 4px 8px;
   border-radius: 2px;
 }
-.mw-gta6__row--me { background: var(--mw-hi); }
-.mw-gta6__rank {
+.mw-gta6.mw-gta6 .mw-gta6__row--me { background: var(--mw-hi); }
+.mw-gta6.mw-gta6 .mw-gta6__rank {
   grid-area: rank;
   font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
-.mw-gta6__lab { grid-area: lab; min-width: 0; }
-.mw-gta6__title {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
+.mw-gta6.mw-gta6 .mw-gta6__lab { grid-area: lab; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -4283,9 +4268,9 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 21px;
   font-weight: 500;
 }
-.mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
-.mw-gta6__sub,
-.mw-gta6__subs {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__subs {
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -4294,11 +4279,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   line-height: 18px;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__sub,
-.mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
-.mw-gta6__subs { display: none; }
-.mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
-.mw-gta6__bar {
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__sub,
+.mw-gta6.mw-gta6 .mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__subs { display: none; }
+.mw-gta6.mw-gta6 .mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
+.mw-gta6.mw-gta6 .mw-gta6__bar {
   flex: none;
   width: calc(var(--w, 0) * 80%);
   min-width: 2px;
@@ -4306,8 +4291,8 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   border-radius: 2px;
   background: var(--mw-red);
 }
-.mw-gta6__bar--film { background: var(--mw-alt); }
-.mw-gta6__val {
+.mw-gta6.mw-gta6 .mw-gta6__bar--film { background: var(--mw-alt); }
+.mw-gta6.mw-gta6 .mw-gta6__val {
   flex: none;
   font-size: 15px;
   line-height: 21px;
@@ -4315,7 +4300,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
-.mw-gta6__gap {
+.mw-gta6.mw-gta6 .mw-gta6__gap {
   margin: 0;
   padding: 0 8px;
   font-size: 13px;
@@ -4325,7 +4310,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 }
 
 /* quiet buttons: pause, share */
-.mw-gta6__quiet {
+.mw-gta6.mw-gta6 .mw-gta6__quiet {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -4340,19 +4325,19 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__quiet:hover { filter: brightness(1.12); }
-.mw-gta6__liverow,
-.mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
-.mw-gta6__liverow { margin-top: -4px; }
-.mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__quiet:hover { filter: brightness(1.12); }
+.mw-gta6.mw-gta6 .mw-gta6__liverow,
+.mw-gta6.mw-gta6 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.mw-gta6.mw-gta6 .mw-gta6__liverow { margin-top: -4px; }
+.mw-gta6.mw-gta6 .mw-gta6__status { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 
 /* next-overtake line under the charts */
-.mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
-.mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
+.mw-gta6.mw-gta6 .mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
+.mw-gta6.mw-gta6 .mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
 
 /* official vs. estimate */
-.mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.mw-gta6__vsitem {
+.mw-gta6.mw-gta6 .mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.mw-gta6.mw-gta6 .mw-gta6__vsitem {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -4363,14 +4348,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   font-size: 13px;
   line-height: 18px;
 }
-.mw-gta6__vsnum {
+.mw-gta6.mw-gta6 .mw-gta6__vsnum {
   font: 700 22px/1.2 Poppins, Arial, Helvetica, sans-serif;
   font-variant-numeric: tabular-nums;
   color: var(--mw-ink);
 }
 
 /* sales by day */
-.mw-gta6__tag {
+.mw-gta6.mw-gta6 .mw-gta6__tag {
   display: inline-block;
   margin-left: 6px;
   padding: 2px 4px;
@@ -4383,52 +4368,46 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   vertical-align: 1px;
 }
 
-/* related links */
-.mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
-.mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
-.mw-gta6__more a {
-  display: block;
-  padding: 10px 8px;
+/* More on GTA 6: one link */
+.mw-gta6.mw-gta6 .mw-gta6__more { padding-top: 12px; border-top: 1px solid var(--mw-rule); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink {
+  display: inline-block;
+  font: 600 17px/20px Poppins, Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
   color: var(--mw-ink);
-  font-size: 15px;
-  line-height: 21px;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
+.mw-gta6.mw-gta6 .mw-gta6__morelink:hover { color: var(--mw-ink-red); text-decoration: underline; }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
-  .mw-gta6__table { min-width: 0; }
-  .mw-gta6__table th,
-  .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
-  .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__panel { padding: 16px 12px 12px; }
-  .mw-gta6__h { font-size: 17px; line-height: 20px; }
-  .mw-gta6__label,
-  .mw-gta6__table th { font-size: 10px; }
-  .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
-  .mw-gta6__num { font-size: 30px; }
-  .mw-gta6__row {
+  .mw-gta6.mw-gta6 .mw-gta6__table { min-width: 0; }
+  .mw-gta6.mw-gta6 .mw-gta6__table th,
+.mw-gta6.mw-gta6 .mw-gta6__table td { padding-left: 4px; padding-right: 4px; }
+  .mw-gta6.mw-gta6 .mw-gta6__vs { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__panel { padding: 16px 12px 12px; }
+  .mw-gta6.mw-gta6 .mw-gta6__h { font-size: 17px; line-height: 20px; }
+  .mw-gta6.mw-gta6 .mw-gta6__label,
+.mw-gta6.mw-gta6 .mw-gta6__table th { font-size: 10px; }
+  .mw-gta6.mw-gta6 .mw-gta6__table { font-size: 15px; line-height: 22px; }
+  .mw-gta6.mw-gta6 .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
+  .mw-gta6.mw-gta6 .mw-gta6__num { font-size: 30px; }
+  .mw-gta6.mw-gta6 .mw-gta6__row {
     grid-template-columns: 1.6rem minmax(0, 1fr);
     grid-template-areas: &quot;rank lab&quot; &quot;rank bar&quot;;
     gap: 4px 8px;
     padding: 6px 8px;
   }
-  .mw-gta6__sub { display: none; }
-  .mw-gta6__subs { display: block; }
-  .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 809px; }
-  .mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 882px; }
-  .mw-gta6__skel--copies { height: 1021px; }
-  .mw-gta6__skel--revenue { height: 1039px; }
-  .mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1112px; }
+  .mw-gta6.mw-gta6 .mw-gta6__sub { display: none; }
+  .mw-gta6.mw-gta6 .mw-gta6__subs { display: block; }
+  .mw-gta6.mw-gta6 .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--tracker { height: 817px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;tracker&quot;] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--copies { height: 949px; }
+  .mw-gta6.mw-gta6 .mw-gta6__skel--revenue { height: 967px; }
+  .mw-gta6.mw-gta6[data-widget=&quot;mega&quot;] .mw-gta6__skel--revenue { height: 1012px; }
 }
 &lt;/style&gt;
-</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>38,518 characters</span><button type="button" data-for="03-revenue-chart-js">Copy</button></div><textarea id="03-revenue-chart-js" readonly spellcheck="false">&lt;script&gt;
+</textarea></div><div class="f"><div class="fh"><b>JS field</b><span>36,750 characters</span><button type="button" data-for="03-revenue-chart-js">Copy</button></div><textarea id="03-revenue-chart-js" readonly spellcheck="false">&lt;script&gt;
 (function () {
   &#x27;use strict&#x27;;
 
@@ -4448,7 +4427,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
   var MONTHS = [&#x27;Jan&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Apr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dec&#x27;];
   var CATS = { tracker: &#x27;GTA 6 Sales Tracker Vignette&#x27;, copies: &#x27;GTA 6 Copies Chart Vignette&#x27;, revenue: &#x27;GTA 6 Revenue Chart Vignette&#x27; };
   var MAX_EVENTS = 50;
-  var BUILD = &#x27;1.2.0+20261119.fa822b1&#x27;;
+  var BUILD = &#x27;1.3.0+20261119.949e6e6&#x27;;
   var DEBUG = /[?&amp;]gta6debug=1(&amp;|$)/.test(location.search);
   var IDS = { tracker: &#x27;gta6-sales-tracker&#x27;, copies: &#x27;gta6-copies-chart&#x27;, revenue: &#x27;gta6-revenue-chart&#x27; };
   var PLATFORMS = [
@@ -4700,26 +4679,14 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
 
   function shareHTML() {
     return &#x27;&lt;div class=&quot;mw-gta6__foot&quot;&gt;&lt;span class=&quot;mw-gta6__status&quot; role=&quot;status&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&#x27; +
-      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Share&lt;/button&gt;&lt;/div&gt;&#x27;;
+      &#x27;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet&quot; data-action=&quot;share&quot;&gt;Copy link&lt;/button&gt;&lt;/div&gt;&#x27;;
   }
 
   function linksHTML(st) {
     var L = st.links;
     if (!L) return &#x27;&#x27;;
-    var h = &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;div class=&quot;mw-gta6__label&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/div&gt;&lt;ul&gt;&#x27;;
-    L.items.forEach(function (x) {
-      h += &#x27;&lt;li&gt;&lt;a href=&quot;&#x27; + esc(x.url) + &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(x.title) + &#x27;&lt;/a&gt;&lt;/li&gt;&#x27;;
-    });
-    return h + &#x27;&lt;/ul&gt;&lt;/nav&gt;&#x27;;
-  }
-
-  function shareText(st) {
-    if (st.kind === &#x27;tracker&#x27;) {
-      var r = st.m.r0;
-      return &#x27;GTA 6 has sold an estimated &#x27; + mUnits(r.units) + &#x27; copies and &#x27; + usd(r.revenue) +
-        &#x27; in digital sales (as of &#x27; + fmtDate(r.date) + &#x27;).&#x27;;
-    }
-    return st.cmp[st.kind].title + &#x27;, updated live&#x27;;
+    return &#x27;&lt;nav class=&quot;mw-gta6__more&quot; aria-label=&quot;&#x27; + esc(L.title) + &#x27;&quot;&gt;&lt;a class=&quot;mw-gta6__morelink&quot; href=&quot;&#x27; + esc(L.items[0].url) +
+      &#x27;&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot; data-track=&quot;related&quot;&gt;&#x27; + esc(L.title) + &#x27;&lt;/a&gt;&lt;/nav&gt;&#x27;;
   }
 
   function copyText(s) {
@@ -4748,12 +4715,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       status.textContent = msg;
       clearTimeout(st.sayTimer);
       st.sayTimer = setTimeout(function () { status.textContent = &#x27;&#x27;; }, 4000);
-    }
-    if (navigator.share) {
-      navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, &#x27;share&#x27;, &#x27;native&#x27;); })
-        .catch(function () { /* cancelled */ });
-      return;
     }
     copyText(url).then(function () {
       say(&#x27;Link copied&#x27;);
@@ -4788,7 +4749,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     var id = st.el.id + &#x27;-byday&#x27;;
     var pname = key === &#x27;all&#x27; ? &#x27;&#x27; : (key === &#x27;ps5&#x27; ? &#x27;PS5&#x27; : &#x27;Xbox Series X|S&#x27;);
     var h = &#x27;&lt;div class=&quot;mw-gta6__block mw-gta6__byday&quot;&gt;&#x27;;
-    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__quiet mw-gta6__disclose&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
+    h += &#x27;&lt;div&gt;&lt;button type=&quot;button&quot; class=&quot;mw-gta6__btn mw-gta6__btn--wide&quot; data-action=&quot;byday&quot; aria-expanded=&quot;&#x27; + (st.byDay ? &#x27;true&#x27; : &#x27;false&#x27;) +
       &#x27;&quot; aria-controls=&quot;&#x27; + id + &#x27;&quot;&gt;&#x27; + (st.byDay ? &#x27;Hide&#x27; : &#x27;Show&#x27;) + &#x27; sales by day&#x27; + (pname ? DOT + esc(pname) : &#x27;&#x27;) +
       &#x27;&lt;span class=&quot;mw-gta6__chev&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;div class=&quot;mw-gta6__block&quot; id=&quot;&#x27; + id + &#x27;&quot;&#x27; + (st.byDay ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27;;
@@ -4799,7 +4760,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         esc(mUnits(r.u)) + &#x27;&lt;/td&gt;&lt;td&gt;&#x27; + esc(usd(r.r)) + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.&lt;/p&gt;&#x27;;
+    h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;Includes pre-orders. Runs about two days behind the latest reading.&lt;/p&gt;&#x27;;
     return h + &#x27;&lt;/div&gt;&lt;/div&gt;&#x27;;
   }
 
@@ -4881,10 +4842,10 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
           &#x27;&lt;div class=&quot;mw-gta6__muted&quot;&gt;&#x27; + esc(fmtDate(e.date)) + &#x27; reading&lt;/div&gt;&lt;/div&gt;&#x27;;
       }
       h += &#x27;&lt;/div&gt;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (o.note ? esc(o.note) + &#x27; &#x27; : &#x27;&#x27;) +
-        &#x27;Official totals can include physical copies and other platforms, so they differ from the digital estimate.&#x27; +
-        &#x27; Source: &#x27; + esc(o.source) + &#x27;&lt;/p&gt;&lt;/div&gt;&#x27;;
+        &#x27;Official totals can include physical copies and other platforms.&lt;/p&gt;&lt;/div&gt;&#x27;;
     }
 
+    h += byDayHTML(st);
 
     var rows = m.rs.slice(0, 5);
     h += &#x27;&lt;div class=&quot;mw-gta6__scroll&quot; tabindex=&quot;0&quot; role=&quot;region&quot; aria-label=&quot;Readings&quot;&gt;&lt;table class=&quot;mw-gta6__table&quot;&gt;&lt;thead&gt;&lt;tr&gt;&#x27; +
@@ -4896,12 +4857,11 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
         &#x27;&lt;/td&gt;&lt;td class=&quot;mw-gta6__chgcell&quot;&gt;&#x27; + chg + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
     });
     h += &#x27;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;&#x27;;
-    h += byDayHTML(st);
 
     h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + (L.stale
-      ? &#x27;Showing the latest reading while the next update is delayed. &#x27;
-      : &#x27;Live figure is projected from the latest reading and resets with each update. &#x27;) +
-      &#x27;Estimates only; excludes physical copies.&lt;/p&gt;&#x27;;
+      ? &#x27;Showing the latest reading; next update delayed. &#x27;
+      : &#x27;Live figure projected from the latest reading. &#x27;) +
+      &#x27;Estimates; excludes physical copies.&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -4937,17 +4897,6 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       units: row.ps5.units + row.xbox.units,
       revenue: row.ps5.revenue + row.xbox.revenue
     };
-  }
-
-  function gtaNote(st, gl) {
-    if (st.mode !== &#x27;launch&#x27;) return &#x27;&#x27;;
-    if (!gl) return &#x27;GTA 6 is a digital sales estimate to date.&#x27;;
-    if (gl.pending) {
-      return &#x27;Until the figure for its first &#x27; + st.m.launchDays + &#x27; days (to &#x27; + fmtShort(gl.end) +
-        &#x27;) is in, GTA 6 shows estimated pre-orders and sales to date.&#x27;;
-    }
-    return &#x27;GTA 6 is a digital sales estimate for its first &#x27; + gl.days + &#x27; days (&#x27; + fmtShort(st.m.release) +
-      &#x27; to &#x27; + fmtShort(gl.end) + &#x27;), including pre-orders.&#x27;;
   }
 
   function chartRows(st) {
@@ -5033,13 +4982,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
       }
       next = parts.join(DOT);
     }
-    return { html: out, next: next, note: gtaNote(st, gl) };
-  }
-
-  function sourcesHTML(list) {
-    if (!Array.isArray(list)) return &#x27;&#x27;;
-    var names = list.map(function (s) { return s &amp;&amp; s.name ? esc(s.name) : &#x27;&#x27;; }).filter(Boolean);
-    return names.length ? &#x27;Source: &#x27; + names.join(DOT) : &#x27;&#x27;;
+    return { html: out, next: next };
   }
 
   function chartHTML(st) {
@@ -5063,10 +5006,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     h += &#x27;&lt;/div&gt;&#x27;;
     h += &#x27;&lt;ol class=&quot;mw-gta6__bars&quot;&gt;&#x27; + rows.html + &#x27;&lt;/ol&gt;&#x27;;
     h += &#x27;&lt;p class=&quot;mw-gta6__next&quot; data-live=&quot;next&quot;&#x27; + (rows.next ? &#x27;&#x27; : &#x27; hidden&#x27;) + &#x27;&gt;&#x27; + rows.next + &#x27;&lt;/p&gt;&#x27;;
-    var note = [view.note, rows.note].filter(Boolean).join(&#x27; &#x27;);
-    if (note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(note) + &#x27;&lt;/p&gt;&#x27;;
-    var src = sourcesHTML(set.sources);
-    if (src) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + src + &#x27;&lt;/p&gt;&#x27;;
+    if (view.note) h += &#x27;&lt;p class=&quot;mw-gta6__caption&quot;&gt;&#x27; + esc(view.note) + &#x27;&lt;/p&gt;&#x27;;
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -5296,7 +5236,7 @@ textarea{width:100%;box-sizing:border-box;height:64px;font:12px/16px ui-monospac
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: &#x27;1.2.0&#x27;, build: BUILD };
+  window[NS] = { mountAll: mountAll, version: &#x27;1.3.0&#x27;, build: BUILD };
 
   function start() {
     mountAll();

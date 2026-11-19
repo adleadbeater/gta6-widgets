@@ -26,8 +26,8 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 - `data-src` in `html.html` is the data URL (must be `https://`, ending in `/data/`)
 - The HTML field holds a static frame: each panel's heading plus a skeleton at the finished height
   - Shows before the script runs and in CMS previews; nothing on the page moves when data arrives
-  - Matches the finished widget to 0px for columns 343-760px wide; a 320px column runs 15-30px short per panel
-  - Heights are tuned to the current content (one related link); see `tools/build.py` to re-measure after changes
+  - Measured on a live MovieWeb article (site fonts): matches the finished widget to 0px on desktop (760px column) and phone (358px)
+  - Heights are tuned to the current content; see `tools/build.py` to re-measure after changes
 - If data fails to load or validate, the widget hides itself and logs a console warning
   - Add `?gta6debug=1` to the page URL: a one-line note instead of hiding, and the build stamp on working widgets
 - Embeds pasted before v1.2 still work, without the static frame
@@ -42,7 +42,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA 6 "Latest reading"
   - Result: a stalled feed never leaves an inflated number on screen
 - Official figure: shown beside the estimate in an "Official vs. estimate" block; it never replaces the estimate (section 8)
-- "Show sales by day": collapsed table of copies and revenue added each day (up to 14 days, newest first)
+- "Show sales by day": full-width button above the readings table; opens a table of copies and revenue added each day (up to 14 days, newest first)
   - Only days with a one-day step in the history (daily from Nov 9; earlier history is in two-day steps)
   - Follows the platform buttons; the release day carries a Launch tag
 - Comparison charts: top 10, sorted on render; GTA 6 pinned below with its rank if it falls outside
@@ -52,11 +52,13 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
     - No pace estimate when data is stale or the target is more than 14 days away
 - Launch view: GTA 6 shows "Pre-orders + sales to date" until the history reaches the end of its first 3 days
   - Then it switches to a fixed "First 3 days" figure, comparable with the other first-3-day entries (section 7)
-- Share button on every panel: native share sheet on phones, otherwise copies a link to the panel
+- "Copy link" button on every panel: copies a link straight to that panel (no share sheet)
   - Links end `#gta6-sales-tracker`, `#gta6-copies-chart` or `#gta6-revenue-chart` (`-2` etc. for repeats, in page order)
   - Opening a shared link scrolls to that panel once it has loaded
-- "More on GTA 6" related links at the bottom of the tracker (or the mega's last panel), from `data/links.json`; open in a new tab
-- No data-provider credit is shown for the tracker; chart credits are plain text from `comparisons.json`, never links
+- "More on GTA 6" link at the bottom of the tracker (or the mega's last panel): the `title` text from `data/links.json`, linking to the first item's URL, in a new tab
+- No source credit lines are shown; the `sources` lists in `comparisons.json` are kept for the record only
+- Site styles can't reach inside: the CSS resets article styles, and `tools/build.py` doubles the root class on every rule
+  (`.mw-gta6.mw-gta6 …`) so it outranks rules such as `.article-body table th` without `!important`
 - Theme follows `prefers-color-scheme`; force with `data-theme="light"` or `data-theme="dark"` on the root div
 - Narrow layout via container query at 600px, so it adapts to the column, not the window
   - Tables fit a 320px column; the date column stays pinned and gets a soft edge if a table has to scroll
@@ -98,7 +100,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Jump limit: no more than +50% since the previous reading, raised to +200% from 3 days before to 14 days after the release date in `comparisons.json`
   - Result: day-one sales on top of pre-orders aren't rejected as a glitch
   - Result: on failure nothing is written and the last good file stays live
-- Workflow runs every 30 minutes, commits `data/` only when it changes
+- Workflow runs at :17 and :47 past each hour (GitHub runs schedules best-effort; :00 and :30 are often delayed), commits `data/` only when it changes
 
 ## 7. Updating comparison data
 
@@ -124,7 +126,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Edit right after a scraper commit, or pull first: the bot commits to the same file
 - Related links: `data/links.json`
   - `{"title": "More on GTA 6", "items": [{"title": "...", "url": "https://movieweb.com/..."}]}`
-  - Only `https://movieweb.com/` URLs are shown, at most 3, and never a link to the page the widget is on
+  - Only `https://movieweb.com/` URLs count, never a link to the page the widget is on; the first valid one is used
   - Empty `items` = no links block
 
 ## 9. Style guide exceptions
@@ -135,3 +137,4 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
 - One namespaced global (`window.MWGTA6`) so repeated pastes don't run twice; everything else is inside the IIFE
 - Highlighted-row rank in light mode is #b81a21, a shade darker than the guide's #c81e25, which only reaches 4.46:1 on the pink row
 - Highlighted-row dates use the heading grey (#555555) in light mode: muted grey fails contrast there (4.15:1)
+- Table cells are 17px (15px at 600px and below), larger than the guide's 15px body, at the editor's request
