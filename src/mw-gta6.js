@@ -448,17 +448,6 @@
 
     h += byDayHTML(st);
 
-    var rows = m.rs.slice(0, 5);
-    h += '<div class="mw-gta6__scroll" tabindex="0" role="region" aria-label="Readings"><table class="mw-gta6__table"><thead><tr>' +
-      '<th scope="col">Reading</th><th scope="col">Copies</th><th scope="col">Revenue</th><th scope="col">Change</th></tr></thead><tbody>';
-    rows.forEach(function (r, i) {
-      var prev = m.rs[i + 1];
-      var chg = prev ? '<span class="mw-gta6__up" aria-hidden="true">' + UP + '</span><span class="mw-gta6__sr">up </span>' + esc(mUnits(r.units - prev.units)) : DASH;
-      h += '<tr><td>' + esc(fmtDate(r.date)) + '</td><td>' + esc(mUnits(r.units)) + '</td><td>' + esc(usd(r.revenue)) +
-        '</td><td class="mw-gta6__chgcell">' + chg + '</td></tr>';
-    });
-    h += '</tbody></table></div>';
-
     h += '<p class="mw-gta6__caption">' + (L.stale
       ? 'Showing the latest reading; next update delayed. '
       : 'Live figure projected from the latest reading. ') +

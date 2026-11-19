@@ -10,6 +10,7 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - `02-copies-chart/` — GTA 6 vs. best-selling games (copies), Launch / All time
   - `03-revenue-chart/` — GTA 6 vs. biggest entertainment releases (revenue), Launch / All time
 - `preview/` — open `preview/index.html` in a browser; runs offline on bundled seed data; `?theme=light` for light mode
+  - `preview/showcase.html` — one self-contained file to click through all four (theme and phone-width switches); live data online, snapshot offline
 - `data/` — `tracker.json` (Sensor Tower readings + daily history), `comparisons.json` (chart data, hand-edited), `links.json` (related articles, hand-edited)
 - `src/` — the shared JS and CSS the fields are built from
 - `tools/build.py` — rebuilds `widgets/` and `preview/` from `src/` and `data/`: run `python3 tools/build.py` after any change to `src/`
@@ -42,7 +43,8 @@ Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are lis
   - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA 6 "Latest reading"
   - Result: a stalled feed never leaves an inflated number on screen
 - Official figure: shown beside the estimate in an "Official vs. estimate" block; it never replaces the estimate (section 8)
-- "Show sales by day": full-width outline button above the readings table; opens Day · Copies · Revenue · Change (up to 14 days, newest first)
+- Tracker order: platform buttons, revenue/copies, platform split, then "Show sales by day"
+- "Show sales by day": full-width outline button; opens Day · Copies · Revenue · Change (up to 14 days, newest first)
   - Copies and revenue added that day; Change = that day's copies against the day before (green ▲, red ▼, = for no change)
   - Only days with a one-day step in the history (daily from Nov 9; earlier history is in two-day steps)
   - Follows the platform buttons; the release day carries a Launch tag

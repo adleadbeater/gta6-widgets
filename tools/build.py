@@ -173,6 +173,72 @@ document.addEventListener('click', function (ev) {{
 """
 
 
+def showcase_page(css_field, js_field, seed_js, titles, stamp):
+    """preview/showcase.html: one self-contained file to click through all four widgets.
+    Loads live data from DATA_SRC; falls back to the bundled snapshot offline."""
+    views = [("mega", "All-in-one"), ("tracker", "Sales tracker"), ("copies", "Copies chart"), ("revenue", "Revenue chart")]
+    tabs = "".join(f'<button type="button" data-view="{k}" aria-pressed="{str(i == 0).lower()}">{n}</button>' for i, (k, n) in enumerate(views))
+    panes = "".join(f'<div class="sc-pane" data-pane="{k}"{"" if i == 0 else " hidden"}>{frame(k, titles, DATA_SRC)}</div>' for i, (k, _) in enumerate(views))
+    return f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTA 6 Vignettes Showcase</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{{--page:#0a0a0a;--bar:#181818;--ink:#ffffff;--muted:#b0b0b0;--btn:#737373;--red:#de272e;--ring:#ff5a5f}}
+body.light{{--page:#f2f2f2;--bar:#ffffff;--ink:#181818;--muted:#6b6b6b;--ring:#c81e25}}
+body{{margin:0;background:var(--page);color:var(--ink);font:15px/21px Roboto,Arial,sans-serif;padding:0 max(16px,env(safe-area-inset-left,0px)) 48px}}
+.sc-bar{{max-width:760px;margin:0 auto;padding:20px 0 4px;display:flex;flex-direction:column;gap:12px}}
+.sc-bar h1{{margin:0;font:700 22px/28px Poppins,Arial,sans-serif;text-transform:uppercase}}
+.sc-bar p{{margin:0;color:var(--muted);font-size:13px;line-height:18px}}
+.sc-row{{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}}
+.sc-group{{display:flex;flex-wrap:wrap;gap:6px}}
+.sc-group button{{min-height:36px;padding:6px 12px;border:0;border-radius:2px;background:var(--btn);color:#fff;font:600 11px/13px Poppins,Arial,sans-serif;text-transform:uppercase;cursor:pointer}}
+.sc-group button[aria-pressed="true"]{{background:var(--red);box-shadow:0 0 0 2px var(--page),0 0 0 3px var(--red)}}
+.sc-group button:focus-visible{{outline:2px solid var(--ring);outline-offset:4px}}
+.sc-label{{font:600 11px/13px Poppins,Arial,sans-serif;text-transform:uppercase;color:var(--muted)}}
+.sc-stage{{max-width:760px;margin:0 auto;transition:max-width .2s}}
+body.phone .sc-stage{{max-width:358px}}
+@media (prefers-reduced-motion: reduce){{.sc-stage{{transition:none}}}}
+</style>
+{seed_js}
+</head><body>
+<div class="sc-bar">
+  <h1>GTA 6 vignettes</h1>
+  <p>Click through the four MovieWeb GTA 6 vignettes. Live data when online; build {stamp}.</p>
+  <div class="sc-row">
+    <div class="sc-group" role="group" aria-label="Vignette">{tabs}</div>
+  </div>
+  <div class="sc-row">
+    <span class="sc-label">Theme</span><div class="sc-group" role="group" aria-label="Theme"><button type="button" data-theme-set="dark" aria-pressed="true">Dark</button><button type="button" data-theme-set="light" aria-pressed="false">Light</button></div>
+    <span class="sc-label">Width</span><div class="sc-group" role="group" aria-label="Width"><button type="button" data-width="desktop" aria-pressed="true">Desktop</button><button type="button" data-width="phone" aria-pressed="false">Phone</button></div>
+  </div>
+</div>
+<div class="sc-stage">{panes}</div>
+{css_field}{js_field}<script>
+(function () {{
+  function press(group, btn) {{ [].forEach.call(group.querySelectorAll('button'), function (b) {{ b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); }}); }}
+  function show(view) {{
+    [].forEach.call(document.querySelectorAll('.sc-pane'), function (p) {{ p.hidden = p.getAttribute('data-pane') !== view; }});
+    var btn = document.querySelector('[data-view="' + view + '"]'); if (btn) press(btn.parentNode, btn);
+  }}
+  document.addEventListener('click', function (ev) {{
+    var b = ev.target.closest ? ev.target.closest('.sc-group button') : null; if (!b) return;
+    if (b.hasAttribute('data-view')) {{ show(b.getAttribute('data-view')); try {{ history.replaceState(null, '', '#' + b.getAttribute('data-view')); }} catch (e) {{}} return; }}
+    press(b.parentNode, b);
+    if (b.hasAttribute('data-theme-set')) {{
+      var t = b.getAttribute('data-theme-set'); document.body.classList.toggle('light', t === 'light');
+      [].forEach.call(document.querySelectorAll('.mw-gta6'), function (r) {{ r.setAttribute('data-theme', t); }});
+    }}
+    if (b.hasAttribute('data-width')) document.body.classList.toggle('phone', b.getAttribute('data-width') === 'phone');
+  }});
+  [].forEach.call(document.querySelectorAll('.mw-gta6'), function (r) {{ r.setAttribute('data-theme', 'dark'); }});
+  var h = (location.hash || '').slice(1); if (/^(mega|tracker|copies|revenue)$/.test(h)) show(h);
+}})();
+</script>
+</body></html>
+"""
+
+
 def main():
     css, js = read("src", "mw-gta6.css"), read("src", "mw-gta6.js")
     emaki_check(js)
@@ -201,8 +267,10 @@ def main():
     }
     seed_js = "<script>window.MWGTA6_SEED = " + json.dumps(seed, ensure_ascii=True).replace("</", "<\\/") + ";</script>"
 
+    out.append(write(showcase_page(css_field, js_field, seed_js, titles, stamp), "preview", "showcase.html"))
+
     for name in sorted(os.listdir(os.path.join(ROOT, "preview"))):
-        if not name.endswith(".html") or name == "index.html":
+        if not name.endswith(".html") or name in ("index.html", "showcase.html"):
             continue
         page = read("preview", name)
         n_seed = n_css = n_js = 0

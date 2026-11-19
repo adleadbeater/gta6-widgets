@@ -103,13 +103,13 @@
 .mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
 /* heights measured on a live MovieWeb article (site fonts), see tools/build.py;
    the related-links block sits in the standalone tracker and the mega's last panel */
-.mw-gta6__skel--tracker { height: 649.4px; }
-.mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 694.4px; }
+.mw-gta6__skel--tracker { height: 407.4px; }
+.mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 452.4px; }
 .mw-gta6__skel--copies { height: 659px; }
 .mw-gta6__skel--revenue { height: 659px; }
 .mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 704px; }
 /* the mega has one Copy link, at the bottom: its first two sections are 44px shorter */
-.mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 605.4px; }
+.mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 363.4px; }
 .mw-gta6[data-widget="mega"] .mw-gta6__skel--copies { height: 615px; }
 .mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
@@ -491,11 +491,11 @@
   .mw-gta6__sub { display: none; }
   .mw-gta6__subs { display: block; }
   .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__skel--tracker { height: 817px; }
-  .mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 862px; }
+  .mw-gta6__skel--tracker { height: 575px; }
+  .mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 620px; }
   .mw-gta6__skel--copies { height: 949px; }
   .mw-gta6__skel--revenue { height: 967px; }
   .mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 1012px; }
-  .mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 773px; }
+  .mw-gta6[data-widget="mega"] .mw-gta6__skel--tracker { height: 531px; }
   .mw-gta6[data-widget="mega"] .mw-gta6__skel--copies { height: 905px; }
 }
