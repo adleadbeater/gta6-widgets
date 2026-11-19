@@ -84,7 +84,31 @@ def harden(css):
         parts.append(cur)
         return lead + ",\n".join(fix(x) for x in parts) + " {"
 
-    return re.sub(r"((?:^|[{}])\s*(?:/\*.*?\*/\s*)*)([^\s{}@/][^{}]*?)\s*\{", prelude, css, flags=re.S)
+    # a comment is matched up to its own first */ only, so it can never swallow the rules after it
+    out = re.sub(r"((?:^|[{}])\s*(?:/\*(?:[^*]|\*(?!/))*\*/\s*)*)([^\s{}@/][^{}]*?)\s*\{", prelude, css, flags=re.S)
+    check_hardened(out)
+    return out
+
+
+def check_hardened(css):
+    """Every selector must carry the doubled root class, or article styles can win again."""
+    body = re.sub(r"/\*(?:[^*]|\*(?!/))*\*/", "", css)
+    bad = []
+    for m in re.finditer(r"([^{};]+)\{", body):
+        pre = m.group(1).strip()
+        if not pre or pre.startswith("@") or re.fullmatch(r"(from|to|\d+%)(\s*,\s*(from|to|\d+%))*", pre):
+            continue
+        parts, depth, cur = [], 0, ""
+        for ch in pre:
+            depth += (ch == "(") - (ch == ")")
+            if ch == "," and depth == 0:
+                parts.append(cur); cur = ""
+            else:
+                cur += ch
+        parts.append(cur)
+        bad += [x.strip() for x in parts if x.strip() and not x.strip().startswith(".mw-gta6.mw-gta6")]
+    if bad:
+        raise SystemExit("CSS rules not hardened (article styles could override them):\n  " + "\n  ".join(bad))
 
 
 def frame(kind, titles, src):
@@ -152,12 +176,12 @@ document.addEventListener('click', function (ev) {{
 def main():
     css, js = read("src", "mw-gta6.css"), read("src", "mw-gta6.js")
     emaki_check(js)
+    css = harden(css)
     version = re.search(r"version: '([^']+)'", js).group(1)
     stamp = f"{version}+{datetime.now(timezone.utc):%Y%m%d}.{hashlib.sha256((js + css).encode()).hexdigest()[:7]}"
     js = js.replace("var BUILD = 'dev';", f"var BUILD = '{stamp}';", 1)
     cmp = json.loads(read("data", "comparisons.json"))
     titles = {"tracker": "GTA 6 Sales Tracker", "copies": cmp["copies"]["title"], "revenue": cmp["revenue"]["title"]}
-    css = harden(css)
     css_field, js_field = "<style>\n" + css + "</style>\n", "<script>\n" + js + "</script>\n"
     out = []
     for folder, kind in WIDGETS.items():

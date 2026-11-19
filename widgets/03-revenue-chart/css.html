@@ -480,7 +480,9 @@
   .mw-gta6.mw-gta6 .mw-gta6__label,
 .mw-gta6.mw-gta6 .mw-gta6__table th { font-size: 10px; }
   .mw-gta6.mw-gta6 .mw-gta6__table { font-size: 15px; line-height: 22px; }
-  .mw-gta6.mw-gta6[data-widget="mega"] { padding: 8px; gap: 8px; }
+  /* the mega nests panels in a box: narrower side padding so its tables fit a 320px column
+     (the root is the query container, so only its panels can respond here) */
+  .mw-gta6.mw-gta6[data-widget="mega"] > .mw-gta6__panel { padding-left: 8px; padding-right: 8px; }
   .mw-gta6.mw-gta6 .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
   .mw-gta6.mw-gta6 .mw-gta6__num { font-size: 30px; }
   .mw-gta6.mw-gta6 .mw-gta6__row {
