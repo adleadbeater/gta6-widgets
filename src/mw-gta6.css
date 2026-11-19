@@ -11,6 +11,10 @@
   --mw-alt: #b0b0b0;
   --mw-hi: #381a1c;
   --mw-track: #333333;
+  --mw-ink-red: #ff5a5f;
+  --mw-hi-ink: #ff5a5f;
+  --mw-hi-muted: #b0b0b0;
+  --mw-up: #4ade80;
   container: mwgta6 / inline-size;
   display: block;
   max-width: 760px;
@@ -30,6 +34,10 @@
     --mw-alt: #181818;
     --mw-hi: #fadcde;
     --mw-track: #e4e4e4;
+    --mw-ink-red: #c81e25;
+    --mw-hi-ink: #b81a21;
+    --mw-hi-muted: #555555;
+    --mw-up: #0b5c2b;
   }
 }
 .mw-gta6[data-theme="light"] {
@@ -42,30 +50,26 @@
   --mw-alt: #181818;
   --mw-hi: #fadcde;
   --mw-track: #e4e4e4;
+  --mw-ink-red: #c81e25;
+  --mw-hi-ink: #b81a21;
+  --mw-hi-muted: #555555;
+  --mw-up: #0b5c2b;
 }
-.mw-gta6[hidden] { display: none !important; }
+.mw-gta6[hidden],
+.mw-gta6 [hidden] { display: none !important; }
 .mw-gta6 *, .mw-gta6 *::before, .mw-gta6 *::after { box-sizing: border-box; }
 
-/* space held while data loads, so the article doesn't jump when the widget appears;
-   if the script never marks it ready, it gives the space back after 12s */
-.mw-gta6:not([data-state="ready"])::before {
-  content: "";
-  display: block;
-  height: 925px;
-  border-radius: 4px;
-  background: var(--mw-panel);
-  animation: mwgta6-giveup 0s linear 12s forwards;
-}
-.mw-gta6[data-widget="copies"]:not([data-state="ready"])::before,
-.mw-gta6[data-widget="revenue"]:not([data-state="ready"])::before { height: 695px; }
-.mw-gta6[data-widget="mega"]:not([data-state="ready"])::before { height: 2363px; }
-@container mwgta6 (max-width: 600px) {
-  .mw-gta6[data-widget="tracker"]:not([data-state="ready"])::before { height: 1110px; }
-  .mw-gta6[data-widget="copies"]:not([data-state="ready"])::before { height: 851px; }
-  .mw-gta6[data-widget="revenue"]:not([data-state="ready"])::before { height: 900px; }
-  .mw-gta6[data-widget="mega"]:not([data-state="ready"])::before { height: 2900px; }
-}
-@keyframes mwgta6-giveup { to { height: 0; } }
+/* static frame (in the HTML field): heading + skeleton at the finished height,
+   so nothing on the page moves when the data arrives */
+.mw-gta6__skel { border-radius: 2px; background: var(--mw-card); }
+/* heights measured from the finished panels (tools/build.py header has the how-to);
+   the related-links block sits in the standalone tracker and the mega's last panel */
+.mw-gta6__skel--tracker { height: 641.4px; }
+.mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 714.4px; }
+.mw-gta6__skel--copies { height: 701px; }
+.mw-gta6__skel--revenue { height: 701px; }
+.mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 774px; }
+.mw-gta6__note { margin: 0; padding: 8px 12px; border-radius: 2px; background: var(--mw-card); color: var(--mw-muted); font-size: 13px; line-height: 18px; }
 
 /* panel */
 .mw-gta6__panel {
@@ -102,8 +106,9 @@
 }
 .mw-gta6__muted { color: var(--mw-muted); }
 .mw-gta6__caption { margin: 0; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
-.mw-gta6__caption a { color: var(--mw-muted); text-decoration: underline; }
-.mw-gta6__caption a:hover { color: var(--mw-ink); }
+.mw-gta6 a { border: 0; box-shadow: none; background-image: none; }
+.mw-gta6 a::before,
+.mw-gta6 a::after { content: none; }
 .mw-gta6__sr {
   position: absolute;
   width: 1px;
@@ -116,14 +121,15 @@
   border: 0;
 }
 .mw-gta6 button:focus-visible,
-.mw-gta6 a:focus-visible { outline: 2px solid var(--mw-red); outline-offset: 2px; }
+.mw-gta6 a:focus-visible,
+.mw-gta6 [tabindex]:focus-visible { outline: 2px solid var(--mw-ink-red); outline-offset: 2px; }
 
 /* platform buttons */
 .mw-gta6__btns { display: flex; flex-wrap: wrap; gap: 6px; }
 .mw-gta6__btn {
   min-height: 36px;
   margin: 0;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border: 0;
   border-radius: 2px;
   background: var(--mw-button);
@@ -132,7 +138,7 @@
   text-transform: uppercase;
   cursor: pointer;
 }
-.mw-gta6__btn[aria-pressed="true"] { background: var(--mw-red); }
+.mw-gta6__btn[aria-pressed="true"] { background: var(--mw-red); box-shadow: 0 0 0 2px var(--mw-panel), 0 0 0 3px var(--mw-red); }
 .mw-gta6__btn:hover { filter: brightness(1.12); }
 
 /* stat cards */
@@ -154,7 +160,7 @@
 }
 .mw-gta6__chg { font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6__chg strong { color: var(--mw-ink); }
-.mw-gta6__up { color: var(--mw-red); }
+.mw-gta6__up { color: var(--mw-up); }
 
 /* platform split */
 .mw-gta6__block { display: flex; flex-direction: column; gap: 8px; }
@@ -181,6 +187,8 @@
 
 /* readings table */
 .mw-gta6__scroll { overflow-x: auto; }
+.mw-gta6__scroll.is-scrolled th:first-child,
+.mw-gta6__scroll.is-scrolled td:first-child { box-shadow: 6px 0 6px -6px rgba(0, 0, 0, 0.45); }
 .mw-gta6__table {
   width: 100%;
   min-width: 340px;
@@ -203,6 +211,7 @@
   border-bottom: 1px solid var(--mw-rule);
   text-align: right;
   font-weight: 500;
+  white-space: nowrap;
 }
 .mw-gta6__table th:first-child,
 .mw-gta6__table td:first-child {
@@ -234,11 +243,11 @@
 .mw-gta6__switch button {
   min-height: 32px;
   margin: 0;
-  padding: 6px 16px;
+  padding: 6px 10px;
   border: 0;
   border-radius: 2px;
   background: transparent;
-  color: var(--mw-ink);
+  color: var(--mw-muted);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   cursor: pointer;
@@ -256,11 +265,11 @@
 .mw-gta6__bars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .mw-gta6__row {
   display: grid;
-  grid-template-columns: 1.6rem 13rem minmax(0, 1fr);
+  grid-template-columns: 2rem 13rem minmax(0, 1fr);
   grid-template-areas: "rank lab bar";
   gap: 8px;
   align-items: center;
-  min-height: 40px;
+  min-height: 42px;
   margin: 0;
   padding: 4px 8px;
   border-radius: 2px;
@@ -271,15 +280,15 @@
   font: 700 16px/20px Poppins, Arial, Helvetica, sans-serif;
   color: var(--mw-muted);
 }
-.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-ink); }
+.mw-gta6__row--me .mw-gta6__rank { color: var(--mw-hi-ink); }
 .mw-gta6__lab { grid-area: lab; min-width: 0; }
 .mw-gta6__title {
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 15px;
+  line-height: 21px;
   font-weight: 500;
 }
 .mw-gta6__row--me .mw-gta6__title { font-weight: 700; }
@@ -289,10 +298,12 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 11px;
-  line-height: 14px;
+  font-size: 13px;
+  line-height: 18px;
   color: var(--mw-muted);
 }
+.mw-gta6__row--me .mw-gta6__sub,
+.mw-gta6__row--me .mw-gta6__subs { color: var(--mw-hi-muted); }
 .mw-gta6__subs { display: none; }
 .mw-gta6__barwrap { grid-area: bar; display: flex; align-items: center; gap: 8px; min-width: 0; }
 .mw-gta6__bar {
@@ -306,8 +317,8 @@
 .mw-gta6__bar--film { background: var(--mw-alt); }
 .mw-gta6__val {
   flex: none;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 15px;
+  line-height: 21px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
@@ -325,20 +336,19 @@
 .mw-gta6__quiet {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   min-height: 32px;
   margin: 0;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border: 0;
   border-radius: 2px;
-  background: var(--mw-card);
-  color: var(--mw-ink);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--mw-rule);
+  color: var(--mw-muted);
   font: 600 11px/13px Poppins, Arial, Helvetica, sans-serif;
   text-transform: uppercase;
   cursor: pointer;
 }
 .mw-gta6__quiet:hover { filter: brightness(1.12); }
-.mw-gta6__quiet svg { width: 14px; height: 14px; flex: none; }
 .mw-gta6__liverow,
 .mw-gta6__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mw-gta6__liverow { margin-top: -4px; }
@@ -347,7 +357,6 @@
 /* next-overtake line under the charts */
 .mw-gta6__next { margin: 0; font-size: 13px; line-height: 18px; color: var(--mw-muted); }
 .mw-gta6__next strong { color: var(--mw-ink); font-weight: 700; }
-.mw-gta6__next[hidden] { display: none; }
 
 /* official vs. estimate */
 .mw-gta6__vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
@@ -368,78 +377,36 @@
   color: var(--mw-ink);
 }
 
-/* sales history chart */
-.mw-gta6__plotwrap { position: relative; padding-top: 30px; }
-.mw-gta6__plot { position: relative; height: 140px; border-bottom: 1px solid var(--mw-rule); }
-.mw-gta6__plot:focus-visible { outline: 2px solid var(--mw-red); outline-offset: 2px; }
-.mw-gta6__plot svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; overflow: visible; }
-.mw-gta6__area { fill: var(--mw-red); opacity: 0.18; }
-.mw-gta6__line {
-  fill: none;
-  stroke: var(--mw-red);
-  stroke-width: 2;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-}
-.mw-gta6__grid {
-  position: absolute;
-  left: 0;
-  right: 0;
-  border-top: 1px solid var(--mw-rule);
-  font-size: 11px;
-  line-height: 13px;
-  color: var(--mw-muted);
-}
-.mw-gta6__grid span { position: absolute; left: 0; bottom: 2px; }
-.mw-gta6__mark { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--mw-muted); }
-.mw-gta6__mark span { position: absolute; top: 0; left: 4px; font-size: 11px; line-height: 13px; color: var(--mw-muted); white-space: nowrap; }
-.mw-gta6__mark--end span { left: auto; right: 4px; }
-.mw-gta6__cross { position: absolute; top: 0; bottom: 0; border-left: 1px solid var(--mw-ink); pointer-events: none; }
-.mw-gta6__dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  margin: -4px 0 0 -4px;
-  border-radius: 50%;
-  background: var(--mw-red);
-  box-shadow: 0 0 0 2px var(--mw-panel);
-  pointer-events: none;
-}
-.mw-gta6__tip {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  z-index: 2;
-  padding: 4px 8px;
+/* sales by day */
+.mw-gta6__tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 4px;
   border-radius: 2px;
-  background: var(--mw-card);
-  color: var(--mw-ink);
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 500;
-  white-space: nowrap;
-  pointer-events: none;
+  background: var(--mw-red);
+  color: #ffffff;
+  font: 600 10px/12px Poppins, Arial, Helvetica, sans-serif;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  vertical-align: 1px;
 }
-.mw-gta6__tip--start { transform: none; }
-.mw-gta6__tip--end { transform: translateX(-100%); }
-.mw-gta6__cross[hidden],
-.mw-gta6__dot[hidden],
-.mw-gta6__tip[hidden] { display: none; }
-.mw-gta6__xaxis { display: flex; justify-content: space-between; font-size: 11px; line-height: 15px; color: var(--mw-muted); }
 
 /* related links */
 .mw-gta6__more ul { list-style: none; margin: 6px 0 0; padding: 0; }
 .mw-gta6__more li { margin: 0; border-top: 1px solid var(--mw-rule); }
 .mw-gta6__more a {
   display: block;
-  padding: 10px 0;
+  padding: 10px 8px;
   color: var(--mw-ink);
   font-size: 15px;
   line-height: 21px;
   font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.mw-gta6__more a:hover { text-decoration: underline; }
+.mw-gta6__more a:hover { background: color-mix(in srgb, var(--mw-ink) 7%, transparent); color: var(--mw-ink-red); }
 
 /* narrow layout: container width 600px and below */
 @container mwgta6 (max-width: 600px) {
@@ -453,17 +420,18 @@
   .mw-gta6__table th { font-size: 10px; }
   .mw-gta6__stats { grid-template-columns: minmax(0, 1fr); }
   .mw-gta6__num { font-size: 30px; }
-  .mw-gta6__table { font-size: 14px; }
   .mw-gta6__row {
     grid-template-columns: 1.6rem minmax(0, 1fr);
     grid-template-areas: "rank lab" "rank bar";
     gap: 4px 8px;
     padding: 6px 8px;
   }
-  .mw-gta6__lab { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
-  .mw-gta6__title { min-width: 0; }
   .mw-gta6__sub { display: none; }
-  .mw-gta6__subs { display: block; flex: none; overflow: visible; }
+  .mw-gta6__subs { display: block; }
   .mw-gta6__bar { height: 14px; width: calc(var(--w, 0) * 62%); }
-  .mw-gta6__val { font-size: 13px; line-height: 16px; }
+  .mw-gta6__skel--tracker { height: 809px; }
+  .mw-gta6[data-widget="tracker"] .mw-gta6__skel--tracker { height: 882px; }
+  .mw-gta6__skel--copies { height: 1021px; }
+  .mw-gta6__skel--revenue { height: 1039px; }
+  .mw-gta6[data-widget="mega"] .mw-gta6__skel--revenue { height: 1112px; }
 }

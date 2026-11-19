@@ -11,11 +11,15 @@
   var CAP_SEC = 36 * 3600;
   var DAY_MS = 86400000;
   var ETA_MAX_SEC = 14 * 86400;
-  var DOT = ' · ';
-  var DASH = '—';
-  var UP = '▲';
+  var BYDAY_MAX = 14;
+  var DOT = ' \u00b7 ';
+  var DASH = '\u2014';
+  var UP = '\u25b2';
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var CATS = { tracker: 'GTA 6 Sales Tracker', copies: 'GTA 6 Copies Chart', revenue: 'GTA 6 Revenue Chart' };
+  var CATS = { tracker: 'GTA 6 Sales Tracker Vignette', copies: 'GTA 6 Copies Chart Vignette', revenue: 'GTA 6 Revenue Chart Vignette' };
+  var MAX_EVENTS = 50;
+  var BUILD = '1.2.0+20261119.c17fd0b';
+  var DEBUG = /[?&]gta6debug=1(&|$)/.test(location.search);
   var IDS = { tracker: 'gta6-sales-tracker', copies: 'gta6-copies-chart', revenue: 'gta6-revenue-chart' };
   var PLATFORMS = [
     { id: 'all', label: 'All platforms' },
@@ -27,11 +31,10 @@
     { id: 'all', label: 'All time' }
   ];
   var ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
-  var SHARE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" ' +
-    'stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
 
   var reduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var instances = [];
+  var events = 0;
   var requests = {};
 
   /* ---------- helpers ---------- */
@@ -44,9 +47,14 @@
     if (window.console && console.warn) console.warn('[mw-gta6] ' + msg, err || '');
   }
 
+  function slug(v) { return String(v || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60); }
+
+  // Readable category, snake_case action, slug label; never reader data or URLs
   function track(cat, action, label) {
+    if (events >= MAX_EVENTS) return;
+    events += 1;
     var tries = 0;
-    label = String(label || '').slice(0, 200);
+    label = slug(label);
     (function attempt() {
       var s = window.websiteSentinel;
       if (s && typeof s.sendEvent === 'function') {
@@ -71,13 +79,17 @@
   function addDays(iso, n) { return new Date(dayMs(iso) + n * DAY_MS).toISOString().slice(0, 10); }
   function whole(n) { return Math.floor(n).toLocaleString('en-US'); }
   function trim2(n) { return String(parseFloat(n.toFixed(2))); }
-  function mUnits(n) { return trim2(n / 1e6) + 'M'; }
+  function mUnits(n) {
+    if (n >= 999500) return trim2(n / 1e6) + 'M';
+    if (n >= 1000) return Math.round(n / 1000) + 'K';
+    return whole(n);
+  }
   function usd(n, plus) {
-    var s = n >= 1e9 ? '$' + trim2(n / 1e9) + 'B' : '$' + Math.round(n / 1e6) + 'M';
+    var s = n >= 999.5e6 ? '$' + trim2(n / 1e9) + 'B' : n >= 999500 ? '$' + Math.round(n / 1e6) + 'M' : '$' + Math.round(n / 1000) + 'K';
     return plus ? s + '+' : s;
   }
-  function gapUnits(n) { return n >= 1e6 ? mUnits(n) : n >= 1000 ? Math.round(n / 1000) + 'K copies' : whole(n) + ' copies'; }
-  function gapUsd(n) { return n >= 1e6 ? usd(n) : '$' + Math.max(1, Math.round(n / 1000)) + 'K'; }
+  function gapUnits(n) { return n >= 999500 ? mUnits(n) : mUnits(n) + ' copies'; }
+  function gapUsd(n) { return usd(Math.max(1000, n)); }
   function fmtDur(sec) {
     var h = sec / 3600;
     if (h < 1) return 'under an hour';
@@ -87,7 +99,6 @@
   }
   function time(r) { return Date.parse(r.at || r.date); }
   function isNum(v) { return typeof v === 'number' && isFinite(v) && v >= 0; }
-  function closest(el, sel) { return el && el.closest ? el.closest(sel) : null; }
 
   /* ---------- data ---------- */
 
@@ -175,7 +186,7 @@
     return { title: typeof d.title === 'string' && d.title.trim() ? d.title : 'More on GTA 6', items: items };
   }
 
-  // Sensor Tower's daily cumulative chart; optional, so a bad series is dropped, never fatal
+  // Daily cumulative history; optional, so a bad series is dropped, never fatal
   function parseSeries(s) {
     if (!s || !Array.isArray(s.rows) || !Array.isArray(s.fields)) return null;
     var ix = {};
@@ -186,7 +197,7 @@
     for (var i = 0; i < s.rows.length; i++) {
       var r = s.rows[i];
       if (!Array.isArray(r) || !dateParts(r[ix.date])) return null;
-      var v = [r[ix.ps5Units], r[ix.xboxUnits], r[ix.ps5Revenue], r[ix.xboxRevenue]];
+      var v = need.slice(1).map(function (k) { var j = ix[k]; return r[j]; });
       if (!v.every(isNum)) return null;
       out.push({ d: String(r[ix.date]).slice(0, 10), ps5: { units: v[0], revenue: v[2] }, xbox: { units: v[1], revenue: v[3] } });
     }
@@ -209,8 +220,8 @@
     }
     var withP = rs.filter(function (r) { return !!r.platforms; });
 
-    // Official figure: shown beside the estimate, never in place of it (Take-Two and
-    // Sensor Tower count different things). Revenue is optional.
+    // Official figure: shown beside the estimate, never in place of it (the two count
+    // different things). Revenue is optional.
     var off = t.official;
     var official = null;
     if (off && isNum(off.units) && off.units > 0 && dateParts(off.date)) {
@@ -235,8 +246,7 @@
       p0: withP[0] || null, p1: withP[1] || null, official: official,
       series: parseSeries(t.series),
       release: g && dateParts(g.release) ? String(g.release).slice(0, 10) : null,
-      launchDays: g && g.launchDays >= 1 ? Math.floor(g.launchDays) : 3,
-      sourceUrl: (t.source && /^https:\/\//.test(t.source.url)) ? t.source.url : 'https://sensortower.com/grand-theft-auto-VI/sales-tracker'
+      launchDays: g && g.launchDays >= 1 ? Math.floor(g.launchDays) : 3
     };
   }
 
@@ -260,7 +270,7 @@
 
   function shareHTML() {
     return '<div class="mw-gta6__foot"><span class="mw-gta6__status" role="status" aria-live="polite"></span>' +
-      '<button type="button" class="mw-gta6__quiet" data-action="share">' + SHARE_ICON + 'Share</button></div>';
+      '<button type="button" class="mw-gta6__quiet" data-action="share">Share</button></div>';
   }
 
   function linksHTML(st) {
@@ -268,7 +278,7 @@
     if (!L) return '';
     var h = '<nav class="mw-gta6__more" aria-label="' + esc(L.title) + '"><div class="mw-gta6__label">' + esc(L.title) + '</div><ul>';
     L.items.forEach(function (x) {
-      h += '<li><a href="' + esc(x.url) + '" data-track="related">' + esc(x.title) + '</a></li>';
+      h += '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener" data-track="related">' + esc(x.title) + '</a></li>';
     });
     return h + '</ul></nav>';
   }
@@ -277,7 +287,7 @@
     if (st.kind === 'tracker') {
       var r = st.m.r0;
       return 'GTA 6 has sold an estimated ' + mUnits(r.units) + ' copies and ' + usd(r.revenue) +
-        ' in digital sales, per Sensor Tower (' + fmtDate(r.date) + ').';
+        ' in digital sales (as of ' + fmtDate(r.date) + ').';
     }
     return st.cmp[st.kind].title + ', updated live';
   }
@@ -311,13 +321,13 @@
     }
     if (navigator.share) {
       navigator.share({ title: document.title, text: shareText(st), url: url })
-        .then(function () { track(cat, 'Share', 'native'); })
+        .then(function () { track(cat, 'share', 'native'); })
         .catch(function () { /* cancelled */ });
       return;
     }
     copyText(url).then(function () {
       say('Link copied');
-      track(cat, 'Share', 'copy');
+      track(cat, 'share', 'copy');
     }, function () { say('Copy this link: ' + url); });
   }
 
@@ -330,90 +340,37 @@
     return 10 * p;
   }
 
-  // Copies sold over time, from Sensor Tower's daily chart; follows the platform buttons
-  function histHTML(st) {
+  // Sales by day: copies and revenue added each day (where the history has one-day steps),
+  // newest first, in a collapsed section; follows the platform buttons
+  function byDayHTML(st) {
     var m = st.m;
-    st.hist = null;
     if (!m.series) return '';
     var key = st.platform;
-    var raw = m.series.map(function (p) {
-      return { d: p.d, t: dayMs(p.d), v: key === 'all' ? p.ps5.units + p.xbox.units : p[key].units };
-    });
-    var tA = raw[0].t;
-    var span = (raw[raw.length - 1].t - tA) || 1;
-    var vmax = niceMax(Math.max.apply(null, raw.map(function (p) { return p.v; })) || 1);
-    var pts = raw.map(function (p) {
-      return { d: p.d, v: p.v, x: (p.t - tA) / span * 1000, y: 100 - p.v / vmax * 100 };
-    });
-    st.hist = pts;
-    var line = 'M' + pts.map(function (p) { return p.x.toFixed(1) + ',' + p.y.toFixed(2); }).join(' L');
-    var area = line + ' L1000,100 L0,100 Z';
-    var first = pts[0];
-    var last = pts[pts.length - 1];
-    var pname = key === 'all' ? '' : (key === 'ps5' ? 'PS5' : 'Xbox Series X|S');
-    var summary = (pname ? pname + ' copies' : 'Copies') + ' sold over time, Sensor Tower estimate: ' + mUnits(first.v) + ' on ' +
-      fmtDate(first.d) + ', rising to ' + mUnits(last.v) + ' on ' + fmtDate(last.d) + '.';
-
-    var h = '<div class="mw-gta6__block mw-gta6__hist">';
-    h += '<div class="mw-gta6__label">Copies sold over time' + (pname ? DOT + esc(pname) : '') + '</div>';
-    h += '<div class="mw-gta6__plotwrap"><div class="mw-gta6__plot" tabindex="0" role="img" aria-label="' + esc(summary) + '">';
-    [0.5, 1].forEach(function (f) {
-      h += '<div class="mw-gta6__grid" style="bottom:' + (f * 100) + '%" aria-hidden="true"><span>' + esc(mUnits(vmax * f)) + '</span></div>';
-    });
-    h += '<svg viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">' +
-      '<path class="mw-gta6__area" d="' + area + '"/><path class="mw-gta6__line" d="' + line + '"/></svg>';
-    if (m.release) {
-      var rt = dayMs(m.release);
-      if (rt >= tA && rt <= tA + span) {
-        var rx = (rt - tA) / span * 100;
-        h += '<div class="mw-gta6__mark' + (rx > 80 ? ' mw-gta6__mark--end' : '') + '" style="left:' + rx.toFixed(2) + '%" aria-hidden="true"><span>Launch</span></div>';
-      }
+    function pick(p, f) { return key === 'all' ? p.ps5[f] + p.xbox[f] : p[key][f]; }
+    var rows = [];
+    for (var i = m.series.length - 1; i > 0 && rows.length < BYDAY_MAX; i--) {
+      var a = m.series[i - 1];
+      var b = m.series[i];
+      if (Math.round((dayMs(b.d) - dayMs(a.d)) / DAY_MS) !== 1) break;
+      rows.push({ d: b.d, u: pick(b, 'units') - pick(a, 'units'), r: pick(b, 'revenue') - pick(a, 'revenue') });
     }
-    h += '<div class="mw-gta6__cross" aria-hidden="true" hidden></div><div class="mw-gta6__dot" aria-hidden="true" hidden></div>';
-    h += '</div><div class="mw-gta6__tip" aria-live="polite" hidden></div></div>';
-    h += '<div class="mw-gta6__xaxis" aria-hidden="true"><span>' + esc(fmtShort(first.d)) + '</span><span>' + esc(fmtShort(last.d)) + '</span></div>';
-    h += '<p class="mw-gta6__caption">Sensor Tower’s daily estimate, including pre-orders. Its chart dates run about two days behind its update date.</p>';
-    return h + '</div>';
-  }
-
-  function histShow(st, i) {
-    var pts = st.hist;
-    if (!pts || !pts.length) return;
-    i = Math.max(0, Math.min(pts.length - 1, i));
-    st.histIdx = i;
-    var p = pts[i];
-    var wrap = st.el.querySelector('.mw-gta6__plotwrap');
-    if (!wrap) return;
-    var cross = wrap.querySelector('.mw-gta6__cross');
-    var dot = wrap.querySelector('.mw-gta6__dot');
-    var tip = wrap.querySelector('.mw-gta6__tip');
-    var left = (p.x / 10).toFixed(2) + '%';
-    cross.style.left = left;
-    dot.style.left = left;
-    dot.style.top = p.y.toFixed(2) + '%';
-    tip.textContent = fmtDate(p.d) + DOT + mUnits(p.v) + ' copies';
-    tip.style.left = left;
-    tip.className = 'mw-gta6__tip' + (p.x < 150 ? ' mw-gta6__tip--start' : p.x > 850 ? ' mw-gta6__tip--end' : '');
-    cross.hidden = dot.hidden = tip.hidden = false;
-  }
-
-  function histHide(st) {
-    var wrap = st.el.querySelector('.mw-gta6__plotwrap');
-    if (!wrap) return;
-    ['.mw-gta6__cross', '.mw-gta6__dot', '.mw-gta6__tip'].forEach(function (s) {
-      var el = wrap.querySelector(s);
-      if (el) el.hidden = true;
+    if (!rows.length) return '';
+    var id = st.el.id + '-byday';
+    var pname = key === 'all' ? '' : (key === 'ps5' ? 'PS5' : 'Xbox Series X|S');
+    var h = '<div class="mw-gta6__block mw-gta6__byday">';
+    h += '<div><button type="button" class="mw-gta6__quiet mw-gta6__disclose" data-action="byday" aria-expanded="' + (st.byDay ? 'true' : 'false') +
+      '" aria-controls="' + id + '">' + (st.byDay ? 'Hide' : 'Show') + ' sales by day' + (pname ? DOT + esc(pname) : '') +
+      '<span class="mw-gta6__chev" aria-hidden="true"></span></button></div>';
+    h += '<div class="mw-gta6__block" id="' + id + '"' + (st.byDay ? '' : ' hidden') + '>';
+    h += '<div class="mw-gta6__scroll" tabindex="0" role="region" aria-label="Sales by day"><table class="mw-gta6__table"><caption class="mw-gta6__sr">Sales by day' + (pname ? ', ' + esc(pname) : '') +
+      '</caption><thead><tr><th scope="col">Day</th><th scope="col">Copies</th><th scope="col">Revenue</th></tr></thead><tbody>';
+    rows.forEach(function (r) {
+      h += '<tr><td>' + esc(fmtDate(r.d)) + (r.d === m.release ? ' <span class="mw-gta6__tag">Launch</span>' : '') + '</td><td>' +
+        esc(mUnits(r.u)) + '</td><td>' + esc(usd(r.r)) + '</td></tr>';
     });
-  }
-
-  function histAtX(st, plot, clientX) {
-    var pts = st.hist;
-    if (!pts) return;
-    var r = plot.getBoundingClientRect();
-    var x = (clientX - r.left) / (r.width || 1) * 1000;
-    var best = 0;
-    for (var i = 1; i < pts.length; i++) if (Math.abs(pts[i].x - x) < Math.abs(pts[best].x - x)) best = i;
-    histShow(st, best);
+    h += '</tbody></table></div>';
+    h += '<p class="mw-gta6__caption">Copies and revenue added each day, including pre-orders. Daily figures run about two days behind the latest reading.</p>';
+    return h + '</div></div>';
   }
 
   function trackerHTML(st) {
@@ -432,17 +389,17 @@
     }
     function change(v, f) {
       if (v === null) return '<div class="mw-gta6__chg">' + DASH + '</div>';
-      return '<div class="mw-gta6__chg"><span class="mw-gta6__up" aria-hidden="true">' + UP + ' </span><strong>+' +
+      return '<div class="mw-gta6__chg"><span class="mw-gta6__up" aria-hidden="true">' + UP + '</span><span class="mw-gta6__sr">up </span><strong>' +
         esc(f(v)) + '</strong> since ' + esc(since) + '</div>';
     }
-    var meta = 'Worldwide digital sales on PS5 and Xbox Series X|S' + DOT + 'Latest Sensor Tower reading ' + esc(fmtDate(m.r0.date));
+    var meta = 'Worldwide digital sales on PS5 and Xbox Series X|S' + DOT + 'Latest reading ' + esc(fmtDate(m.r0.date));
 
     var h = '';
     h += '<div class="mw-gta6__head"><h2 class="mw-gta6__h">GTA 6 Sales Tracker</h2>' +
       '<span class="mw-gta6__badge">' + (L.stale ? 'Latest reading' : 'Live estimate') + '</span></div>';
     h += '<p class="mw-gta6__meta">' + meta + '<span data-live="status">' + (L.stale ? DOT + 'Awaiting next update' : '') + '</span></p>';
-    h += '<p class="mw-gta6__sr">As of the ' + esc(fmtDate(m.r0.date)) + ' reading: ' + esc(mUnits(m.r0.units)) +
-      ' copies and ' + esc(usd(m.r0.revenue)) + ' in revenue.</p>';
+    h += '<p class="mw-gta6__sr">As of the ' + esc(fmtDate(m.r0.date)) + ' reading: ' + esc(whole(m.r0.units)) +
+      ' copies and $' + esc(whole(m.r0.revenue)) + ' in revenue.</p>';
 
     if (m.p0) {
       h += '<div class="mw-gta6__btns" role="group" aria-label="Platform">';
@@ -489,32 +446,32 @@
         (o.revenue ? '<div>' + esc(usd(o.revenue)) + '</div>' : '') +
         '<div class="mw-gta6__muted">As of ' + esc(fmtDate(o.date)) + '</div></div>';
       if (e) {
-        h += '<div class="mw-gta6__vsitem"><div class="mw-gta6__muted">Sensor Tower, estimate</div>' +
+        h += '<div class="mw-gta6__vsitem"><div class="mw-gta6__muted">Estimate</div>' +
           '<div class="mw-gta6__vsnum">' + esc(mUnits(e.units)) + ' copies</div><div>' + esc(usd(e.revenue)) + '</div>' +
           '<div class="mw-gta6__muted">' + esc(fmtDate(e.date)) + ' reading</div></div>';
       }
       h += '</div><p class="mw-gta6__caption">' + (o.note ? esc(o.note) + ' ' : '') +
-        'Official totals can include physical copies and other platforms, so they differ from Sensor Tower’s digital estimate.' +
-        (o.url ? ' Source: <a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.source) + '</a>' : '') + '</p></div>';
+        'Official totals can include physical copies and other platforms, so they differ from the digital estimate.' +
+        ' Source: ' + esc(o.source) + '</p></div>';
     }
 
-    h += histHTML(st);
 
     var rows = m.rs.slice(0, 5);
-    h += '<div class="mw-gta6__scroll"><table class="mw-gta6__table"><thead><tr>' +
+    h += '<div class="mw-gta6__scroll" tabindex="0" role="region" aria-label="Readings"><table class="mw-gta6__table"><thead><tr>' +
       '<th scope="col">Reading</th><th scope="col">Copies</th><th scope="col">Revenue</th><th scope="col">Change</th></tr></thead><tbody>';
     rows.forEach(function (r, i) {
       var prev = m.rs[i + 1];
-      var chg = prev ? '<span class="mw-gta6__up" aria-hidden="true">' + UP + ' </span>' + esc(mUnits(r.units - prev.units)) : DASH;
+      var chg = prev ? '<span class="mw-gta6__up" aria-hidden="true">' + UP + '</span><span class="mw-gta6__sr">up </span>' + esc(mUnits(r.units - prev.units)) : DASH;
       h += '<tr><td>' + esc(fmtDate(r.date)) + '</td><td>' + esc(mUnits(r.units)) + '</td><td>' + esc(usd(r.revenue)) +
         '</td><td class="mw-gta6__chgcell">' + chg + '</td></tr>';
     });
     h += '</tbody></table></div>';
+    h += byDayHTML(st);
 
     h += '<p class="mw-gta6__caption">' + (L.stale
-      ? 'Showing the latest Sensor Tower reading while the next update is delayed. '
-      : 'Live figure is projected from the latest reading and resets when Sensor Tower updates. ') +
-      'Estimates only; excludes physical copies. Source: <a href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">Sensor Tower</a></p>';
+      ? 'Showing the latest reading while the next update is delayed. '
+      : 'Live figure is projected from the latest reading and resets with each update. ') +
+      'Estimates only; excludes physical copies.</p>';
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -532,7 +489,7 @@
 
   /* ---------- charts ---------- */
 
-  // GTA 6's like-for-like launch figure: Sensor Tower's cumulative total at the end of
+  // GTA 6's like-for-like launch figure: the estimated cumulative total at the end of
   // its first N days (pre-orders included, as for the other games). Null without a
   // release date; { pending } until the series reaches that day.
   function gtaLaunch(st) {
@@ -554,12 +511,12 @@
 
   function gtaNote(st, gl) {
     if (st.mode !== 'launch') return '';
-    if (!gl) return 'GTA 6 is Sensor Tower’s digital estimate to date.';
+    if (!gl) return 'GTA 6 is a digital sales estimate to date.';
     if (gl.pending) {
-      return 'Until Sensor Tower’s figure for its first ' + st.m.launchDays + ' days (to ' + fmtShort(gl.end) +
-        ') is in, GTA 6 shows its estimate of pre-orders and sales to date.';
+      return 'Until the figure for its first ' + st.m.launchDays + ' days (to ' + fmtShort(gl.end) +
+        ') is in, GTA 6 shows estimated pre-orders and sales to date.';
     }
-    return 'GTA 6 is Sensor Tower’s digital estimate for its first ' + gl.days + ' days (' + fmtShort(st.m.release) +
+    return 'GTA 6 is a digital sales estimate for its first ' + gl.days + ' days (' + fmtShort(st.m.release) +
       ' to ' + fmtShort(gl.end) + '), including pre-orders.';
   }
 
@@ -575,7 +532,7 @@
     var base0 = copies ? m.r0.units : m.r0.revenue;
     var base1 = m.r1 ? (copies ? m.r1.units : m.r1.revenue) : null;
     var gl = gtaLaunch(st);
-    var prefix = copies ? '' : 'Game · ';
+    var prefix = copies ? '' : 'Game \u00b7 ';
     var fixed = false;
 
     var items = view.items.map(function (x) {
@@ -608,9 +565,9 @@
       var isPin = pinned && x === pinned;
       var rank = isPin ? (view.pinRank || String(myIdx + 1)) : String(i + 1);
       var sub = x.year + DOT + x.sub;
-      var subShort = String(x.year) + (x.sub === 'Lifetime' ? '' : DOT + String(x.sub).replace(/^(Film|Game) · /, ''));
+      var subShort = String(x.year) + (x.sub === 'Lifetime' ? '' : DOT + String(x.sub).replace(/^(Film|Game) \u00b7 /, ''));
       var val = fmt(x);
-      if (isPin) out += '<li class="mw-gta6__gap" aria-hidden="true">···</li>';
+      if (isPin) out += '<li class="mw-gta6__gap" aria-hidden="true">\u00b7\u00b7\u00b7</li>';
       out += '<li class="mw-gta6__row' + (x.me ? ' mw-gta6__row--me' : '') + '" aria-label="' +
         esc(rank + '. ' + x.title + ' (' + x.year + '), ' + x.sub + ': ' + val) + '">' +
         '<span class="mw-gta6__rank" aria-hidden="true">' + esc(rank) + '</span>' +
@@ -649,12 +606,8 @@
 
   function sourcesHTML(list) {
     if (!Array.isArray(list)) return '';
-    return 'Source: ' + list.map(function (s) {
-      if (s && s.url && /^https:\/\//.test(s.url)) {
-        return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.name) + '</a>';
-      }
-      return esc(s && s.name);
-    }).join(DOT);
+    var names = list.map(function (s) { return s && s.name ? esc(s.name) : ''; }).filter(Boolean);
+    return names.length ? 'Source: ' + names.join(DOT) : '';
   }
 
   function chartHTML(st) {
@@ -680,7 +633,8 @@
     h += '<p class="mw-gta6__next" data-live="next"' + (rows.next ? '' : ' hidden') + '>' + rows.next + '</p>';
     var note = [view.note, rows.note].filter(Boolean).join(' ');
     if (note) h += '<p class="mw-gta6__caption">' + esc(note) + '</p>';
-    h += '<p class="mw-gta6__caption">' + sourcesHTML(set.sources) + '</p>';
+    var src = sourcesHTML(set.sources);
+    if (src) h += '<p class="mw-gta6__caption">' + src + '</p>';
     h += shareHTML();
     h += linksHTML(st);
     return h;
@@ -709,7 +663,6 @@
       if (active.getAttribute('data-platform')) refocus = '[data-platform="' + active.getAttribute('data-platform') + '"]';
       else if (active.getAttribute('data-mode')) refocus = '[data-mode="' + active.getAttribute('data-mode') + '"]';
       else if (active.getAttribute('data-action')) refocus = '[data-action="' + active.getAttribute('data-action') + '"]';
-      else if (closest(active, '.mw-gta6__plot')) refocus = '.mw-gta6__plot';
     }
     st.lastTick = Date.now();
     if (st.kind === 'tracker') {
@@ -733,8 +686,7 @@
       if (!t || t === el) return;
       var cat = CATS[st.kind];
       if (t.tagName === 'A') {
-        if (t.getAttribute('data-track') === 'related') track(CATS.tracker, 'Related Click', t.textContent);
-        else track(cat, 'Link Click', t.textContent);
+        track(t.getAttribute('data-track') === 'related' ? CATS.tracker : cat, 'link_click', t.textContent);
         return;
       }
       var act = t.getAttribute('data-action');
@@ -742,57 +694,41 @@
         st.paused = !st.paused;
         st.pausedAt = Date.now();
         render(st);
-        track(cat, 'Pause', st.paused ? 'pause' : 'resume');
+        track(cat, st.paused ? 'pause' : 'resume', 'live-count');
         return;
       }
       if (act === 'share') { share(st); return; }
+      if (act === 'byday') {
+        st.byDay = !st.byDay;
+        render(st);
+        track(cat, st.byDay ? 'by_day_open' : 'by_day_close', 'sales-by-day');
+        return;
+      }
       var p = t.getAttribute('data-platform');
       var md = t.getAttribute('data-mode');
       if (p && p !== st.platform) {
         st.platform = p;
         render(st);
-        track(cat, 'Platform Switch', p);
+        track(cat, 'tab_switch', p);
       } else if (md && md !== st.mode) {
         st.mode = md;
         render(st);
-        track(cat, 'Toggle', st.kind + DOT + md);
+        track(cat, 'period_switch', md === 'all' ? 'all-time' : 'launch');
       }
     });
-    if (st.kind !== 'tracker') return;
-    // History chart: pointer and keyboard read-out of each day's figure
-    el.addEventListener('pointermove', function (ev) {
-      var plot = closest(ev.target, '.mw-gta6__plot');
-      if (plot) histAtX(st, plot, ev.clientX);
-    });
-    el.addEventListener('pointerout', function (ev) {
-      var plot = closest(ev.target, '.mw-gta6__plot');
-      if (plot && !plot.contains(ev.relatedTarget) && document.activeElement !== plot) histHide(st);
-    });
-    el.addEventListener('keydown', function (ev) {
-      if (!closest(ev.target, '.mw-gta6__plot') || !st.hist) return;
-      var n = st.hist.length;
-      var i = st.histIdx == null ? n - 1 : st.histIdx;
-      var k = ev.key;
-      if (k === 'ArrowLeft') i -= 1;
-      else if (k === 'ArrowRight') i += 1;
-      else if (k === 'Home') i = 0;
-      else if (k === 'End') i = n - 1;
-      else return;
-      ev.preventDefault();
-      histShow(st, i);
-    });
-    el.addEventListener('focusin', function (ev) {
-      if (closest(ev.target, '.mw-gta6__plot') && st.hist) histShow(st, st.histIdx == null ? st.hist.length - 1 : st.histIdx);
-    });
-    el.addEventListener('focusout', function (ev) {
-      if (closest(ev.target, '.mw-gta6__plot')) histHide(st);
-    });
+  }
+
+  function bindScroll(st) {
+    st.el.addEventListener('scroll', function (ev) {
+      var box = ev.target;
+      if (box && box.classList && box.classList.contains('mw-gta6__scroll')) box.classList.toggle('is-scrolled', box.scrollLeft > 0);
+    }, true);
   }
 
   function observe(st) {
     if (!('IntersectionObserver' in window)) {
       st.visible = true;
-      track(CATS[st.kind], 'Impression', st.kind);
+      track(CATS[st.kind], 'view', st.kind);
       return;
     }
     var io = new IntersectionObserver(function (entries) {
@@ -800,7 +736,7 @@
         st.visible = e.isIntersecting;
         if (!st.impressed && e.intersectionRatio >= 0.5) {
           st.impressed = true;
-          track(CATS[st.kind], 'Impression', st.kind);
+          track(CATS[st.kind], 'view', st.kind);
         }
       });
     }, { threshold: [0, 0.5] });
@@ -809,7 +745,7 @@
 
   function needsFor(kinds) {
     var charts = kinds.indexOf('copies') >= 0 || kinds.indexOf('revenue') >= 0;
-    // comparisons.json also carries the release date the tracker's history chart marks
+    // comparisons.json also carries the release date the tracker's by-day table marks
     var needs = [{ name: 'tracker' }, { name: 'comparisons', optional: !charts }];
     if (kinds.indexOf('tracker') >= 0) needs.push({ name: 'links', optional: true });
     return needs;
@@ -860,7 +796,8 @@
     root.setAttribute('data-mounted', '1');
     var kind = root.getAttribute('data-widget');
     var kinds = kind === 'mega' ? ['tracker', 'copies', 'revenue'] : [kind];
-    if (!CATS[kinds[0]]) { warn('unknown data-widget "' + kind + '"'); root.setAttribute('data-state', 'failed'); root.hidden = true; return; }
+    var first = kinds[0];
+    if (!CATS[first]) { warn('unknown data-widget "' + kind + '"'); root.setAttribute('data-state', 'failed'); root.hidden = true; return; }
     var ids = kinds.map(function (k) { return uniqueId(IDS[k]); });
     var needs = needsFor(kinds);
     loadData(root, needs).then(function (res) {
@@ -871,20 +808,30 @@
         el.id = ids[i];
         inst.parts.push({
           kind: k, el: el, platform: 'all', mode: 'launch', last: '', lastNext: '', visible: false, impressed: false,
-          stale: false, paused: false, pausedAt: 0, hostLinks: kinds.indexOf('tracker') >= 0 && i === kinds.length - 1
+          stale: false, paused: false, pausedAt: 0, byDay: false, hostLinks: kinds.indexOf('tracker') >= 0 && i === kinds.length - 1
         });
       });
       apply(inst, res);
-      inst.parts.forEach(function (st) { bind(st); observe(st); });
+      inst.parts.forEach(function (st) { bind(st); bindScroll(st); observe(st); track(CATS[st.kind], 'load', st.kind); });
       root.hidden = false;
       root.setAttribute('data-state', 'ready');
+      if (DEBUG) {
+        var note = document.createElement('p');
+        note.className = 'mw-gta6__note';
+        note.textContent = 'Build ' + BUILD + DOT + 'latest reading ' + inst.parts[0].m.r0.date + DOT + 'data ' + (root.getAttribute('data-src') || 'seed');
+        root.appendChild(note);
+      }
       instances.push(inst);
       scrollToHash();
     }).catch(function (e) {
-      root.innerHTML = '';
       root.setAttribute('data-state', 'failed');
-      root.hidden = true;
       warn('widget hidden: ' + (e && e.message), e);
+      if (DEBUG) {
+        root.innerHTML = '<p class="mw-gta6__note">GTA 6 vignette not shown: ' + esc(e && e.message) + DOT + 'build ' + esc(BUILD) + '</p>';
+      } else {
+        root.innerHTML = '';
+        root.hidden = true;
+      }
       scrollToHash();
     });
   }
@@ -917,9 +864,20 @@
     });
   }, REFRESH_MS);
 
-  window[NS] = { mountAll: mountAll, version: '1.1.0' };
+  window[NS] = { mountAll: mountAll, version: '1.2.0', build: BUILD };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountAll);
-  else mountAll();
+  function start() {
+    mountAll();
+    if (!window.MutationObserver) return;
+    var queued = false;
+    new MutationObserver(function () {
+      if (queued) return;
+      queued = true;
+      setTimeout(function () { queued = false; mountAll(); }, 100);
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();
 </script>

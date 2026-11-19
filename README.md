@@ -1,5 +1,7 @@
 # GTA 6 widgets for MovieWeb
 
+Built to the MovieWeb Vignette Style guide (`../index.html`). Exceptions are listed in section 9.
+
 ## 1. Contents
 
 - `widgets/` — CMS-ready embeds, three fields each (`html.html`, `css.html`, `js.html`)
@@ -20,13 +22,15 @@
 - CSS and JS are identical across all four widgets
   - Several widgets on one page: pasting the same CSS/JS more than once is harmless (mount guard + one global)
   - Mega and separate widgets can sit on the same page
+  - A widget inserted later (e.g. infinite scroll) mounts by itself
 - `data-src` in `html.html` is the data URL (must be `https://`, ending in `/data/`)
-- While data loads, the widget holds its space with an empty panel, so the article doesn't jump when it appears
-  - Result: no layout shift (Core Web Vitals) on pages where the widget sits near the top
+- The HTML field holds a static frame: each panel's heading plus a skeleton at the finished height
+  - Shows before the script runs and in CMS previews; nothing on the page moves when data arrives
+  - Matches the finished widget to 0px for columns 343-760px wide; a 320px column runs 15-30px short per panel
+  - Heights are tuned to the current content (one related link); see `tools/build.py` to re-measure after changes
 - If data fails to load or validate, the widget hides itself and logs a console warning
-  - Result: a failed fetch or bad JSON never shows a broken box; the held space closes
-  - If the script never runs at all, the held space closes after 12 seconds
-- Embeds pasted before v1.1 (with `hidden` on the div) still work; they just don't hold space while loading
+  - Add `?gta6debug=1` to the page URL: a one-line note instead of hiding, and the build stamp on working widgets
+- Embeds pasted before v1.2 still work, without the static frame
 
 ## 3. Behaviour
 
@@ -38,30 +42,34 @@
   - Shows the latest real reading, badge "Latest reading", "Awaiting next update"; charts label GTA 6 "Latest reading"
   - Result: a stalled feed never leaves an inflated number on screen
 - Official figure: shown beside the estimate in an "Official vs. estimate" block; it never replaces the estimate (section 8)
-- History chart: Sensor Tower's daily cumulative copies, following the platform buttons; hover or arrow keys read out each day
+- "Show sales by day": collapsed table of copies and revenue added each day (up to 14 days, newest first)
+  - Only days with a one-day step in the history (daily from Nov 9; earlier history is in two-day steps)
+  - Follows the platform buttons; the release day carries a Launch tag
 - Comparison charts: top 10, sorted on render; GTA 6 pinned below with its rank if it falls outside
   - Copies all-time uses a fixed `pinRank` of "50+"
   - Line under each chart: what GTA 6 last passed and what's next, with the gap and an estimate at the current pace
     - Hidden in the next-target part when GTA 6 sits behind a fixed `pinRank` (the entries in between aren't listed)
     - No pace estimate when data is stale or the target is more than 14 days away
-- Launch view: GTA 6 shows "Pre-orders + sales to date" until Sensor Tower's history reaches the end of its first 3 days
+- Launch view: GTA 6 shows "Pre-orders + sales to date" until the history reaches the end of its first 3 days
   - Then it switches to a fixed "First 3 days" figure, comparable with the other first-3-day entries (section 7)
 - Share button on every panel: native share sheet on phones, otherwise copies a link to the panel
   - Links end `#gta6-sales-tracker`, `#gta6-copies-chart` or `#gta6-revenue-chart` (`-2` etc. for repeats, in page order)
   - Opening a shared link scrolls to that panel once it has loaded
-- "More on GTA 6" related links at the bottom of the tracker (or the mega's last panel), from `data/links.json`
+- "More on GTA 6" related links at the bottom of the tracker (or the mega's last panel), from `data/links.json`; open in a new tab
+- No data-provider credit is shown for the tracker; chart credits are plain text from `comparisons.json`, never links
 - Theme follows `prefers-color-scheme`; force with `data-theme="light"` or `data-theme="dark"` on the root div
 - Narrow layout via container query at 600px, so it adapts to the column, not the window
-  - Readings table fits a 320px column; its date column stays pinned if a column is narrower still
-- Exception to the design system's "freeze what an article shows" rule: these widgets are intentionally live
+  - Tables fit a 320px column; the date column stays pinned and gets a soft edge if a table has to scroll
 
 ## 4. Tracking
 
-- `window.websiteSentinel.sendEvent(category, action, label)`, retried 20 × 250ms, then dropped
-- Categories: `GTA 6 Sales Tracker`, `GTA 6 Copies Chart`, `GTA 6 Revenue Chart` (mega sends each panel under its own category)
-- Actions: `Impression` (once, 50% visible), `Platform Switch`, `Toggle`, `Link Click`
-  - `Pause` (label `pause` / `resume`), `Share` (label `native` / `copy`)
-  - `Related Click` (always under `GTA 6 Sales Tracker`, label = article title)
+- `window.websiteSentinel.sendEvent(category, action, label)`, retried 20 × 250ms, then dropped; at most 50 events per page
+- Categories: `GTA 6 Sales Tracker Vignette`, `GTA 6 Copies Chart Vignette`, `GTA 6 Revenue Chart Vignette` (mega sends each panel under its own)
+- Actions (snake_case) and labels (slugs, never reader data or URLs):
+  - `load`, `view` (once, 50% visible): label = panel (`tracker`, `copies`, `revenue`)
+  - `tab_switch`: `all`, `ps5`, `xbox` · `period_switch`: `launch`, `all-time`
+  - `pause` / `resume`: `live-count` · `by_day_open` / `by_day_close`: `sales-by-day`
+  - `share`: `native` / `copy` · `link_click`: link text as a slug (related links always under the Sales Tracker category)
 
 ## 5. Data hosting
 
@@ -107,11 +115,21 @@
 ## 8. Official figures and related links
 
 - Official figure: add `official` to `data/tracker.json` (the scraper keeps it)
-  - `{"date": "YYYY-MM-DD", "units": 25000000, "source": "Take-Two", "note": "Sell-in, all formats.", "url": "https://..."}`
+  - `{"date": "YYYY-MM-DD", "units": 25000000, "source": "Take-Two", "note": "Sell-in, all formats."}`
+  - `source` is shown as a plain-text credit (no link)
   - `revenue` is optional; Take-Two usually reports units only
-  - Shown beside the Sensor Tower reading on or before that date; the live estimate keeps running
+  - Shown beside the estimate reading on or before that date; the live estimate keeps running
   - Edit right after a scraper commit, or pull first: the bot commits to the same file
 - Related links: `data/links.json`
   - `{"title": "More on GTA 6", "items": [{"title": "...", "url": "https://movieweb.com/..."}]}`
   - Only `https://movieweb.com/` URLs are shown, at most 3, and never a link to the page the widget is on
   - Empty `items` = no links block
+
+## 9. Style guide exceptions
+
+- Live, exact counter: the guide prefers abbreviated estimates and freezing what an article shows; the tracker
+  intentionally counts live in full figures (decided Nov 19, 2026)
+- Launch / All time is a plain switch, not the guide's flip card
+- One namespaced global (`window.MWGTA6`) so repeated pastes don't run twice; everything else is inside the IIFE
+- Highlighted-row rank in light mode is #b81a21, a shade darker than the guide's #c81e25, which only reaches 4.46:1 on the pink row
+- Highlighted-row dates use the heading grey (#555555) in light mode: muted grey fails contrast there (4.15:1)
